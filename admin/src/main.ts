@@ -16,7 +16,7 @@ const app = createApp(App)
 
 axios.defaults.withCredentials = true
 
-axios.defaults.baseURL = 'http://localhost/technique/public'
+axios.defaults.baseURL = 'http://localhost/make-content-telegramm/public'
 //axios.defaults.baseURL = 'http://techniqueb1.simpleitrunner.ru/';
 
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'

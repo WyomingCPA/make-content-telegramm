@@ -8,6 +8,8 @@ use App\Models\RssItem;
 use GuzzleHttp\Client;
 use Symfony\Component\DomCrawler\Crawler;
 
+
+
 class GetRssHabr extends Command
 {
     /**
@@ -58,10 +60,19 @@ class GetRssHabr extends Command
             try {
                 $pubDate = $domElement->filter('pubDate')->text();
                 echo 'break';
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
             }
-
-            echo $title . '\n';
+            $model = RssItem::firstOrCreate(
+                ['link' => $guid,],
+                [
+                    'title' => $title,
+                    'link' => $guid,
+                    'body' => $description,
+                    'pubDate' => '2023-04-03 20:43:42',
+                ]
+            );
+            $model->save();
+            echo $title . "\n";
         }
 
         return Command::SUCCESS;

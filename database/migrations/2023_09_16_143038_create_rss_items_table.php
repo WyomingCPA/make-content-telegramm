@@ -25,7 +25,7 @@ return new class extends Migration
         // migrations/****_**_**_******_create_categories_table.php
         Schema::create('categories', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 100);
+            $table->text('name');
         });
 
         // migrations/****_**_**_******_create_category_post_table.php

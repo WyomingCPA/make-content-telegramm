@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Models\RssItem;
+use App\Models\Category;
 
 use GuzzleHttp\Client;
 use Symfony\Component\DomCrawler\Crawler;
@@ -62,6 +63,13 @@ class GetRssHabr extends Command
                 echo 'break';
             } catch (\Exception $e) {
             }
+            $list_id_category = [];
+            foreach ($list_category as $item_category)
+            {
+                $model = Category::firstOrCreate(['name' => $item_category,],);
+                $list_id_category [] = $model->id;
+            }
+
             $model = RssItem::firstOrCreate(
                 ['link' => $guid,],
                 [
@@ -72,6 +80,7 @@ class GetRssHabr extends Command
                 ]
             );
             $model->save();
+            $model->categories()->attach($list_id_category);
             echo $title . "\n";
         }
 

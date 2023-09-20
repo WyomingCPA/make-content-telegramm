@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('body');
             $table->string('link');
             $table->date('pubDate');
+            $table->boolean('is_publish')->unsigned()->nullable();
             $table->timestamps();
         });
 

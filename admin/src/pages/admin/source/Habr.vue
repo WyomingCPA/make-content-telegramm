@@ -126,7 +126,7 @@
             },
           })
           .then((response) => {
-            self.items = response.data.etfs;
+            self.items = response.data.posts;
             self.count = response.data.count;
             self.loading = false;
             console.log(this.pages);

@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PostController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -27,5 +28,5 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth:sanctum'], function
 });
 
 Route::group(['prefix' => 'post', 'middleware' => 'auth:sanctum'], function () {
-	Route::post('rss-habr-all', ['uses' => 'PostController@rssHabrAll']);
+	Route::post('rss-habr-all', [PostController::class, 'rssHabrAll']);
 });

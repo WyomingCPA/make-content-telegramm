@@ -25,3 +25,7 @@ Route::post('/register', 'AuthController@register');
 Route::group(['prefix' => 'dashboard', 'middleware' => 'auth:sanctum'], function () {
 	Route::get('/index', 'DashboardController@index');
 });
+
+Route::group(['prefix' => 'post', 'middleware' => 'auth:sanctum'], function () {
+	Route::post('rss-habr-all', ['uses' => 'PostController@rssHabrAll']);
+});

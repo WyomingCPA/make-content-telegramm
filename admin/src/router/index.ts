@@ -30,49 +30,14 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('../pages/admin/dashboard/Dashboard.vue'),
       },
       {
-        name: 'products',
-        path: 'products',
+        name: 'source',
+        path: 'source',
         component: RouteViewComponent,
         children: [
           {
-            name: 'refrigerator',
-            path: 'refrigerator',
-            component: () => import('../pages/admin/products/Refrigerator.vue'),
-          },
-          {
-            name: 'washmashine',
-            path: 'washmashine',
-            component: () => import('../pages/admin/products/Washmasine.vue'),
-          },
-          {
-            name: 'tv32',
-            path: 'tv32',
-            component: () => import('../pages/admin/products/Tv32.vue'),
-          },
-          {
-            name: 'tv50',
-            path: 'tv50',
-            component: () => import('../pages/admin/products/Tv50.vue'),
-          },
-          {
-            name: 'smart',
-            path: 'smart',
-            component: () => import('../pages/admin/products/Smart.vue'),
-          },
-          {
-            name: 'laptop',
-            path: 'laptop',
-            component: () => import('../pages/admin/products/Laptop.vue'),
-          },
-          {
-            name: 'favorite',
-            path: 'favorite',
-            component: () => import('../pages/admin/products/Favorite.vue'),
-          },
-          {
-            name: 'product-edit',
-            path: 'edit/:id',
-            component: () => import('../pages/admin/products/Edit.vue'),
+            name: 'rss-habr',
+            path: 'rss-habr',
+            component: () => import('../pages/admin/source/Habr.vue'),
           },
         ],
       },

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use TelegramBot\Api\BotApi;
+
 use App\Models\RssItem;
 
 class PostController extends Controller
@@ -31,5 +33,22 @@ class PostController extends Controller
                 'count' => $count
             ]);
         }
+    }
+
+    public function rssHabrPublish(Request $request)
+    {
+        $rows = $request->post('selRows');
+        $select = [];
+        foreach ($rows as $value) {
+            $select[] = $value['id'];
+        }
+        $chatId = '-414528593';
+
+        $bot = new BotApi(env('TELEGRAM_TOKEN'));
+        $bot->sendMessage($chatId, $messageText, 'HTML'); 
+
+        return response()->json([
+            'status' => true,
+        ], 200);
     }
 }

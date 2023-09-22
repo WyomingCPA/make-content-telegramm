@@ -6,8 +6,8 @@
         </div>
         <div class="row">
           <div class="col">
-            <va-button @click="favorite">
-              Добавить в избранное
+            <va-button @click="publish">
+              Опубликовать в Телеграмм
             </va-button>
           </div>
   
@@ -52,8 +52,8 @@
       const input = '';
       const columns = [
         { key: 'title', sortable: true },
-        { key: 'body', sortable: true },
         { key: 'link', sortable: true },
+        { key: 'created_at', sortable: true },
       ]
       return {
         count: { type: Number },
@@ -140,17 +140,17 @@
         this.infoModal.title = ''
         this.infoModal.content = ''
       },
-      favorite: function (event, rows) {
+      publish: function (event, rows) {
         let self = this;
         this.loading = true;
         console.log(self.selectedItemsEmitted);
         axios.get("/sanctum/csrf-cookie").then((response) => {
           axios
-            .post("/api/etf/favorite", { selRows: self.selectedItemsEmitted })
+            .post("/api/post/rss-habr-publish", { selRows: self.selectedItemsEmitted })
             .then((response) => {
               if (response.status) {
                 console.log("Вызвали алерт");
-                this.$vaToast.init({ message: 'Инструмент добавлен в избранное', color: 'success' })
+                this.$vaToast.init({ message: 'Запись добавлена в телеграмм', color: 'success' })
                 this.fetchRows();
                 self.loading = false;
               } else {

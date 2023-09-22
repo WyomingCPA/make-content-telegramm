@@ -40,12 +40,16 @@ class PostController extends Controller
         $rows = $request->post('selRows');
         $select = [];
         foreach ($rows as $value) {
-            $select[] = $value['id'];
-        }
-        $chatId = '-414528593';
+            //$select[] = $value['id'];
+            $post = RssItem::findOrFail($value['id']);
+            $messageText = $post->title . "<br>";
+            $messageText .= $post->link . "<br>";
 
-        $bot = new BotApi(env('TELEGRAM_TOKEN'));
-        $bot->sendMessage($chatId, $messageText, 'HTML'); 
+            $chatId = '-414528593';
+            $bot = new BotApi(env('TELEGRAM_TOKEN'));
+            $bot->sendMessage($chatId, $messageText, 'HTML'); 
+        }
+
 
         return response()->json([
             'status' => true,

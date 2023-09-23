@@ -42,14 +42,15 @@ class PostController extends Controller
         foreach ($rows as $value) {
             //$select[] = $value['id'];
             $post = RssItem::findOrFail($value['id']);
-            $messageText = $post->title . "<br>";
-            $messageText .= $post->link . "<br>";
+            $messageText = $post->title . "\n";
+            $messageText .= $post->link . "\n";
 
             $chatId = '-414528593';
             $bot = new BotApi(env('TELEGRAM_TOKEN'));
-            $bot->sendMessage($chatId, $messageText, 'HTML'); 
+            $bot->sendMessage($chatId, $messageText, 'HTML');
+            $post->is_publish = true;
+            $post->save();  
         }
-
 
         return response()->json([
             'status' => true,

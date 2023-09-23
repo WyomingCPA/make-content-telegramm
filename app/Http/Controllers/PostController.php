@@ -42,8 +42,16 @@ class PostController extends Controller
         foreach ($rows as $value) {
             //$select[] = $value['id'];
             $post = RssItem::findOrFail($value['id']);
+            $categories = $post->categories;
+            $tags = '';
+            foreach ($categories as $item_category)
+            {
+                $tags .= "#" . $item_category->name . " ";
+            }
             $messageText = $post->title . "\n";
             $messageText .= $post->link . "\n";
+            $messageText .= "\n";
+            $messageText .= $tags;
 
             $chatId = '-414528593';
             $bot = new BotApi(env('TELEGRAM_TOKEN'));

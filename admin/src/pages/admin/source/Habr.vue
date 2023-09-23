@@ -16,9 +16,8 @@
           @filtered="filteredCount = $event.items.length" :loading=loading selectable selected-color="warning"
           @selectionChange="selectedItemsEmitted = $event.currentSelectedItems">
   
-          <template #cell(name)="{ rowData }">
-            <a class="link" target="_blank" :href="'https://www.tinkoff.ru/invest/etfs/' + rowData.ticker">{{ rowData.name
-            }}</a>
+          <template #cell(title)="{ rowData }">
+            <a class="link" target="_blank" :href="rowData.link">{{ rowData.title }}</a>
           </template>
           <template #bodyAppend>
             <tr>
@@ -52,7 +51,6 @@
       const input = '';
       const columns = [
         { key: 'title', sortable: true },
-        { key: 'link', sortable: true },
         { key: 'created_at', sortable: true },
       ]
       return {

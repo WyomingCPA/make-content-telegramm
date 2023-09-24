@@ -7,12 +7,14 @@ use Illuminate\Http\Request;
 use TelegramBot\Api\BotApi;
 
 use App\Models\RssItem;
+use App\Models\Category;
 
 class PostController extends Controller
 {
     public function rssHabrAll(Request $request)
     {
-        $objects = RssItem::where('is_publish', null);
+        $objects = RssItem::where('is_publish', null)->orderBy('created_at', 'desc');
+        $categories = Category::all();
         $count = $objects->count();
         $sort = $request->get('sort');
         $direction = $request->get('direction');
@@ -22,7 +24,7 @@ class PostController extends Controller
         $limit = 20;
         $page = (int) $request->get('page');
         $created_at = $request->get('created_at');
-
+       
         if ($name !== null) {
             $objects->where('title', 'like', '%' . $name['searchTerm'] . '%');
         }
@@ -30,7 +32,8 @@ class PostController extends Controller
         if ($request->isMethod('post')) {
             return response()->json([
                 'posts' => $objects->get()->toArray(),
-                'count' => $count
+                'count' => $count,
+                'categories' => $categories
             ]);
         }
     }

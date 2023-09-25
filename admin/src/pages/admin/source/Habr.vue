@@ -6,7 +6,8 @@
       </div>
 
         <div class="grid md:grid-cols-2 gap-6 mb-6">
-          <va-select v-model="value" label="Removable chips" :options="options" multiple>
+          <va-select v-model="value" label="Removable chips" :options="options"
+          @create-new="addNewOption" :track-by="(option) => option" allow-create="unique" multiple>
             <template #content="{ value }">
               <va-chip v-for="chip in value" :key="chip" size="small" class="mr-1 my-1" closeable
                 @update:modelValue="deleteChip(chip)">
@@ -81,21 +82,19 @@ export default {
       serverParams: {
         name: "",
       },
-      options: [
-        "one",
-        "two",
-        "three",
-        "four",
-        "five",
-        "six",
-        "seven",
-        "eight",
-        "nine",
-      ],
-      value: ["one", "two"],
+      options: [],
+      value: ["laravel", "php"],
     }
   },
   methods: {
+    addNewOption(newOption) {
+      const option = {
+        id: String(this.options.length),
+        text: newOption,
+        value: newOption,
+      };
+      this.options = [...this.options, option];
+    },
     deleteChip(chip) {
       this.value = this.value.filter((v) => v !== chip);
     },
@@ -151,6 +150,7 @@ export default {
         .then((response) => {
           self.items = response.data.posts;
           self.count = response.data.count;
+          self.options = response.data.categories;
           self.loading = false;
           console.log(this.pages);
         })
@@ -204,6 +204,16 @@ export default {
         this.updateParams({ name: newValue });
         this.fetchRows();
         this.updateFilter(newValue)
+      }
+    },
+    value(newValue) {
+      if (this.isDebounceInput) {
+        this.debouncedUpdateFilter(newValue)
+      } else {
+        console.log(newValue);
+        this.updateParams({ category_value: newValue });
+        this.fetchRows();
+
       }
     },
     currentPage: function (page) {

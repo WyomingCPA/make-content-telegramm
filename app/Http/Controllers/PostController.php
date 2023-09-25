@@ -14,11 +14,12 @@ class PostController extends Controller
     public function rssHabrAll(Request $request)
     {
         $objects = RssItem::where('is_publish', null)->orderBy('created_at', 'desc');
-        $categories = Category::all();
+        $categories = Category::pluck('name')->toArray();
         $count = $objects->count();
         $sort = $request->get('sort');
         $direction = $request->get('direction');
         $name = $request->get('title');
+        $category_value = $request->get('category_value');
         $created_by = $request->get('created_by');
         $type = $request->get('type');
         $limit = 20;
@@ -27,6 +28,14 @@ class PostController extends Controller
        
         if ($name !== null) {
             $objects->where('title', 'like', '%' . $name['searchTerm'] . '%');
+        }
+        if ($category_value !==null)
+        {
+            $category_ids = Category::whereIn('name', $category_value)->pluck('id')->toArray();
+
+            $objects->whereHas('categories', function ($query) use ($category_ids, $request) {
+                $query->whereIn('category_id', array_values($category_ids));
+            });
         }
         $objects->offset($limit * ($page - 1))->limit($limit);
         if ($request->isMethod('post')) {

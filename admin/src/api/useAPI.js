@@ -13,8 +13,8 @@ export const useApi = (endpoint = 'api') => {
   let baseURL
 
   if (endpoint === 'api') {
-    baseURL = API_HOST + API_PATH || 'http://localhost/make-content-telegramm/public/api'
-    //baseURL = API_HOST + API_PATH || 'http://techniqueb1.simpleitrunner.ru/'
+    //baseURL = API_HOST + API_PATH || 'http://localhost/make-content-telegramm/public/api'
+    baseURL = API_HOST + API_PATH || 'http://make-content-telegrammb.simpleitrunner.ru/'
   } else if (endpoint === 'web') {
     baseURL = API_HOST || 'http://localhost'
   }

@@ -61,11 +61,12 @@ class PostController extends Controller
                 $tags .= "#" . $item_category->name . " ";
             }
             $messageText = $post->title . "\n";
+            $messageText .= "\n";
             $messageText .= $post->link . "\n";
             $messageText .= "\n";
             $messageText .= $tags;
 
-            $chatId = '-414528593';
+            $chatId = '-1001723315292';
             $bot = new BotApi(env('TELEGRAM_TOKEN'));
             $bot->sendMessage($chatId, $messageText, 'HTML');
             $post->is_publish = true;

@@ -67,6 +67,7 @@ class PostController extends Controller
             $messageText .= $tags;
 
             $chatId = '-1001723315292';
+            //$chatId = '-414528593';
             $bot = new BotApi(env('TELEGRAM_TOKEN'));
             $bot->sendMessage($chatId, $messageText, 'HTML');
             $post->is_publish = true;

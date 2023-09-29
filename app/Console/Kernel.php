@@ -16,7 +16,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('command:get-rss-habr')->hourly();
-        $schedule->command('command:send-new-post')->everyThreeHours();
+        $schedule->command('command:send-new-post')->everyTwoHours();
     }
 
     /**

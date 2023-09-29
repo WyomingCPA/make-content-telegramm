@@ -41,6 +41,18 @@ const routes: Array<RouteRecordRaw> = [
           },
         ],
       },
+      {
+        name: 'publish',
+        path: 'publish',
+        component: RouteViewComponent,
+        children: [
+          {
+            name: 'rss-it-publish',
+            path: 'rss-it-publish',
+            component: () => import('../pages/admin/source/Publish.vue'),
+          },
+        ],
+      },
       UIRoute,
     ],
   },

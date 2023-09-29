@@ -339,7 +339,10 @@
     "404-pages": "404 Pages",
     "faq": "Faq",
     "source": "Источники",
-    "habr": "Rss Habr"
+    "habr": "Rss Habr",
+    "publish": "Опубликованные",
+    "it-publish": "IT блог", 
+    "Logs": "Логи"
   },
   "messages": {
     "all": "See all messages",

@@ -30,7 +30,20 @@ export default {
           name: 'rss-habr',
           displayName: 'menu.habr',
         },
-
+      ],
+    },
+    {
+      name: 'publish',
+      displayName: 'menu.publish',
+      meta: {
+        icon: 'vuestic-iconset-components',
+      },
+      disabled: true,
+      children: [
+        {
+          name: 'rss-it-publish',
+          displayName: 'menu.it-publish',
+        },
       ],
     },
   ] as INavigationRoute[],

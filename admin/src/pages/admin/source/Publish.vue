@@ -60,6 +60,7 @@
       ]
       return {
         count: { type: Number },
+        perPage: { type: Number },
         loading: false,
         items,
         columns,
@@ -143,6 +144,7 @@
           .then((response) => {
             self.items = response.data.posts;
             self.count = response.data.count;
+            self.perPage = response.data.perPage;
             self.options = response.data.categories;
             self.loading = false;
             console.log(this.pages);

@@ -50,6 +50,7 @@ class PostController extends Controller
             return response()->json([
                 'posts' => $objects->get()->toArray(),
                 'count' => $count,
+                'perPage' => $limit,
                 'categories' => $categories
             ]);
         }

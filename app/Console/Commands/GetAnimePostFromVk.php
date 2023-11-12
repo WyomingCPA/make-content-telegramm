@@ -65,14 +65,7 @@ class GetAnimePostFromVk extends Command
                 $model = Category::firstOrCreate(['name' => $item_category,],);
                 $list_id_category[] = $model->id;
             }
-
-            $list_id_category = [];
-            foreach ($list_category as $item_category)
-            {
-                $model = Category::firstOrCreate(['name' => $item_category,],);
-                $list_id_category [] = $model->id;
-            }
-
+;
             $link = "photo" . str($owner_id) . "_" . str($id_post);
             $model = Post::firstOrCreate(
                 ['link' => $link,],
@@ -85,10 +78,12 @@ class GetAnimePostFromVk extends Command
                     'is_hidden' => false,
                 ]
             );
+            if($model->wasRecentlyCreated){
+                $model->categories()->attach($list_id_category);
+                echo $id_post . "\n";
+            }         
             $model->save();
-            $model->categories()->attach($list_id_category);
-
-            echo 'break';
+            
         }
         return Command::SUCCESS;
     }

@@ -79,8 +79,11 @@ class GetRssHabr extends Command
                     'pubDate' => '2023-04-03 20:43:42',
                 ]
             );
-            $model->save();
-            $model->categories()->attach($list_id_category);
+            if($model->wasRecentlyCreated){
+                $model->categories()->attach($list_id_category);
+                $model->save();
+            }
+
             echo $title . "\n";
         }
 

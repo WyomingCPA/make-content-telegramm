@@ -30,6 +30,10 @@ export default {
           name: 'rss-habr',
           displayName: 'menu.habr',
         },
+        {
+          name: 'vk-anime',
+          displayName: 'menu.vk-anime',
+        },
       ],
     },
     {

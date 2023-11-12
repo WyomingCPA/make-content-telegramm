@@ -30,4 +30,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth:sanctum'], function
 Route::group(['prefix' => 'post', 'middleware' => 'auth:sanctum'], function () {
 	Route::post('rss-habr-all', [PostController::class, 'rssHabrAll']);
     Route::post('rss-habr-publish', [PostController::class, 'rssHabrPublish']);
+    Route::post('vk-anime-publish', [PostController::class, 'vkAnimePublish']);   
+    Route::post('vk-anime-all', [PostController::class, 'vkAnimeAll']);
+    
 });

@@ -19,4 +19,9 @@ class Category extends Model
     {
         return $this->belongsToMany(RssItem::class);
     }
+
+    public function postItems()
+    {
+        return $this->belongsToMany(Post::class);
+    }
 }

@@ -39,6 +39,11 @@ const routes: Array<RouteRecordRaw> = [
             path: 'rss-habr',
             component: () => import('../pages/admin/source/Habr.vue'),
           },
+          {
+            name: 'vk-anime',
+            path: 'vk-anime',
+            component: () => import('../pages/admin/source/VkAnime.vue'),
+          },
         ],
       },
       {

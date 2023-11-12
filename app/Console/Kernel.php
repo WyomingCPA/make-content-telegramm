@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        $schedule->command('command:get-vk-anime')->hourly();
         $schedule->command('command:get-rss-habr')->hourly();
         $schedule->command('command:send-new-post')->everyTwoHours();
     }

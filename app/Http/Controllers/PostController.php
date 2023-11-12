@@ -51,6 +51,7 @@ class PostController extends Controller
             return response()->json([
                 'posts' => $objects->get()->toArray(),
                 'count' => $count,
+                'perPage' => $limit,
                 'categories' => $categories
             ]);
         }
@@ -73,7 +74,7 @@ class PostController extends Controller
             $messageText .= "\n";
             $messageText .= $tags;
             if (!empty($messageText)) {
-                $chatId = '-1001723315292';
+                $chatId = '-1001771871700';
                 //$chatId = '-414528593';
                 $bot = new BotApi(env('TELEGRAM_TOKEN'));
                 //$bot->sendMessage($chatId, $messageText, 'HTML');

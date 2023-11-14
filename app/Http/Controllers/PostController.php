@@ -57,6 +57,21 @@ class PostController extends Controller
         }
     }
 
+    public function vkAnimeHidden(Request $request)
+    {
+        $rows = $request->post('selRows');
+        $select = [];
+        foreach ($rows as $value) 
+        {
+            $post = Post::findOrFail($value['id']);
+            $post->is_hidden = true;
+            $post->save();            
+        }
+
+        return response()->json([
+            'status' => true,
+        ], 200);
+    }
     public function vkAnimePublish(Request $request)
     {
         $rows = $request->post('selRows');
@@ -97,7 +112,7 @@ class PostController extends Controller
     }
     public function vkAnimeAll(Request $request)
     {
-        $objects = Post::where('is_publish', false)->orderBy('created_at', 'desc');
+        $objects = Post::where('is_publish', false)->where('is_hidden', false)->orderBy('created_at', 'desc');
         $categories = Category::pluck('name')->toArray();
         $count = $objects->count();
         $sort = $request->get('sort');

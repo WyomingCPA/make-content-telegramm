@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('post_id');
             $table->integer('owner_id');
-            $table->string('text', 500);
+            $table->string('text', 2000);
             $table->string('link');
             $table->json('attachments');
             $table->boolean('is_publish')->unsigned()->nullable();

@@ -23,6 +23,11 @@
                         Опубликовать в Телеграмм
                     </va-button>
                 </div>
+                <div class="col">
+                    <va-button color="danger" @click="hidden">
+                        Скрыть
+                    </va-button>
+                </div>
             </div>
             <va-data-table :items="items" :columns="columns" :filter="filter" :filter-method="customFilteringFn"
                 @filtered="filteredCount = $event.items.length" :loading=loading selectable selected-color="warning"
@@ -176,6 +181,27 @@ export default {
             this.infoModal.title = ''
             this.infoModal.content = ''
         },
+        hidden: function(event, rows) {
+            let self = this;
+            this.loading = true;
+            console.log(self.selectedItemsEmitted);
+            axios.get("/sanctum/csrf-cookie").then((response) => {
+                axios
+                    .post("/api/post/vk-anime-hidden", { selRows: self.selectedItemsEmitted })
+                    .then((response) => {
+                        if (response.status) {
+                            console.log("Вызвали алерт");
+                            this.$vaToast.init({ message: 'Запись скрыта', color: 'danger' })
+                            this.fetchRows();
+                            self.loading = false;
+                        } else {
+                            console.log("Не работает");
+                            console.log(response.status);
+                            self.loading = false;
+                        }
+                    });
+            });
+        },            
         publish: function (event, rows) {
             let self = this;
             this.loading = true;

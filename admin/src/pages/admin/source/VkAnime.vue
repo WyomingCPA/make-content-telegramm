@@ -36,6 +36,9 @@
                 <template #cell(attachments)="{ rowData }">
                     <va-image :src="getOneImage(rowData.attachments)" :sizes="100" />
                 </template>
+                <template #cell(count_attachments)="{ rowData }">
+                    <span>{{ getCountAttachments(rowData.attachments) }}</span>
+                </template>
                 <template #cell(text)="{ rowData }">
                     <div v-if="rowData.text == ''"><a class="link" target="_blank" :href="'https://vk.com/' + rowData.link">Посмотреть</a></div>
                     <div v-else><a class="link" target="_blank" :href="'https://vk.com/' + rowData.link">{{
@@ -74,6 +77,7 @@ export default {
         const columns = [
             { key: 'id', sortable: true },
             { key: 'attachments', sortable: true },
+            { key: 'count_attachments', sortable: true },
             { key: 'text', sortable: true },
             { key: 'created_at', sortable: true },
         ]
@@ -104,6 +108,12 @@ export default {
             let array = stringObject.toString().replace('[', '').replace(']', '').split(",").map(String);
             console.log(array[0]);
             return array[0];
+        },
+        getCountAttachments(stringObject) {
+            //firstImage = JSON.parse(object);
+            let array = stringObject.toString().replace('[', '').replace(']', '').split(",").map(String);
+            console.log(array.length)
+            return array.length;
         },
         addNewOption(newOption) {
             const option = {

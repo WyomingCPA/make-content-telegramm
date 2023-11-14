@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\DashboardController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -24,7 +25,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', 'AuthController@register');
 
 Route::group(['prefix' => 'dashboard', 'middleware' => 'auth:sanctum'], function () {
-	Route::get('/index', 'DashboardController@index');
+	Route::get('index', [DashboardController::class, 'index']);
 });
 
 Route::group(['prefix' => 'post', 'middleware' => 'auth:sanctum'], function () {

@@ -98,7 +98,7 @@ class PostController extends Controller
                 foreach ($list_img as $img) {
                     foreach ($img as $item_image)
                     {
-                        $media->addItem(new InputMediaPhoto($item_image));
+                        $media->addItem(new InputMediaPhoto($item_image, '#anime'));
                     }                  
                 }
                 $bot->sendMediaGroup($chatId, $media);

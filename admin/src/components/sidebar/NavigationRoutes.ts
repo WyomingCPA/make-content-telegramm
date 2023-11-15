@@ -34,6 +34,10 @@ export default {
           name: 'vk-anime',
           displayName: 'menu.vk-anime',
         },
+        {
+          name: 'vk-sexy',
+          displayName: 'menu.vk-sexy',
+        },
       ],
     },
     {

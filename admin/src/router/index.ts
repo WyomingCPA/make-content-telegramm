@@ -44,6 +44,11 @@ const routes: Array<RouteRecordRaw> = [
             path: 'vk-anime',
             component: () => import('../pages/admin/source/VkAnime.vue'),
           },
+          {
+            name: 'vk-sexy',
+            path: 'vk-sexy',
+            component: () => import('../pages/admin/source/VkSexy.vue'),
+          },
         ],
       },
       {

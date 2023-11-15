@@ -31,8 +31,9 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth:sanctum'], function
 Route::group(['prefix' => 'post', 'middleware' => 'auth:sanctum'], function () {
 	Route::post('rss-habr-all', [PostController::class, 'rssHabrAll']);
     Route::post('rss-habr-publish', [PostController::class, 'rssHabrPublish']);
-    Route::post('vk-anime-publish', [PostController::class, 'vkAnimePublish']);  
-    Route::post('vk-anime-hidden ', [PostController::class, 'vkAnimeHidden']);
+    Route::post('vk-anime-publish', [PostController::class, 'vkAnimePublish']);
+    Route::post('vk-sexy-publish', [PostController::class, 'vkSexyPublish']);  
+    Route::post('post-hidden ', [PostController::class, 'postHidden']);
     Route::post('vk-anime-all', [PostController::class, 'vkAnimeAll']);
-    
+    Route::post('vk-sexy-all', [PostController::class, 'vkSexyAll']);
 });

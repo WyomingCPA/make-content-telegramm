@@ -169,7 +169,7 @@ export default {
             axios
                 .request({
                     method: "post",
-                    url: "/api/post/vk-anime-all",
+                    url: "/api/post/vk-sexy-all",
                     params: this.serverParams,
                     paramsSerializer: (params) => {
                         return qs.stringify(params);
@@ -218,7 +218,7 @@ export default {
             console.log(self.selectedItemsEmitted);
             axios.get("/sanctum/csrf-cookie").then((response) => {
                 axios
-                    .post("/api/post/vk-anime-publish", { selRows: self.selectedItemsEmitted })
+                    .post("/api/post/vk-sexy-publish", { selRows: self.selectedItemsEmitted })
                     .then((response) => {
                         if (response.status) {
                             console.log("Вызвали алерт");

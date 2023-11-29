@@ -49,6 +49,11 @@ const routes: Array<RouteRecordRaw> = [
             path: 'vk-sexy',
             component: () => import('../pages/admin/source/VkSexy.vue'),
           },
+          {
+            name: 'vk-estetic-vibes',
+            path: 'vk-estetic-vibes',
+            component: () => import('../pages/admin/source/VkEsteticVibes.vue'),
+          },
         ],
       },
       {
@@ -60,6 +65,11 @@ const routes: Array<RouteRecordRaw> = [
             name: 'rss-it-publish',
             path: 'rss-it-publish',
             component: () => import('../pages/admin/source/Publish.vue'),
+          },
+          {
+            name: 'vk-anime-publish',
+            path: 'vk-anime-publish',
+            component: () => import('../pages/admin/source/VkAnimePublish.vue'),
           },
         ],
       },

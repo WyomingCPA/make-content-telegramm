@@ -38,6 +38,10 @@ export default {
           name: 'vk-sexy',
           displayName: 'menu.vk-sexy',
         },
+        {
+          name: 'vk-estetic-vibes',
+          displayName: 'menu.vk-estetic-vibes',
+        },
       ],
     },
     {
@@ -51,6 +55,10 @@ export default {
         {
           name: 'rss-it-publish',
           displayName: 'menu.it-publish',
+        },
+        {
+          name: 'vk-anime-publish',
+          displayName: 'menu.vk-anime',
         },
       ],
     },

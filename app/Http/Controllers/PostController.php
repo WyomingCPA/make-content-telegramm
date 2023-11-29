@@ -8,6 +8,8 @@ use TelegramBot\Api\BotApi;
 use TelegramBot\Api\Types\InputMedia\InputMediaPhoto;
 use \TelegramBot\Api\Types\InputMedia\ArrayOfInputMedia;
 
+use Tumblr\API\Client;
+
 use App\Models\RssItem;
 use App\Models\Post;
 use App\Models\Category;
@@ -61,13 +63,26 @@ class PostController extends Controller
     {
         $rows = $request->post('selRows');
         $select = [];
-        foreach ($rows as $value) 
-        {
+        foreach ($rows as $value) {
             $post = Post::findOrFail($value['id']);
             $post->is_hidden = true;
-            $post->save();            
+            $post->save();
         }
 
+        return response()->json([
+            'status' => true,
+        ], 200);
+    }
+    public function tumblrAnimePublish(Request $request)
+    {
+        $consumerKey = '';
+        $consumerSecret = '';
+        $rows = $request->post('selRows');
+        $select = [];
+        $client = new Client($consumerKey, $consumerSecret);
+        $client->setToken($token, $tokenSecret);
+        foreach ($rows as $value) {
+        }
         return response()->json([
             'status' => true,
         ], 200);
@@ -96,10 +111,9 @@ class PostController extends Controller
 
                 $media = new ArrayOfInputMedia();
                 foreach ($list_img as $img) {
-                    foreach ($img as $item_image)
-                    {
+                    foreach ($img as $item_image) {
                         $media->addItem(new InputMediaPhoto($item_image, '#sexy'));
-                    }                  
+                    }
                 }
                 $bot->sendMediaGroup($chatId, $media);
                 $post->is_publish = true;
@@ -108,7 +122,7 @@ class PostController extends Controller
         }
         return response()->json([
             'status' => true,
-        ], 200);        
+        ], 200);
     }
     public function vkAnimePublish(Request $request)
     {
@@ -134,10 +148,9 @@ class PostController extends Controller
 
                 $media = new ArrayOfInputMedia();
                 foreach ($list_img as $img) {
-                    foreach ($img as $item_image)
-                    {
+                    foreach ($img as $item_image) {
                         $media->addItem(new InputMediaPhoto($item_image, '#anime'));
-                    }                  
+                    }
                 }
                 $bot->sendMediaGroup($chatId, $media);
                 $post->is_publish = true;
@@ -147,6 +160,45 @@ class PostController extends Controller
         return response()->json([
             'status' => true,
         ], 200);
+    }
+    public function vkAnimeRelease(Request $request)
+    {
+        $objects = Post::where('is_publish', true)->where('is_hidden', false)->orderBy('created_at', 'desc');
+        $categories = Category::pluck('name')->toArray();
+        $count = $objects->count();
+        $sort = $request->get('sort');
+        $direction = $request->get('direction');
+        $name = $request->get('title');
+        $category_value = ['anime'];
+        $created_by = $request->get('created_by');
+        $type = $request->get('type');
+        $limit = 20;
+        $page = (int) $request->get('page');
+        $created_at = $request->get('created_at');
+
+        if ($name !== null) {
+            $objects->where('title', 'like', '%' . $name['searchTerm'] . '%');
+        }
+        if ($category_value !== null) {
+            $category_ids = Category::whereIn('name', $category_value)->pluck('id')->toArray();
+
+            $objects->whereHas('categories', function ($query) use ($category_ids, $request) {
+                $query->whereIn('category_id', array_values($category_ids));
+            });
+        }
+        $objects->offset($limit * ($page - 1))->limit($limit);
+        //$test = $objects->first()->attachments;
+        //foreach ($test as $item_test)
+        //{
+        //    echo "break";
+        //}
+        if ($request->isMethod('post')) {
+            return response()->json([
+                'posts' => $objects->get()->toArray(),
+                'count' => $count,
+                'categories' => $categories
+            ]);
+        }
     }
 
     public function vkSexyAll(Request $request)
@@ -186,7 +238,7 @@ class PostController extends Controller
                 'count' => $count,
                 'categories' => $categories
             ]);
-        }        
+        }
     }
     public function vkAnimeAll(Request $request)
     {

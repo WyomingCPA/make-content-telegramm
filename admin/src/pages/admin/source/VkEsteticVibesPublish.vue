@@ -19,8 +19,8 @@
 
             <div class="row">
                 <div class="col">
-                    <va-button @click="publish">
-                        Опубликовать в Телеграмм
+                    <va-button @click="publishTumbrl">
+                        Опубликовать в Tumblr
                     </va-button>
                 </div>
                 <div class="col">
@@ -169,7 +169,7 @@ export default {
             axios
                 .request({
                     method: "post",
-                    url: "/api/post/vk-estetic-vibes-all",
+                    url: "/api/post/vk-anime-release",
                     params: this.serverParams,
                     paramsSerializer: (params) => {
                         return qs.stringify(params);
@@ -212,17 +212,17 @@ export default {
                     });
             });
         },            
-        publish: function (event, rows) {
+        publishAnimeTumbrl: function (event, rows) {
             let self = this;
             this.loading = true;
             console.log(self.selectedItemsEmitted);
             axios.get("/sanctum/csrf-cookie").then((response) => {
                 axios
-                    .post("/api/post/vk-estetic-vibes-publish", { selRows: self.selectedItemsEmitted })
+                    .post("/api/post/tumbrl-anime-publish", { selRows: self.selectedItemsEmitted })
                     .then((response) => {
                         if (response.status) {
                             console.log("Вызвали алерт");
-                            this.$vaToast.init({ message: 'Запись добавлена в телеграмм', color: 'success' })
+                            this.$vaToast.init({ message: 'Запись добавлена в Tumbler', color: 'success' })
                             this.fetchRows();
                             self.loading = false;
                         } else {
@@ -275,5 +275,6 @@ export default {
         this.fetchRows();
     },
 }
+
 
 </script>

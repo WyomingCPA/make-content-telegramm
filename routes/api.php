@@ -32,10 +32,14 @@ Route::group(['prefix' => 'post', 'middleware' => 'auth:sanctum'], function () {
 	Route::post('rss-habr-all', [PostController::class, 'rssHabrAll']);
     Route::post('rss-habr-publish', [PostController::class, 'rssHabrPublish']);
     Route::post('vk-anime-publish', [PostController::class, 'vkAnimePublish']);
+    Route::post('vk-sexy-all', [PostController::class, 'vkSexyAll']);
+    Route::post('vk-sexy-release', [PostController::class, 'vkSexyRelease']);
     Route::post('vk-sexy-publish', [PostController::class, 'vkSexyPublish']);
     Route::post('tumbrl-anime-publish', [PostController::class, 'tumblrAnimePublish']);  
     Route::post('post-hidden ', [PostController::class, 'postHidden']);
     Route::post('vk-anime-all', [PostController::class, 'vkAnimeAll']);
     Route::post('vk-anime-release', [PostController::class, 'vkAnimeRelease']);
+    Route::post('vk-estetic-vibes-all', [PostController::class, 'vkEsteticVibesAll']);
+    
     
 });

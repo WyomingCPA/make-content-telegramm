@@ -124,6 +124,45 @@ class PostController extends Controller
             'status' => true,
         ], 200);
     }
+    public function vkSexyRelease(Request $request)
+    {
+        $objects = Post::where('is_publish', true)->where('is_hidden', false)->orderBy('created_at', 'desc');
+        $categories = Category::pluck('name')->toArray();
+        $count = $objects->count();
+        $sort = $request->get('sort');
+        $direction = $request->get('direction');
+        $name = $request->get('title');
+        $category_value = ['sexy'];
+        $created_by = $request->get('created_by');
+        $type = $request->get('type');
+        $limit = 20;
+        $page = (int) $request->get('page');
+        $created_at = $request->get('created_at');
+
+        if ($name !== null) {
+            $objects->where('title', 'like', '%' . $name['searchTerm'] . '%');
+        }
+        if ($category_value !== null) {
+            $category_ids = Category::whereIn('name', $category_value)->pluck('id')->toArray();
+
+            $objects->whereHas('categories', function ($query) use ($category_ids, $request) {
+                $query->whereIn('category_id', array_values($category_ids));
+            });
+        }
+        $objects->offset($limit * ($page - 1))->limit($limit);
+        //$test = $objects->first()->attachments;
+        //foreach ($test as $item_test)
+        //{
+        //    echo "break";
+        //}
+        if ($request->isMethod('post')) {
+            return response()->json([
+                'posts' => $objects->get()->toArray(),
+                'count' => $count,
+                'categories' => $categories
+            ]);
+        }
+    }
     public function vkAnimePublish(Request $request)
     {
         $rows = $request->post('selRows');
@@ -249,6 +288,45 @@ class PostController extends Controller
         $direction = $request->get('direction');
         $name = $request->get('title');
         $category_value = ['anime'];
+        $created_by = $request->get('created_by');
+        $type = $request->get('type');
+        $limit = 20;
+        $page = (int) $request->get('page');
+        $created_at = $request->get('created_at');
+
+        if ($name !== null) {
+            $objects->where('title', 'like', '%' . $name['searchTerm'] . '%');
+        }
+        if ($category_value !== null) {
+            $category_ids = Category::whereIn('name', $category_value)->pluck('id')->toArray();
+
+            $objects->whereHas('categories', function ($query) use ($category_ids, $request) {
+                $query->whereIn('category_id', array_values($category_ids));
+            });
+        }
+        $objects->offset($limit * ($page - 1))->limit($limit);
+        //$test = $objects->first()->attachments;
+        //foreach ($test as $item_test)
+        //{
+        //    echo "break";
+        //}
+        if ($request->isMethod('post')) {
+            return response()->json([
+                'posts' => $objects->get()->toArray(),
+                'count' => $count,
+                'categories' => $categories
+            ]);
+        }
+    }
+    public function vkEsteticVibesAll(Request $request)
+    {
+        $objects = Post::where('is_publish', false)->where('is_hidden', false)->orderBy('created_at', 'desc');
+        $categories = Category::pluck('name')->toArray();
+        $count = $objects->count();
+        $sort = $request->get('sort');
+        $direction = $request->get('direction');
+        $name = $request->get('title');
+        $category_value = ['estetic_vibes'];
         $created_by = $request->get('created_by');
         $type = $request->get('type');
         $limit = 20;

@@ -56,7 +56,8 @@ class GetRssHabr extends Command
             foreach ($categorysNode as $categoryItem) {
                 $domCategory = new Crawler($categoryItem);
                 $titleCategory = $domCategory->filter('category')->text();
-                $list_category[] = $titleCategory;
+                $hash_tag = str_replace(' ', '_', $titleCategory);
+                $list_category[] = $hash_tag;
             }
             try {
                 $pubDate = $domElement->filter('pubDate')->text();

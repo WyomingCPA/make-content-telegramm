@@ -36,6 +36,14 @@
             </va-card-content>
           </va-card>
         </div>
+        <div class="flex xs12 sm6 md6">
+          <va-card>
+            <va-card-content>
+              <h2 class="va-h2 ma-0">{{ add_today_post_count }}</h2>
+              <p class="no-wrap">Добавлено сегодня постов</p>
+            </va-card-content>
+          </va-card>
+        </div>
       </div>
     </div>
   </div>
@@ -74,6 +82,7 @@ export default defineComponent({
       total_all_post_count: { type: Number },
       all_publish_post_count: { type: Number },
       all_hide_post_count: { type: Number },
+      add_today_post_count: { type: Number },
       items,
     }
   },
@@ -93,6 +102,7 @@ export default defineComponent({
           self.total_all_post_count = response.data.total_all_post_count;
           self.all_publish_post_count = response.data.all_publish_post_count;
           self.all_hide_post_count = response.data.all_hide_post_count;
+          self.add_today_post_count = response.data.add_today_post_count;
 
           console.log(response.data.all_hide_post_count);
         })

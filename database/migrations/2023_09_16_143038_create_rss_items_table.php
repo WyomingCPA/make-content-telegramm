@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('rss_items', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 500);
+            $table->string('title', 1500);
             $table->text('body');
             $table->string('link');
             $table->date('pubDate');

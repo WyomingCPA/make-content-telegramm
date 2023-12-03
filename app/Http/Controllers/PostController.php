@@ -200,6 +200,44 @@ class PostController extends Controller
             'status' => true,
         ], 200);
     }
+
+    public function vkEsteticVibesPublish(Request $request)
+    {
+        $rows = $request->post('selRows');
+        $select = [];
+        foreach ($rows as $value) {
+            $messageText = '';
+            //$select[] = $value['id'];
+            $post = Post::findOrFail($value['id']);
+            $categories = $post->categories;
+            $list_img = $post->attachments;
+            $tags = '';
+            foreach ($categories as $item_category) {
+                $tags .= "#" . $item_category->name . " ";
+            }
+            $messageText .= "\n";
+            $messageText .= $tags;
+            if (!empty($messageText)) {
+                $chatId = '-1001597866737';
+                //$chatId = '-414528593';
+                $bot = new BotApi(env('TELEGRAM_TOKEN'));
+                //$bot->sendMessage($chatId, $messageText, 'HTML');
+
+                $media = new ArrayOfInputMedia();
+                foreach ($list_img as $img) {
+                    foreach ($img as $item_image) {
+                        $media->addItem(new InputMediaPhoto($item_image, '#nature #travel'));
+                    }
+                }
+                $bot->sendMediaGroup($chatId, $media);
+                $post->is_publish = true;
+                $post->save();
+            }
+        }
+        return response()->json([
+            'status' => true,
+        ], 200);
+    }
     public function vkAnimeRelease(Request $request)
     {
         $objects = Post::where('is_publish', true)->where('is_hidden', false)->orderBy('created_at', 'desc');

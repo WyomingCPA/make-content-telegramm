@@ -40,6 +40,6 @@ Route::group(['prefix' => 'post', 'middleware' => 'auth:sanctum'], function () {
     Route::post('vk-anime-all', [PostController::class, 'vkAnimeAll']);
     Route::post('vk-anime-release', [PostController::class, 'vkAnimeRelease']);
     Route::post('vk-estetic-vibes-all', [PostController::class, 'vkEsteticVibesAll']);
-    
+    Route::post('vk-estetic-vibes-publish', [PostController::class, 'vkEsteticVibesPublish']);
     
 });

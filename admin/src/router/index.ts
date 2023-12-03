@@ -71,6 +71,11 @@ const routes: Array<RouteRecordRaw> = [
             path: 'vk-anime-publish',
             component: () => import('../pages/admin/source/VkAnimePublish.vue'),
           },
+          {
+            name: 'vk-sexy-publish',
+            path: 'vk-sexy-publish',
+            component: () => import('../pages/admin/source/VkSexyPublish.vue'),
+          },
         ],
       },
       UIRoute,

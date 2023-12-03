@@ -60,6 +60,10 @@ export default {
           name: 'vk-anime-publish',
           displayName: 'menu.vk-anime',
         },
+        {
+          name: 'vk-sexy-publish',
+          displayName: 'menu.vk-sexy-publish',
+        },
       ],
     },
   ] as INavigationRoute[],

@@ -44,7 +44,8 @@ class GetAnimePostFromVk extends Command
         $array_groups = [
             -115419027, -196685535, -195462840,
             -171488847, -193838785, -204481547,
-            -212892056, -160959246
+            -212892056, -160959246, -100867898,
+            -58449508, 
         ];
         foreach ($array_groups as $item_group) {
             $response = $vk->wall()->get($access_token, [

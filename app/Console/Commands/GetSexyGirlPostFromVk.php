@@ -38,6 +38,10 @@ class GetSexyGirlPostFromVk extends Command
 
         $array_groups = [
             -182201279, -54010085, -66886959,
+            -37140953, -14832011, -74168656,
+            -45070834, -71652659, -183773006, 
+            -56550258, -65484616, -42070824
+            
         ];
         foreach ($array_groups as $item_group) {
             $response = $vk->wall()->get($access_token, [

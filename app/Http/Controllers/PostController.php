@@ -97,7 +97,7 @@ class PostController extends Controller
             $post = Post::findOrFail($value['id']);
             $categories = $post->categories;
             $list_img = $post->attachments;
-            $tags = '';
+            $tags = '#girl #body #fit';
             foreach ($categories as $item_category) {
                 $tags .= "#" . $item_category->name . " ";
             }
@@ -112,7 +112,7 @@ class PostController extends Controller
                 $media = new ArrayOfInputMedia();
                 foreach ($list_img as $img) {
                     foreach ($img as $item_image) {
-                        $media->addItem(new InputMediaPhoto($item_image, '#sexy'));
+                        $media->addItem(new InputMediaPhoto($item_image, '#sexy #girl #body #fit'));
                     }
                 }
                 $bot->sendMediaGroup($chatId, $media);
@@ -173,7 +173,7 @@ class PostController extends Controller
             $post = Post::findOrFail($value['id']);
             $categories = $post->categories;
             $list_img = $post->attachments;
-            $tags = '';
+            $tags = '#art #tyan ';
             foreach ($categories as $item_category) {
                 $tags .= "#" . $item_category->name . " ";
             }
@@ -188,7 +188,7 @@ class PostController extends Controller
                 $media = new ArrayOfInputMedia();
                 foreach ($list_img as $img) {
                     foreach ($img as $item_image) {
-                        $media->addItem(new InputMediaPhoto($item_image, '#anime'));
+                        $media->addItem(new InputMediaPhoto($item_image, '#anime #art #tyan'));
                     }
                 }
                 $bot->sendMediaGroup($chatId, $media);

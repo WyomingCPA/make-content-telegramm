@@ -237,7 +237,7 @@ class PostController extends Controller
         $token_secret = env('TOKEN_SECRET'); // your token secret
 
         $list_name = ['anime-feeder', 'animegirlpin'];
-        $blogName = array_rand($list_name, 1);
+        $blogName = $list_name[array_rand($list_name, 1)];
         
         $client = new Client($consumer_key, $consumer_secret);
         $client->setToken($token_key, $token_secret);

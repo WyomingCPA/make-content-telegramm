@@ -59,6 +59,35 @@
       </va-card>
     </div>
   </div>
+  <div class="row row-equal">
+    <div class="flex xl8 xs12 lg8">
+      <va-card square outlined>
+        <va-card-title>Избранное</va-card-title>
+        <va-card-content>
+          <VaList>
+
+            <VaListItem class="list__item">
+
+
+              <VaListItemSection>
+                <VaListItemLabel>
+                  Anime
+                </VaListItemLabel>
+
+                <VaListItemLabel caption>
+                  {{ favorite_anime_post_count }}
+                </VaListItemLabel>
+              </VaListItemSection>
+
+              <VaListItemSection icon>
+                <VaIcon name="remove_red_eye" color="background-element" />
+              </VaListItemSection>
+            </VaListItem>
+          </VaList>
+        </va-card-content>
+      </va-card>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -83,6 +112,7 @@ export default defineComponent({
       all_publish_post_count: { type: Number },
       all_hide_post_count: { type: Number },
       add_today_post_count: { type: Number },
+      favorite_anime_post_count: { type: Number },
       items,
     }
   },
@@ -103,6 +133,7 @@ export default defineComponent({
           self.all_publish_post_count = response.data.all_publish_post_count;
           self.all_hide_post_count = response.data.all_hide_post_count;
           self.add_today_post_count = response.data.add_today_post_count;
+          self.favorite_anime_post_count = response.data.favorite_anime_post_count;
 
           console.log(response.data.all_hide_post_count);
         })

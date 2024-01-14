@@ -41,4 +41,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function queuesPost()
+    {
+        return $this->belongsToMany(Post::class, 'queue_posts', 'user_id', 'posts_id')->withTimeStamps();
+    }
 }

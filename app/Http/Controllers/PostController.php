@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use TelegramBot\Api\BotApi;
 use TelegramBot\Api\Types\InputMedia\InputMediaPhoto;
@@ -196,6 +197,20 @@ class PostController extends Controller
                 'categories' => $categories
             ]);
         }
+    }
+    public function vkAnimeSetQueue(Request $request)
+    {
+        $rows = $request->post('selRows');
+        $select = [];
+        foreach ($rows as $value) {
+            $select[] = $value['id'];
+        }
+
+        Auth::user()->queuesPost()->attach(array_values($select));
+
+        return response()->json([
+            'status' => true,
+        ], 200);
     }
     public function vkAnimePublish(Request $request)
     {
@@ -391,7 +406,8 @@ class PostController extends Controller
     }
     public function vkAnimeAll(Request $request)
     {
-        $objects = Post::where('is_publish', false)->where('is_hidden', false)->orderBy('created_at', 'desc');
+        $favorite_ids = Auth::user()->queuesPost->pluck('id')->toArray();
+        $objects = Post::where('is_publish', false)->where('is_hidden', false)->whereNotIn('id', $favorite_ids)->orderBy('created_at', 'desc');
         $categories = Category::pluck('name')->toArray();
         $count = $objects->count();
         $sort = $request->get('sort');

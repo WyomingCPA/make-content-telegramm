@@ -21,6 +21,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('command:get-rss-habr')->hourly();
         $schedule->command('command:send-new-post')->everyTwoHours();
         $schedule->command('command:delete-old-post')->everyTwoHours();
+        $schedule->command('command:publish-anime-queue')->everyThreeHours();
     }
 
     /**

@@ -28,6 +28,11 @@
                         Скрыть
                     </va-button>
                 </div>
+                <div class="col">
+                    <va-button @click="addQueue">
+                        Добавить в очередь
+                    </va-button>
+                </div>
             </div>
             <va-data-table :items="items" :columns="columns" :filter="filter" :filter-method="customFilteringFn"
                 @filtered="filteredCount = $event.items.length" :loading=loading selectable selected-color="warning"
@@ -223,6 +228,27 @@ export default {
                         if (response.status) {
                             console.log("Вызвали алерт");
                             this.$vaToast.init({ message: 'Запись добавлена в телеграмм', color: 'success' })
+                            this.fetchRows();
+                            self.loading = false;
+                        } else {
+                            console.log("Не работает");
+                            console.log(response.status);
+                            self.loading = false;
+                        }
+                    });
+            });
+        },
+        addQueue: function (event, rows) {
+            let self = this;
+            this.loading = true;
+            console.log(self.selectedItemsEmitted);
+            axios.get("/sanctum/csrf-cookie").then((response) => {
+                axios
+                    .post("/api/queue/vk-sexy-set-queue", { selRows: self.selectedItemsEmitted })
+                    .then((response) => {
+                        if (response.status) {
+                            console.log("Вызвали алерт");
+                            this.$vaToast.init({ message: 'Запись добавлена в очередь', color: 'success' })
                             this.fetchRows();
                             self.loading = false;
                         } else {

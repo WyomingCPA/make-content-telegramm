@@ -79,6 +79,16 @@
                 </VaListItemLabel>
               </VaListItemSection>
 
+              <VaListItemSection>
+                <VaListItemLabel>
+                  Sexy
+                </VaListItemLabel>
+
+                <VaListItemLabel caption>
+                  {{ favorite_sexy_post_count }}
+                </VaListItemLabel>
+              </VaListItemSection>
+
               <VaListItemSection icon>
                 <VaIcon name="remove_red_eye" color="background-element" />
               </VaListItemSection>
@@ -113,6 +123,7 @@ export default defineComponent({
       all_hide_post_count: { type: Number },
       add_today_post_count: { type: Number },
       favorite_anime_post_count: { type: Number },
+      favorite_sexy_post_count: { type: Number },
       items,
     }
   },
@@ -134,7 +145,7 @@ export default defineComponent({
           self.all_hide_post_count = response.data.all_hide_post_count;
           self.add_today_post_count = response.data.add_today_post_count;
           self.favorite_anime_post_count = response.data.favorite_anime_post_count;
-
+          self.favorite_sexy_post_count = response.data.favorite_sexy_post_count;
           console.log(response.data.all_hide_post_count);
         })
         .catch(function (error) {

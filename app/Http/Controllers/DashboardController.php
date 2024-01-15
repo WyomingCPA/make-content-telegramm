@@ -18,16 +18,25 @@ class DashboardController extends Controller
         $all_hide_post_count = Post::where('is_hidden', true)->get()->count();
         $add_today_post_count = Post::whereDate('created_at', Carbon::today())->get()->count(); 
 
-        //Избранное Anime
-
+        //Очередь Anime
         $favorite_ids = $favorite_ids = Auth::user()->queuesPost->pluck('id')->toArray();
-        $objects = Post::where('is_publish', false)->where('is_hidden', false)->whereIn('id', $favorite_ids)->orderBy('created_at', 'desc');
+        $anime_object = Post::where('is_publish', false)->where('is_hidden', false)->whereIn('id', $favorite_ids)->orderBy('created_at', 'desc');
         $category_value = ['anime'];
         $category_ids = Category::whereIn('name', $category_value)->pluck('id')->toArray();
-        $objects->whereHas('categories', function ($query) use ($category_ids) {
+        $anime_object->whereHas('categories', function ($query) use ($category_ids) {
             $query->whereIn('category_id', array_values($category_ids));
         });
-        $favorite_anime_post_count = $objects->count();
+        $favorite_anime_post_count = $anime_object->count();
+
+        //Очередь sexy
+        $sexy_object = Post::where('is_publish', false)->where('is_hidden', false)->whereIn('id', $favorite_ids)->orderBy('created_at', 'desc');
+        $category_value = ['sexy'];
+        $category_ids = Category::whereIn('name', $category_value)->pluck('id')->toArray();
+        $sexy_object->whereHas('categories', function ($query) use ($category_ids) {
+            $query->whereIn('category_id', array_values($category_ids));
+        });
+        $favorite_sexy_post_count = $sexy_object->count();
+
         //$date = Carbon::now()->subDays(7);
         //$statistics = Statistics::where('created_at', '>=', $date)->orderBy('created_at', 'desc')->get();
         return response([
@@ -36,6 +45,7 @@ class DashboardController extends Controller
             'all_hide_post_count' => $all_hide_post_count,
             'add_today_post_count' => $add_today_post_count,
             'favorite_anime_post_count' => $favorite_anime_post_count, 
+            'favorite_sexy_post_count' => $favorite_sexy_post_count,
         ], 200);
     }
 }

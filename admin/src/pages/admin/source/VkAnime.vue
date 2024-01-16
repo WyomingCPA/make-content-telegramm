@@ -244,7 +244,7 @@ export default {
             console.log(self.selectedItemsEmitted);
             axios.get("/sanctum/csrf-cookie").then((response) => {
                 axios
-                    .post("/api/post/vk-anime-set-queue", { selRows: self.selectedItemsEmitted })
+                    .post("/api/queue/set", { selRows: self.selectedItemsEmitted })
                     .then((response) => {
                         if (response.status) {
                             console.log("Вызвали алерт");

@@ -78,6 +78,28 @@ const routes: Array<RouteRecordRaw> = [
           },
         ],
       },
+      {
+        name: 'queue',
+        path: 'queue',
+        component: RouteViewComponent,
+        children: [
+          {
+            name: 'queue-anime',
+            path: 'queue-anime',
+            component: () => import('../pages/admin/queue/Anime.vue'),
+          },
+          {
+            name: 'queue-sexy',
+            path: 'queue-sexy',
+            component: () => import('../pages/admin/queue/Sexy.vue'),
+          },
+          {
+            name: 'vk-sexy-publish',
+            path: 'vk-sexy-publish',
+            component: () => import('../pages/admin/source/VkSexyPublish.vue'),
+          },
+        ],
+      },
       UIRoute,
     ],
   },

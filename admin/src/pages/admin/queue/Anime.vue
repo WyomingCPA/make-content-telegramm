@@ -19,13 +19,8 @@
 
             <div class="row">
                 <div class="col">
-                    <va-button @click="publish">
-                        Опубликовать в Телеграмм
-                    </va-button>
-                </div>
-                <div class="col">
                     <va-button @click="addQueue">
-                        Добавить в очередь
+                        Удалить из очереди
                     </va-button>
                 </div>
                 <div class="col">
@@ -174,7 +169,7 @@ export default {
             axios
                 .request({
                     method: "post",
-                    url: "/api/post/vk-estetic-vibes-all",
+                    url: "/api/queue/vk-anime",
                     params: this.serverParams,
                     paramsSerializer: (params) => {
                         return qs.stringify(params);
@@ -223,7 +218,7 @@ export default {
             console.log(self.selectedItemsEmitted);
             axios.get("/sanctum/csrf-cookie").then((response) => {
                 axios
-                    .post("/api/post/vk-estetic-vibes-publish", { selRows: self.selectedItemsEmitted })
+                    .post("/api/post/vk-anime-publish", { selRows: self.selectedItemsEmitted })
                     .then((response) => {
                         if (response.status) {
                             console.log("Вызвали алерт");
@@ -258,7 +253,7 @@ export default {
                         }
                     });
             });
-        },        
+        },
     },
     computed: {
         customFilteringFn() {
@@ -301,5 +296,6 @@ export default {
         this.fetchRows();
     },
 }
+
 
 </script>

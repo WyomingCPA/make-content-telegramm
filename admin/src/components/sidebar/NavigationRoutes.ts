@@ -66,5 +66,23 @@ export default {
         },
       ],
     },
+    {
+      name: 'queue',
+      displayName: 'menu.queue',
+      meta: {
+        icon: 'vuestic-iconset-components',
+      },
+      disabled: true,
+      children: [
+        {
+          name: 'queue-anime',
+          displayName: 'menu.queue-anime',
+        },
+        {
+          name: 'queue-sexy',
+          displayName: 'menu.queue-anime',
+        },
+      ],
+    },
   ] as INavigationRoute[],
 }

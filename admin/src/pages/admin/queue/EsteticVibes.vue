@@ -169,7 +169,7 @@ export default {
             axios
                 .request({
                     method: "post",
-                    url: "/api/queue/vk-anime",
+                    url: "/api/queue/vk-estetic-vibes",
                     params: this.serverParams,
                     paramsSerializer: (params) => {
                         return qs.stringify(params);

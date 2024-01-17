@@ -94,9 +94,9 @@ const routes: Array<RouteRecordRaw> = [
             component: () => import('../pages/admin/queue/Sexy.vue'),
           },
           {
-            name: 'vk-sexy-publish',
-            path: 'vk-sexy-publish',
-            component: () => import('../pages/admin/source/VkSexyPublish.vue'),
+            name: 'queue-estetic',
+            path: 'queue-estetic',
+            component: () => import('../pages/admin/queue/EsteticVibes.vue'),
           },
         ],
       },

@@ -82,6 +82,10 @@ export default {
           name: 'queue-sexy',
           displayName: 'menu.queue-anime',
         },
+        {
+          name: 'queue-estetic',
+          displayName: 'menu.queue-estetic',
+        },
       ],
     },
   ] as INavigationRoute[],

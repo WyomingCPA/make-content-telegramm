@@ -46,5 +46,8 @@ Route::group(['prefix' => 'post', 'middleware' => 'auth:sanctum'], function () {
 });
 Route::group(['prefix' => 'queue', 'middleware' => 'auth:sanctum'], function () {
     Route::post('set', [QueueController::class, 'set']);
+    Route::post('unset', [QueueController::class, 'unset']);
     Route::post('vk-anime', [QueueController::class, 'vkAnime']); 
+    Route::post('vk-sexy', [QueueController::class, 'vkSexy']);
+    Route::post('vk-estetic-vibes', [QueueController::class, 'vkEsteticVibes']);
 });

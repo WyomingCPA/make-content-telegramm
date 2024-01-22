@@ -80,7 +80,7 @@ export default {
         },
         {
           name: 'queue-sexy',
-          displayName: 'menu.queue-anime',
+          displayName: 'menu.queue-sexy',
         },
         {
           name: 'queue-estetic',

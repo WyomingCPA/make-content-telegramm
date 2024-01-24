@@ -47,7 +47,7 @@ class SendNewPostToday extends Command
         $models->whereHas('categories', function ($query) use ($category_ids) {
             $query->whereIn('category_id', array_values($category_ids));
         });
-        $messageText = "<b>Последние статьи</b>\n\n";
+        $messageText = "<b>Последнее</b>\n\n";
         $links = array();
         $item_count = 1;
         foreach ($models->take(5)->get() as $post) {

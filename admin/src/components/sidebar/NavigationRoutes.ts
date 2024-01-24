@@ -42,6 +42,10 @@ export default {
           name: 'vk-estetic-vibes',
           displayName: 'menu.vk-estetic-vibes',
         },
+        {
+          name: 'vk-mir-tlen-mai',
+          displayName: 'menu.vk-mir-tlen-mai',
+        },
       ],
     },
     {
@@ -85,6 +89,10 @@ export default {
         {
           name: 'queue-estetic',
           displayName: 'menu.queue-estetic',
+        },
+        {
+          name: 'queue-mir-tlen-mai',
+          displayName: 'menu.queue-mir-tlen-mai',
         },
       ],
     },

@@ -37,6 +37,14 @@ class DashboardController extends Controller
         });
         $favorite_sexy_post_count = $sexy_object->count();
 
+        //Очередь Estetic Vibes
+        $estetic_object = Post::where('is_publish', false)->where('is_hidden', false)->whereIn('id', $favorite_ids)->orderBy('created_at', 'desc');
+        $category_value = ['estetic_vibes'];
+        $category_ids = Category::whereIn('name', $category_value)->pluck('id')->toArray();
+        $estetic_object->whereHas('categories', function ($query) use ($category_ids) {
+            $query->whereIn('category_id', array_values($category_ids));
+        });
+        $favorite_estetic_post_count = $estetic_object->count();
         //$date = Carbon::now()->subDays(7);
         //$statistics = Statistics::where('created_at', '>=', $date)->orderBy('created_at', 'desc')->get();
         return response([
@@ -46,6 +54,7 @@ class DashboardController extends Controller
             'add_today_post_count' => $add_today_post_count,
             'favorite_anime_post_count' => $favorite_anime_post_count, 
             'favorite_sexy_post_count' => $favorite_sexy_post_count,
+            'favorite_estetic_post_count' => $favorite_estetic_post_count,
         ], 200);
     }
 }

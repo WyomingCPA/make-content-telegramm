@@ -43,6 +43,8 @@ Route::group(['prefix' => 'post', 'middleware' => 'auth:sanctum'], function () {
     Route::post('vk-anime-release', [PostController::class, 'vkAnimeRelease']);
     Route::post('vk-estetic-vibes-all', [PostController::class, 'vkEsteticVibesAll']);
     Route::post('vk-estetic-vibes-publish', [PostController::class, 'vkEsteticVibesPublish']);
+    Route::post('vk-mirtlenmai-all', [PostController::class, 'vkMirTlenMaiAll']);
+    Route::post('vk-mirtlenmai-publish', [PostController::class, 'vkMirTlenMaiPublish']);
 });
 Route::group(['prefix' => 'queue', 'middleware' => 'auth:sanctum'], function () {
     Route::post('set', [QueueController::class, 'set']);
@@ -50,4 +52,5 @@ Route::group(['prefix' => 'queue', 'middleware' => 'auth:sanctum'], function () 
     Route::post('vk-anime', [QueueController::class, 'vkAnime']); 
     Route::post('vk-sexy', [QueueController::class, 'vkSexy']);
     Route::post('vk-estetic-vibes', [QueueController::class, 'vkEsteticVibes']);
+    Route::post('vk-mirtlenmai', [QueueController::class, 'vkMirtlenMai']);
 });

@@ -445,6 +445,47 @@ class PostController extends Controller
             ]);
         }
     }
+
+    public function vkMirTlenMaiAll(Request $request)
+    {
+        $favorite_ids = Auth::user()->queuesPost->pluck('id')->toArray();
+        $objects = Post::where('is_publish', false)->where('is_hidden', false)->whereNotIn('id', $favorite_ids)->orderBy('created_at', 'desc');
+        $categories = Category::pluck('name')->toArray();
+        $count = $objects->count();
+        $sort = $request->get('sort');
+        $direction = $request->get('direction');
+        $name = $request->get('title');
+        $category_value = ['mir_tlen_mai'];
+        $created_by = $request->get('created_by');
+        $type = $request->get('type');
+        $limit = 20;
+        $page = (int) $request->get('page');
+        $created_at = $request->get('created_at');
+
+        if ($name !== null) {
+            $objects->where('title', 'like', '%' . $name['searchTerm'] . '%');
+        }
+        if ($category_value !== null) {
+            $category_ids = Category::whereIn('name', $category_value)->pluck('id')->toArray();
+
+            $objects->whereHas('categories', function ($query) use ($category_ids, $request) {
+                $query->whereIn('category_id', array_values($category_ids));
+            });
+        }
+        $objects->offset($limit * ($page - 1))->limit($limit);
+        //$test = $objects->first()->attachments;
+        //foreach ($test as $item_test)
+        //{
+        //    echo "break";
+        //}
+        if ($request->isMethod('post')) {
+            return response()->json([
+                'posts' => $objects->get()->toArray(),
+                'count' => $count,
+                'categories' => $categories
+            ]);
+        }
+    }
     public function vkEsteticVibesAll(Request $request)
     {
         $favorite_ids = Auth::user()->queuesPost->pluck('id')->toArray();
@@ -485,6 +526,8 @@ class PostController extends Controller
             ]);
         }
     }
+
+    
     public function rssHabrPublish(Request $request)
     {
         $rows = $request->post('selRows');
@@ -511,6 +554,43 @@ class PostController extends Controller
             $post->save();
         }
 
+        return response()->json([
+            'status' => true,
+        ], 200);
+    }
+    public function vkMirTlenMaiPublish(Request $request)
+    {
+        $rows = $request->post('selRows');
+        $select = [];
+        foreach ($rows as $value) {
+            $messageText = '';
+            //$select[] = $value['id'];
+            $post = Post::findOrFail($value['id']);
+            $categories = $post->categories;
+            $list_img = $post->attachments;
+            $tags = '';
+            foreach ($categories as $item_category) {
+                $tags .= "#" . $item_category->name . " ";
+            }
+            $messageText .= "\n";
+            $messageText .= $tags;
+            if (!empty($messageText)) {
+                $chatId = '-1002082778220';
+                //$chatId = '-414528593';
+                $bot = new BotApi(env('TELEGRAM_TOKEN'));
+                //$bot->sendMessage($chatId, $messageText, 'HTML');
+
+                $media = new ArrayOfInputMedia();
+                foreach ($list_img as $img) {
+                    foreach ($img as $item_image) {
+                        $media->addItem(new InputMediaPhoto($item_image, $post->text));
+                    }
+                }
+                $bot->sendMediaGroup($chatId, $media);
+                $post->is_publish = true;
+                $post->save();
+            }
+        }
         return response()->json([
             'status' => true,
         ], 200);

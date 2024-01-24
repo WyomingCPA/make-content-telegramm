@@ -343,6 +343,7 @@
     "vk-anime": "Vk Anime",
     "vk-sexy": "Vk Sexy",
     "vk-estetic-vibes": "Vk Estetic Vibes",
+    "vk-mir-tlen-mai": "Мир, Тлен, Май",
     "publish": "Опубликованные",
     "it-publish": "IT блог",
     "vk-sexy-publish": "vk-sexy", 
@@ -350,7 +351,8 @@
     "queue": "Очередь",
     "queue-anime": "Очередь Anime",
     "queue-sexy": "Очередь Sexy",
-    "queue-estetic": "Очередь Estetic"
+    "queue-estetic": "Очередь Estetic",
+    "queue-mir-tlen-mai": "Очередь Мир, Тлен, Май"
   },
   "messages": {
     "all": "See all messages",

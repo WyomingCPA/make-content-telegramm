@@ -54,6 +54,11 @@ const routes: Array<RouteRecordRaw> = [
             path: 'vk-estetic-vibes',
             component: () => import('../pages/admin/source/VkEsteticVibes.vue'),
           },
+          {
+            name: 'vk-mir-tlen-mai',
+            path: 'vk-mir-tlen-mai',
+            component: () => import('../pages/admin/source/VkMirTlenMai.vue'),
+          },
         ],
       },
       {
@@ -97,6 +102,11 @@ const routes: Array<RouteRecordRaw> = [
             name: 'queue-estetic',
             path: 'queue-estetic',
             component: () => import('../pages/admin/queue/EsteticVibes.vue'),
+          },
+          {
+            name: 'queue-mir-tlen-mai',
+            path: 'queue-mir-tlen-mai',
+            component: () => import('../pages/admin/queue/VkMirTlenMai.vue'),
           },
         ],
       },

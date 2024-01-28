@@ -41,7 +41,8 @@ class GetEsteticVibesPostFromVk extends Command
         //171488847
         //$owner_id = -115419027;
         $array_groups = [
-            -55541884, -87654749,
+            -55541884, -87654749, -190970681,
+            -42879402, -25869828, -57069145,
         ];
         foreach ($array_groups as $item_group) {
             $response = $vk->wall()->get($access_token, [

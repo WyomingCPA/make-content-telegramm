@@ -8,6 +8,8 @@ use Carbon\Carbon;
 use TelegramBot\Api\BotApi;
 
 use App\Models\Statistic;
+use App\Models\Post;
+
 
 class GetStatistics extends Command
 {
@@ -33,8 +35,8 @@ class GetStatistics extends Command
     public function handle()
     {
         $list_chat_id = [
-            '-1001723315292' => 'it channel', '-1001866603682' => 'sexy channel', '-1001597866737' => 'estetic channel',
-            '-1001771871700' => 'anime channel', '-1002082778220' => 'mir tlen mai'
+            '-1001723315292' => 'it channel', '-1001866603682' => 'sexy', '-1001597866737' => 'estetic_vibes',
+            '-1001771871700' => 'anime', '-1002082778220' => 'mir tlen mai'
         ];
 
         $bot = new BotApi(env('TELEGRAM_TOKEN'));
@@ -43,8 +45,13 @@ class GetStatistics extends Command
         $messageText = "<b>Статистика каналов Telegramm</b>\n\n";
         foreach ($list_chat_id as $key => $value) {
             $count_channel = $bot->getChatMembersCount($key);
-            $stat[] = array('count_member' => $count_channel, 'channel' => $value, 'id_channel' => $key, 'count_queues' => 0);
-            $messageText .= "$value = $count_channel\n";
+            $queues_count = Post::queueCount($value);
+            $stat[] = array(
+                'count_member' => $count_channel,
+                'channel' => $value, 'id_channel' => $key,
+                'count_queues' => $queues_count,
+            );
+            $messageText .= "$value = $count_channel Очередь = $queues_count\n";
         }
 
         $model = Statistic::create([

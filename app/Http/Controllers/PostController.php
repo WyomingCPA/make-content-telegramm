@@ -15,6 +15,9 @@ use App\Models\RssItem;
 use App\Models\Post;
 use App\Models\Category;
 
+
+use Symfony\Component\DomCrawler\Crawler;
+
 class PostController extends Controller
 {
     public function rssHabrAll(Request $request)
@@ -532,27 +535,82 @@ class PostController extends Controller
     {
         $rows = $request->post('selRows');
         $select = [];
-        foreach ($rows as $value) {
-            //$select[] = $value['id'];
-            $post = RssItem::findOrFail($value['id']);
+        foreach ($rows as $item)
+        {
+            $select [] = $item['id'];
+        }
+        $objects = RssItem::whereIn('id', $select)->orderBy('created_at', 'desc');
+        $messageText = "<b>Подборка</b>\n\n";
+        $links = array();
+        $raw_links = array();
+        $item_count = 1;
+        //Тут получаем image header
+        foreach ($objects->get() as $item_img) {
+            $raw_links[] = $item_img->link;
+        }
+        $options = [
+            'headers' => [
+                'User-Agent' => 'Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.101 Safari/537.36'
+            ],
+            'curl' => [CURLOPT_SSL_VERIFYPEER => false],
+        ];
+        $list_img = array();
+        foreach ($raw_links as $item_link)
+        {
+            $client = new \GuzzleHttp\Client($options);
+            $response = $client->request('GET', $item_link)->getBody()->getContents();
+    
+            $crawler = new Crawler($response);
+            $image = '';
+            try {
+                $image = $crawler->filterXPath('//*[@id="post-content-body"]//img')->eq(0)->attr('src');
+                if (!empty($image)) {
+                    echo "$image\n";
+                    $list_img = array($image);
+                    break;
+                }
+            }
+            catch (\Exception $e)
+            {
+                echo 'Error';
+            }
+        }
+
+        if (count($list_img) === 0) {
+            echo "No Data";
+            return response()->json([
+                'status' => true,
+            ], 200);
+        }
+        $first_link = array_shift($list_img);
+        //Тут формируем пост 
+        foreach ($objects->get() as $post) {
             $categories = $post->categories;
             $tags = '';
             foreach ($categories as $item_category) {
-                $tags .= "#" . $item_category->name . " ";
+                if (strlen($item_category->name) <= 15) {
+                    if ($item_category->name === "anime")
+                    {
+                        continue;
+                    }
+                    $tags .= "#" . str_replace('-', '_', $item_category->name) . " ";
+                }
             }
-            $messageText = $post->title . "\n";
-            $messageText .= "\n";
-            $messageText .= $post->link . "\n";
-            $messageText .= "\n";
-            $messageText .= $tags;
+            $messageText .= "$item_count) <a href='$post->link'>$post->title</a>\n";
+            $messageText .= $tags . "\n \n";
 
-            $chatId = '-1001723315292';
-            //$chatId = '-414528593';
-            $bot = new BotApi(env('TELEGRAM_TOKEN'));
-            $bot->sendMessage($chatId, $messageText, 'HTML');
             $post->is_publish = true;
             $post->save();
+
+            $item_count++;
         }
+
+        $chatId = '-1001723315292';
+        //$chatId = '-414528593';
+        $bot = new BotApi(env('TELEGRAM_TOKEN'));
+        $media = new ArrayOfInputMedia();
+        $media->addItem(new InputMediaPhoto($first_link, $messageText, 'HTML'));
+        $bot->sendMediaGroup($chatId, $media);
 
         return response()->json([
             'status' => true,

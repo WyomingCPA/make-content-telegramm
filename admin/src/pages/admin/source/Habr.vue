@@ -84,7 +84,7 @@ export default {
         name: "",
       },
       options: [],
-      value: ["laravel", "php"],
+      value: [],
     }
   },
   methods: {

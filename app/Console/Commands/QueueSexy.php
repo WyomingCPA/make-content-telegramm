@@ -66,8 +66,9 @@ class QueueSexy extends Command
 
                 $media = new ArrayOfInputMedia();
                 foreach ($list_img as $img) {
-                    foreach ($img as $item_image) {
-                        $media->addItem(new InputMediaPhoto($item_image, '#girl #body #fit'));
+                    foreach ($img as $item_image) {              
+                        $messageText = "#girl #body #fit \n\n\n<a href='https://t.me/worldofbeautiestg'>World of Beauties</a>";
+                        $media->addItem(new InputMediaPhoto($item_image, $messageText, 'HTML'));
                     }
                 }
                 $bot->sendMediaGroup($chatId, $media);

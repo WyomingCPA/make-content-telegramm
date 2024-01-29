@@ -30,8 +30,10 @@ class PostController extends Controller
             $objects = RssItem::where('is_publish', null)->orderBy('created_at', 'desc');
         }
 
-        $categories = Category::pluck('name')->toArray();
-        $count = $objects->count();
+        //$categories = Category::pluck('name')->toArray();
+        $categories = ['laravel', 'php', 'typescript', 'javascript', 'vue', 'unix',
+        'программирование', 'python', 'разработка', 'github'];
+        
         $sort = $request->get('sort');
         $direction = $request->get('direction');
         $name = $request->get('title');
@@ -53,6 +55,7 @@ class PostController extends Controller
             });
         }
         $objects->offset($limit * ($page - 1))->limit($limit);
+        $count = $objects->count();
         if ($request->isMethod('post')) {
             return response()->json([
                 'posts' => $objects->get()->toArray(),

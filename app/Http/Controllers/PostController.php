@@ -40,7 +40,7 @@ class PostController extends Controller
         $category_value = $request->get('category_value');
         $created_by = $request->get('created_by');
         $type = $request->get('type');
-        $limit = 20;
+        $limit = 50;
         $page = (int) $request->get('page');
         $created_at = $request->get('created_at');
 
@@ -383,7 +383,7 @@ class PostController extends Controller
         $category_value = ['sexy'];
         $created_by = $request->get('created_by');
         $type = $request->get('type');
-        $limit = 20;
+        $limit = 50;
         $page = (int) $request->get('page');
         $created_at = $request->get('created_at');
 
@@ -423,7 +423,7 @@ class PostController extends Controller
         $category_value = ['anime'];
         $created_by = $request->get('created_by');
         $type = $request->get('type');
-        $limit = 20;
+        $limit = 50;
         $page = (int) $request->get('page');
         $created_at = $request->get('created_at');
 
@@ -464,7 +464,7 @@ class PostController extends Controller
         $category_value = ['mir_tlen_mai'];
         $created_by = $request->get('created_by');
         $type = $request->get('type');
-        $limit = 20;
+        $limit = 50;
         $page = (int) $request->get('page');
         $created_at = $request->get('created_at');
 
@@ -504,7 +504,7 @@ class PostController extends Controller
         $category_value = ['estetic_vibes'];
         $created_by = $request->get('created_by');
         $type = $request->get('type');
-        $limit = 20;
+        $limit = 50;
         $page = (int) $request->get('page');
         $created_at = $request->get('created_at');
 

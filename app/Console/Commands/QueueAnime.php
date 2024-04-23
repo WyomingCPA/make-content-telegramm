@@ -41,6 +41,11 @@ class QueueAnime extends Command
         $user = User::select('id')->where('email', 'WyomingCPA@yandex.ru')->first();
         $favorite_ids = $user->queuesPost->pluck('id')->toArray();
         $objects = Post::where('is_publish', false)->where('is_hidden', false)->whereIn('id', $favorite_ids)->orderBy('created_at', 'desc');
+        if ($objects->count() == 0)
+        {
+            $objects =  Post::where('is_publish', true)->where('is_hidden', false)->orderBy('updated_at', 'asc');
+            //echo $objects->count();
+        }
         $category_value = ['anime'];
         $category_ids = Category::whereIn('name', $category_value)->pluck('id')->toArray();
         $objects->whereHas('categories', function ($query) use ($category_ids) {

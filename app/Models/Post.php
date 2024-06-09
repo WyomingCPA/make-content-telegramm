@@ -33,6 +33,11 @@ class Post extends Model
         return Carbon::parse($value)->format('H:i:s j F Y');
     }
     
+    public function getUpdatedAtAttribute($value)
+    {
+        return Carbon::parse($value)->format('H:i:s j F Y');
+    }
+
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'category_post', 'post_id');

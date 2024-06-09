@@ -79,7 +79,7 @@ export default {
             { key: 'attachments', sortable: true },
             { key: 'count_attachments', sortable: true },
             { key: 'text', sortable: true },
-            { key: 'created_at', sortable: true },
+            { key: 'updated_at', sortable: true },
         ]
         return {
             count: { type: Number },

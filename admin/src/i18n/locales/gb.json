@@ -352,7 +352,9 @@
     "queue-anime": "Очередь Anime",
     "queue-sexy": "Очередь Sexy",
     "queue-estetic": "Очередь Estetic",
-    "queue-mir-tlen-mai": "Очередь Мир, Тлен, Май"
+    "queue-mir-tlen-mai": "Очередь Мир, Тлен, Май",
+    "tumblr-reblog": "Tumblr Реблог",
+    "tumblr-reblog-anime": "Tumblr Реблог Anime"
   },
   "messages": {
     "all": "See all messages",

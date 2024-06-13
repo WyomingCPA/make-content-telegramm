@@ -71,6 +71,20 @@ export default {
       ],
     },
     {
+      name: 'tumblr-reblog',
+      displayName: 'menu.tumblr-reblog',
+      meta: {
+        icon: 'vuestic-iconset-components',
+      },
+      disabled: true,
+      children: [
+        {
+          name: 'tumblr-reblog-anime',
+          displayName: 'menu.tumblr-reblog-anime',
+        },
+      ],
+    },
+    {
       name: 'queue',
       displayName: 'menu.queue',
       meta: {

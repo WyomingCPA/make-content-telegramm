@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\QueueController;
+use App\Http\Controllers\TumblrController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -53,4 +54,9 @@ Route::group(['prefix' => 'queue', 'middleware' => 'auth:sanctum'], function () 
     Route::post('vk-sexy', [QueueController::class, 'vkSexy']);
     Route::post('vk-estetic-vibes', [QueueController::class, 'vkEsteticVibes']);
     Route::post('vk-mirtlenmai', [QueueController::class, 'vkMirtlenMai']);
+});
+
+Route::group(['prefix' => 'tumblr', 'middleware' => 'auth:sanctum'], function () {
+    Route::post('get-post', [TumblrController::class, 'getDataPostId']);
+    Route::post('publish-anime-post', [TumblrController::class, 'publishAnimePost']);
 });

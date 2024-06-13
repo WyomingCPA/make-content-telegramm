@@ -84,6 +84,18 @@ const routes: Array<RouteRecordRaw> = [
         ],
       },
       {
+        name: 'reblogtumblr',
+        path: 'reblogtumblr',
+        component: RouteViewComponent,
+        children: [
+          {
+            name: 'tumblr-reblog-anime',
+            path: 'tumblr-reblog-anime',
+            component: () => import('../pages/admin/tumblr/Reblog.vue'),
+          },
+        ],
+      },
+      {
         name: 'queue',
         path: 'queue',
         component: RouteViewComponent,

@@ -227,7 +227,7 @@ export default {
                     .then((response) => {
                         if (response.status) {
                             console.log("Вызвали алерт");
-                            this.$vaToast.init({ message: 'Запись добавлена в телеграмм', color: 'success' })
+                            this.$vaToast.init({ message: 'Запись добавлена в телеграмм', color: 'success' });
                             this.fetchRows();
                             self.loading = false;
                         } else {

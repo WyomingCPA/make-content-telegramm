@@ -39,7 +39,7 @@
                 @selectionChange="selectedItemsEmitted = $event.currentSelectedItems">
 
                 <template #cell(attachments)="{ rowData }">
-                    <va-image :src="getOneImage(rowData.attachments)" :sizes="100" />
+                    <va-image :src="getOneImage(rowData.attachments)" :sizes="150" />
                 </template>
                 <template #cell(count_attachments)="{ rowData }">
                     <span>{{ getCountAttachments(rowData.attachments) }}</span>
@@ -109,16 +109,13 @@ export default {
     },
     methods: {
         getOneImage(stringObject) {
-            //firstImage = JSON.parse(object);
-            let array = stringObject.toString().replace('[', '').replace(']', '').split(",").map(String);
-            console.log(array[0]);
-            return array[0];
+            let arr = Array.from(Object.entries(stringObject), ([key, value]) => value);
+            return arr[0];
         },
         getCountAttachments(stringObject) {
-            //firstImage = JSON.parse(object);
-            let array = stringObject.toString().replace('[', '').replace(']', '').split(",").map(String);
-            console.log(array.length)
-            return array.length;
+            let arr = Array.from(Object.entries(stringObject), ([key, value]) => value);
+            var count = arr.filter(function () { return true; }).length;
+            return count;
         },
         addNewOption(newOption) {
             const option = {

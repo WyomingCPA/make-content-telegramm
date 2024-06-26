@@ -82,6 +82,10 @@ export default {
           name: 'tumblr-reblog-anime',
           displayName: 'menu.tumblr-reblog-anime',
         },
+        {
+          name: 'tumblr-reblog-estetic-vibes',
+          displayName: 'menu.tumblr-reblog-estetic-vibes',
+        },
       ],
     },
     {

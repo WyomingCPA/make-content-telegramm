@@ -59,4 +59,6 @@ Route::group(['prefix' => 'queue', 'middleware' => 'auth:sanctum'], function () 
 Route::group(['prefix' => 'tumblr', 'middleware' => 'auth:sanctum'], function () {
     Route::post('get-post', [TumblrController::class, 'getDataPostId']);
     Route::post('publish-anime-post', [TumblrController::class, 'publishAnimePost']);
+    Route::post('estetic-vibes-post', [TumblrController::class, 'publishEsteticVibes']);
+    
 });

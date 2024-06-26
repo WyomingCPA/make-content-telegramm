@@ -39,15 +39,16 @@
                 @selectionChange="selectedItemsEmitted = $event.currentSelectedItems">
 
                 <template #cell(attachments)="{ rowData }">
-                    <va-image :src="getOneImage(rowData.attachments)" :sizes="100" />
+                    <va-image :src="getOneImage(rowData.attachments)" :sizes="150" />
                 </template>
                 <template #cell(count_attachments)="{ rowData }">
                     <span>{{ getCountAttachments(rowData.attachments) }}</span>
                 </template>
                 <template #cell(text)="{ rowData }">
-                    <div v-if="rowData.text == ''"><a class="link" target="_blank" :href="'https://vk.com/' + rowData.link">Посмотреть</a></div>
+                    <div v-if="rowData.text == ''"><a class="link" target="_blank"
+                            :href="'https://vk.com/' + rowData.link">Посмотреть</a></div>
                     <div v-else><a class="link" target="_blank" :href="'https://vk.com/' + rowData.link">{{
-                        rowData.text }}</a></div>
+                    rowData.text }}</a></div>
                 </template>
                 <template #bodyAppend>
                     <tr>
@@ -109,16 +110,13 @@ export default {
     },
     methods: {
         getOneImage(stringObject) {
-            //firstImage = JSON.parse(object);
-            let array = stringObject.toString().replace('[', '').replace(']', '').split(",").map(String);
-            console.log(array[0]);
-            return array[0];
+            let arr = Array.from(Object.entries(stringObject), ([key, value]) => value);
+            return arr[0];
         },
         getCountAttachments(stringObject) {
-            //firstImage = JSON.parse(object);
-            let array = stringObject.toString().replace('[', '').replace(']', '').split(",").map(String);
-            console.log(array.length)
-            return array.length;
+            let arr = Array.from(Object.entries(stringObject), ([key, value]) => value);
+            var count = arr.filter(function () { return true; }).length;
+            return count;
         },
         addNewOption(newOption) {
             const option = {
@@ -196,7 +194,7 @@ export default {
             this.infoModal.title = ''
             this.infoModal.content = ''
         },
-        hidden: function(event, rows) {
+        hidden: function (event, rows) {
             let self = this;
             this.loading = true;
             console.log(self.selectedItemsEmitted);
@@ -216,7 +214,7 @@ export default {
                         }
                     });
             });
-        },            
+        },
         publish: function (event, rows) {
             let self = this;
             this.loading = true;

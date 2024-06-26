@@ -16,6 +16,36 @@ use \TelegramBot\Api\Types\InputMedia\ArrayOfInputMedia;
 
 class TumblrController extends Controller
 {
+    public function publishEsteticVibes(Request $request)
+    {
+        $list_img = $request->get('list_img');
+        $tags_array = $request->get('tags');
+        $messageText = '';
+        foreach ($tags_array as $tag)
+        {
+            $tagText = str_replace(' ', '_', $tag);
+            $messageText .= " #$tagText";
+        }
+         
+        $messageText .= "\n";
+        if (!empty($messageText)) {
+            $chatId = '-1001597866737';
+            //$chatId = '-414528593';
+            $bot = new BotApi(env('TELEGRAM_TOKEN'));
+            //$bot->sendMessage($chatId, $messageText, 'HTML');
+
+            $media = new ArrayOfInputMedia();
+            $messageText .= " #nature #travel \n\n\n<a href='https://t.me/estetic_vibes_tg'>Estetic Vibes</a>";
+            foreach ($list_img as $item_image) {
+                $media->addItem(new InputMediaPhoto($item_image, $messageText, 'HTML'));
+            }
+
+            $bot->sendMediaGroup($chatId, $media);
+        }
+        return response()->json([
+            'status' => true,
+        ], 200);
+    }
     public function publishAnimePost(Request $request)
     {
         $list_img = $request->get('list_img');

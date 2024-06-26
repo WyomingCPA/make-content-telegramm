@@ -41,25 +41,37 @@ class QueueEsteticVibes extends Command
         $user = User::select('id')->where('email', 'WyomingCPA@yandex.ru')->first();
         $favorite_ids = $user->queuesPost->pluck('id')->toArray();
         $objects = Post::where('is_publish', false)->where('is_hidden', false)->whereIn('id', $favorite_ids)->orderBy('created_at', 'desc');
+
         $category_value = ['estetic_vibes'];
         $category_ids = Category::whereIn('name', $category_value)->pluck('id')->toArray();
         $objects->whereHas('categories', function ($query) use ($category_ids) {
             $query->whereIn('category_id', array_values($category_ids));
         });
+
+        if ($objects->count() == 0) {
+            $objects =  Post::where('is_publish', true)->where('is_hidden', false)->orderBy('updated_at', 'asc');
+            $category_value = ['sexy'];
+            $category_ids = Category::whereIn('name', $category_value)->pluck('id')->toArray();
+            $objects->whereHas('categories', function ($query) use ($category_ids) {
+                $query->whereIn('category_id', array_values($category_ids));
+            });
+            //echo $objects->count();
+        }
         $post = $objects->inRandomOrder()->first();
+        $post->touch();
         try {
             //Telegramm
             $messageText = '';
             $categories = $post->categories;
             $list_img = $post->attachments;
-            $tags = '';
+            $tags = '#girl #body #fit';
             foreach ($categories as $item_category) {
                 $tags .= "#" . $item_category->name . " ";
             }
             $messageText .= "\n";
             $messageText .= $tags;
             if (!empty($messageText)) {
-                $chatId = '-1001597866737';
+                $chatId = '-1001866603682';
                 //$chatId = '-414528593';
                 $bot = new BotApi(env('TELEGRAM_TOKEN'));
                 //$bot->sendMessage($chatId, $messageText, 'HTML');
@@ -67,21 +79,21 @@ class QueueEsteticVibes extends Command
                 $media = new ArrayOfInputMedia();
                 foreach ($list_img as $img) {
                     foreach ($img as $item_image) {
-                        $media->addItem(new InputMediaPhoto($item_image, '#nature #travel'));
+                        $messageText = "#girl #body #fit \n\n\n<a href='https://t.me/worldofbeautiestg'>World of Beauties</a>";
+                        $media->addItem(new InputMediaPhoto($item_image, $messageText, 'HTML'));
                     }
                 }
                 $bot->sendMediaGroup($chatId, $media);
                 $post->is_publish = true;
                 $post->save();
             }
-
-            echo 'Публикация выполена успешно';
         } catch (\Error $e) {
             $user->queuesPost()->detach(array_values([$post->id]));
             $post->is_hidden = true;
             $post->save();
             echo $e->getMessage();
         }
+
         return Command::SUCCESS;
     }
 }

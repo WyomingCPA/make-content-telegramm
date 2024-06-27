@@ -50,7 +50,7 @@ class QueueEsteticVibes extends Command
 
         if ($objects->count() == 0) {
             $objects =  Post::where('is_publish', true)->where('is_hidden', false)->orderBy('updated_at', 'asc');
-            $category_value = ['sexy'];
+            $category_value = ['estetic_vibes'];
             $category_ids = Category::whereIn('name', $category_value)->pluck('id')->toArray();
             $objects->whereHas('categories', function ($query) use ($category_ids) {
                 $query->whereIn('category_id', array_values($category_ids));
@@ -64,14 +64,14 @@ class QueueEsteticVibes extends Command
             $messageText = '';
             $categories = $post->categories;
             $list_img = $post->attachments;
-            $tags = '#girl #body #fit';
+            $tags = '#nature #travel';
             foreach ($categories as $item_category) {
                 $tags .= "#" . $item_category->name . " ";
             }
             $messageText .= "\n";
             $messageText .= $tags;
             if (!empty($messageText)) {
-                $chatId = '-1001866603682';
+                $chatId = '-1001597866737';
                 //$chatId = '-414528593';
                 $bot = new BotApi(env('TELEGRAM_TOKEN'));
                 //$bot->sendMessage($chatId, $messageText, 'HTML');
@@ -79,7 +79,7 @@ class QueueEsteticVibes extends Command
                 $media = new ArrayOfInputMedia();
                 foreach ($list_img as $img) {
                     foreach ($img as $item_image) {
-                        $messageText = "#girl #body #fit \n\n\n<a href='https://t.me/worldofbeautiestg'>World of Beauties</a>";
+                        $messageText = "#nature #travel \n\n\n<a href='https://t.me/estetic_vibes_tg'>Estetic Vibes</a>";
                         $media->addItem(new InputMediaPhoto($item_image, $messageText, 'HTML'));
                     }
                 }

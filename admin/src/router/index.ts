@@ -81,6 +81,11 @@ const routes: Array<RouteRecordRaw> = [
             path: 'vk-sexy-publish',
             component: () => import('../pages/admin/source/VkSexyPublish.vue'),
           },
+          {
+            name: 'vk-sexy-publish',
+            path: 'vk-sexy-publish',
+            component: () => import('../pages/admin/source/VkSexyPublish.vue'),
+          },
         ],
       },
       {

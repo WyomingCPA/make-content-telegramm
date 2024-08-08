@@ -8,6 +8,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\QueueController;
 use App\Http\Controllers\TumblrController;
+use App\Http\Controllers\GroupController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -44,7 +45,7 @@ Route::group(['prefix' => 'post', 'middleware' => 'auth:sanctum'], function () {
     Route::post('vk-anime-release', [PostController::class, 'vkAnimeRelease']);
     Route::post('vk-estetic-vibes-all', [PostController::class, 'vkEsteticVibesAll']);
     Route::post('vk-estetic-vibes-publish', [PostController::class, 'vkEsteticVibesPublish']);
-    Route::post('api/post/vk-anime-release', [PostController::class, 'vkEsteticVibesRelease']);
+    Route::post('vk-esteticvibes-release', [PostController::class, 'vkEsteticVibesRelease']);
     Route::post('vk-mirtlenmai-all', [PostController::class, 'vkMirTlenMaiAll']);
     Route::post('vk-mirtlenmai-publish', [PostController::class, 'vkMirTlenMaiPublish']);
 });
@@ -55,6 +56,17 @@ Route::group(['prefix' => 'queue', 'middleware' => 'auth:sanctum'], function () 
     Route::post('vk-sexy', [QueueController::class, 'vkSexy']);
     Route::post('vk-estetic-vibes', [QueueController::class, 'vkEsteticVibes']);
     Route::post('vk-mirtlenmai', [QueueController::class, 'vkMirtlenMai']);
+});
+
+Route::group(['prefix' => 'groups', 'middleware' => 'auth:sanctum'], function () {
+    Route::post('index', [GroupController::class, 'index']);
+    Route::post('store', [GroupController::class, 'store']);
+    Route::post('update-status', [GroupController::class, 'updateStatus']);
+    Route::post('update', [GroupController::class, 'update']);
+    Route::get('edit/{id}', [GroupController::class, 'edit']);
+    Route::post('add-source', [GroupController::class, 'addSource']);
+    Route::post('get-source', [GroupController::class, 'getSource']);
+    Route::post('delete-source', [GroupController::class, 'deleteSource']);
 });
 
 Route::group(['prefix' => 'tumblr', 'middleware' => 'auth:sanctum'], function () {

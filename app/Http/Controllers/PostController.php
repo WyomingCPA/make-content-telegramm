@@ -167,7 +167,7 @@ class PostController extends Controller
     }
     public function vkSexyRelease(Request $request)
     {
-        $objects = Post::where('is_publish', true)->where('is_hidden', false)->orderBy('updated_at', 'desc');
+        $objects = Post::where('is_publish', true)->where('is_hidden', false)->orderBy('updated_at', 'asc');
         $categories = Category::pluck('name')->toArray();
         $count = $objects->count();
         $sort = $request->get('sort');
@@ -207,7 +207,7 @@ class PostController extends Controller
 
     public function vkEsteticVibesRelease(Request $request)
     {
-        $objects = Post::where('is_publish', true)->where('is_hidden', false)->orderBy('updated_at', 'desc');
+        $objects = Post::where('is_publish', true)->where('is_hidden', false)->orderBy('updated_at', 'asc');
         $categories = Category::pluck('name')->toArray();
         $count = $objects->count();
         $sort = $request->get('sort');
@@ -373,7 +373,7 @@ class PostController extends Controller
     }
     public function vkAnimeRelease(Request $request)
     {
-        $objects = Post::where('is_publish', true)->where('is_hidden', false)->orderBy('updated_at', 'desc');
+        $objects = Post::where('is_publish', true)->where('is_hidden', false)->orderBy('updated_at', 'asc');
         $categories = Category::pluck('name')->toArray();
         $count = $objects->count();
         $sort = $request->get('sort');

@@ -4,25 +4,7 @@
             <div class="grid md:grid-cols-2 gap-6 mb-6">
                 <va-input v-model="input" placeholder="Filter..." class="w-full" />
             </div>
-
-            <div class="grid md:grid-cols-2 gap-6 mb-6">
-                <va-select v-model="value" label="Removable chips" :options="options" @create-new="addNewOption"
-                    :track-by="(option) => option" allow-create="unique" multiple>
-                    <template #content="{ value }">
-                        <va-chip v-for="chip in value" :key="chip" size="small" class="mr-1 my-1" closeable
-                            @update:modelValue="deleteChip(chip)">
-                            {{ chip }}
-                        </va-chip>
-                    </template>
-                </va-select>
-            </div>
-
             <div class="row">
-                <div class="col">
-                    <va-button @click="publishTumbrl">
-                        Опубликовать в Tumblr
-                    </va-button>
-                </div>
                 <div class="col">
                     <va-button color="danger" @click="hidden">
                         Скрыть
@@ -79,7 +61,7 @@ export default {
             { key: 'attachments', sortable: true },
             { key: 'count_attachments', sortable: true },
             { key: 'text', sortable: true },
-            { key: 'created_at', sortable: true },
+            { key: 'updated_at', sortable: true },
         ]
         return {
             count: { type: Number },
@@ -104,16 +86,13 @@ export default {
     },
     methods: {
         getOneImage(stringObject) {
-            //firstImage = JSON.parse(object);
-            let array = stringObject.toString().replace('[', '').replace(']', '').split(",").map(String);
-            console.log(array[0]);
-            return array[0];
+            let arr = Array.from(Object.entries(stringObject), ([key, value]) => value);
+            return arr[0];
         },
         getCountAttachments(stringObject) {
-            //firstImage = JSON.parse(object);
-            let array = stringObject.toString().replace('[', '').replace(']', '').split(",").map(String);
-            console.log(array.length)
-            return array.length;
+            let arr = Array.from(Object.entries(stringObject), ([key, value]) => value);
+            var count = arr.filter(function () { return true; }).length;
+            return count;
         },
         addNewOption(newOption) {
             const option = {
@@ -169,7 +148,7 @@ export default {
             axios
                 .request({
                     method: "post",
-                    url: "/api/post/vk-anime-release",
+                    url: "/api/post/vk-esteticvibes-release",
                     params: this.serverParams,
                     paramsSerializer: (params) => {
                         return qs.stringify(params);

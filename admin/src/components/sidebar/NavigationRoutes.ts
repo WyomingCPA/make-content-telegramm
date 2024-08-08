@@ -68,6 +68,10 @@ export default {
           name: 'vk-sexy-publish',
           displayName: 'menu.vk-sexy-publish',
         },
+        {
+          name: 'vk-esteticvibes-publish',
+          displayName: 'menu.vk-esteticvibes-publish',
+        },
       ],
     },
     {
@@ -111,6 +115,24 @@ export default {
         {
           name: 'queue-mir-tlen-mai',
           displayName: 'menu.queue-mir-tlen-mai',
+        },
+      ],
+    },
+    {
+      name: 'queue',
+      displayName: 'menu.group',
+      meta: {
+        icon: 'vuestic-iconset-components',
+      },
+      disabled: true,
+      children: [
+        {
+          name: 'group-index',
+          displayName: 'menu.group-index',
+        },
+        {
+          name: 'group-create',
+          displayName: 'menu.group-create',
         },
       ],
     },

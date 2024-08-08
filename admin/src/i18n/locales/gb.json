@@ -346,7 +346,8 @@
     "vk-mir-tlen-mai": "Мир, Тлен, Май",
     "publish": "Опубликованные",
     "it-publish": "IT блог",
-    "vk-sexy-publish": "vk-sexy", 
+    "vk-sexy-publish": "vk-sexy",
+    "vk-esteticvibes-publish": "Vk EsteticVibes Publish", 
     "Logs": "Логи",
     "queue": "Очередь",
     "queue-anime": "Очередь Anime",
@@ -355,8 +356,10 @@
     "queue-mir-tlen-mai": "Очередь Мир, Тлен, Май",
     "tumblr-reblog": "Tumblr Реблог",
     "tumblr-reblog-anime": "Tumblr Реблог Anime",
-    "tumblr-reblog-estetic-vibes": "Tumblr estetic-vibes"
-    
+    "tumblr-reblog-estetic-vibes": "Tumblr estetic-vibes",
+    "group": "Управление группами",
+    "group-index": "Список групп",
+    "group-create": "Добавить группу"
   },
   "messages": {
     "all": "See all messages",

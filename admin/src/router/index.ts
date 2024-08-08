@@ -82,9 +82,9 @@ const routes: Array<RouteRecordRaw> = [
             component: () => import('../pages/admin/source/VkSexyPublish.vue'),
           },
           {
-            name: 'vk-sexy-publish',
-            path: 'vk-sexy-publish',
-            component: () => import('../pages/admin/source/VkSexyPublish.vue'),
+            name: 'vk-esteticvibes-publish',
+            path: 'vk-esteticvibes-publish',
+            component: () => import('../pages/admin/source/VkEsteticVibesPublish.vue'),
           },
         ],
       },
@@ -129,6 +129,33 @@ const routes: Array<RouteRecordRaw> = [
             name: 'queue-mir-tlen-mai',
             path: 'queue-mir-tlen-mai',
             component: () => import('../pages/admin/queue/VkMirTlenMai.vue'),
+          },
+        ],
+      },
+      {
+        name: 'groups',
+        path: 'groups',
+        component: RouteViewComponent,
+        children: [
+          {
+            name: 'group-index',
+            path: 'group-index',
+            component: () => import('../pages/admin/groups/Index.vue'),
+          },
+          {
+            name: 'group-create',
+            path: 'group-create',
+            component: () => import('../pages/admin/groups/Create.vue'),
+          },
+          {
+            name: 'group-edit',
+            path: 'edit/:id',
+            component: () => import('../pages/admin/groups/Edit.vue'),
+          },
+          {
+            name: 'source-edit',
+            path: 'source-edit/:id',
+            component: () => import('../pages/admin/groups/SourceManager.vue'),
           },
         ],
       },

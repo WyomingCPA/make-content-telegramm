@@ -4,25 +4,7 @@
             <div class="grid md:grid-cols-2 gap-6 mb-6">
                 <va-input v-model="input" placeholder="Filter..." class="w-full" />
             </div>
-
-            <div class="grid md:grid-cols-2 gap-6 mb-6">
-                <va-select v-model="value" label="Removable chips" :options="options" @create-new="addNewOption"
-                    :track-by="(option) => option" allow-create="unique" multiple>
-                    <template #content="{ value }">
-                        <va-chip v-for="chip in value" :key="chip" size="small" class="mr-1 my-1" closeable
-                            @update:modelValue="deleteChip(chip)">
-                            {{ chip }}
-                        </va-chip>
-                    </template>
-                </va-select>
-            </div>
-
             <div class="row">
-                <div class="col">
-                    <va-button @click="publishTumbrl">
-                        Опубликовать в Tumblr
-                    </va-button>
-                </div>
                 <div class="col">
                     <va-button color="danger" @click="hidden">
                         Скрыть

@@ -68,9 +68,8 @@ export default {
                 .then((response) => {
                     if (response.status) {
                             console.log("Вызвали алерт");
-                            this.$vaToast.init({ message: 'Запись опубликована', color: 'success' })
-                            self.list_img = [];
-                            this.tags.splice(0);
+                            this.$vaToast.init({ message: 'Запись опубликована', color: 'success' });
+                            window.location.reload();
                             self.input = '';
                             self.loading = false;
                         } else {

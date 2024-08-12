@@ -21,12 +21,16 @@ class TumblrController extends Controller
         $list_img = $request->get('list_img');
         $tags_array = $request->get('tags');
         $messageText = '';
-        foreach ($tags_array as $tag)
-        {
-            $tagText = str_replace(' ', '_', $tag);
-            $messageText .= " #$tagText";
+
+        if (!empty($tags_array)) {
+            foreach ($tags_array as $tag)
+            {
+                $tagText = str_replace(' ', '_', $tag);
+                $messageText .= " #$tagText";
+            }
         }
-         
+        
+ 
         $messageText .= "\n";
         if (!empty($messageText)) {
             $chatId = '-1001597866737';
@@ -51,12 +55,13 @@ class TumblrController extends Controller
         $list_img = $request->get('list_img');
         $tags_array = $request->get('tags');
         $messageText = '';
-        foreach ($tags_array as $tag)
-        {
-            $tagText = str_replace(' ', '_', $tag);
-            $messageText .= " #$tagText";
-        }
-         
+        if (!empty($tags_array)) {
+            foreach ($tags_array as $tag)
+            {
+                $tagText = str_replace(' ', '_', $tag);
+                $messageText .= " #$tagText";
+            }
+        }  
         $messageText .= "\n";
         if (!empty($messageText)) {
             $chatId = '-1001771871700';

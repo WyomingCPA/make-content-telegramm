@@ -4,6 +4,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 items-end">
                 <VaInput v-model="nameSource" placeholder="" label="Name Source" class="mr-2" />
                 <VaInput v-model="urlSource" placeholder="" label="Url Source" class="mr-2" />
+                <VaInput v-model="ownerId" placeholder="" label="Owner ID" class="mr-2" />
             </div>
             <div class="row">
                 <div class="col mt-2 ml-2">
@@ -23,6 +24,12 @@
                 </template>
                 <template #cell(name)="{ rowData }">
                     <a target="_blank" :href="rowData.url_source">{{ rowData.name }}</a>
+                </template>
+                <template #cell(is_parce)="{ rowData }">
+                    <va-button v-if="rowData.is_parce == 1" :color="getStatusColor(rowData.is_parce)"
+                        @click="updateStatus(rowData.id)">Запущен</va-button>
+                    <va-button v-else :color="getStatusColor(rowData.is_parce)"
+                        @click="updateStatus(rowData.id)">Остановлен</va-button>
                 </template>
                 <template #cell(actions)="{ rowData }">
                     <va-button color="danger" @click="deleteSource(rowData.id)">Удалить</va-button>
@@ -58,6 +65,7 @@ export default {
     data() {
         const nameSource = '';
         const urlSource = '';
+        const ownerId = 0;
         const items = [];
         const columns = [
             { key: 'id', sortable: true },
@@ -69,17 +77,27 @@ export default {
         return {
             nameSource,
             urlSource,
+            ownerId, 
             columns,
             items,
             loading: false,
             serverParams: {
                 name_source: "",
                 url_source: "",
+                owner_id: "", 
             },
             value: 0,
         }
     },
     methods: {
+        getStatusColor(status) {
+            console.log(status);
+            if (status == 1) {
+                return "success";
+            } else {
+                return "danger";
+            }
+        },
         updateParams(newProps) {
             this.serverParams = Object.assign({}, this.serverParams, newProps);
         },
@@ -105,10 +123,39 @@ export default {
                     });
             });
         },
+        updateStatus(id) {
+            this.loading = true
+            this.idSource = id;
+            console.log(id)
+            let self = this
+            axios.get('/sanctum/csrf-cookie').then((response) => {
+                axios
+                    .post('/api/groups/update-parce-groups', {
+                        id_source: self.idSource,
+                    })
+                    .then((response) => {
+                        if (response.status) {
+                            console.log('Вызвали алерт')
+                            this.getData()
+                            this.loading = false
+                        } else {
+                            console.log('Не работает')
+                            console.log(response.status)
+                            this.loading = false
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(response)
+                        console.error(error)
+                        this.loading = false
+                    })
+            })
+        },
         createSource() {
             this.updateParams({
                 name_source: this.nameSource,
                 url_source: this.urlSource,
+                owner_id: this.ownerId,
                 id_group: this.$route.params.id,
             });
 

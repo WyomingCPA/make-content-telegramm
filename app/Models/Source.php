@@ -12,7 +12,7 @@ class Source extends Model
     use HasFactory;
     protected $table = 'source';
 
-    protected $fillable = ['groups_id', 'name', 'url_source'];
+    protected $fillable = ['groups_id', 'name', 'url_source', 'owner_id', 'is_parce'];
 
     public function getUpdatedAtAttribute($value)
     {

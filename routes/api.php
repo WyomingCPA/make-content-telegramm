@@ -67,6 +67,10 @@ Route::group(['prefix' => 'groups', 'middleware' => 'auth:sanctum'], function ()
     Route::post('add-source', [GroupController::class, 'addSource']);
     Route::post('get-source', [GroupController::class, 'getSource']);
     Route::post('delete-source', [GroupController::class, 'deleteSource']);
+    Route::post('delete-group', [GroupController::class, 'deleteGroup']);
+    Route::post('update-parce-groups', [GroupController::class, 'updateParceGroups']);
+    Route::get('source-edit/{id}', [GroupController::class, 'sourceEdit']);
+    Route::post('source-update', [GroupController::class, 'sourceUpdate']);
 });
 
 Route::group(['prefix' => 'tumblr', 'middleware' => 'auth:sanctum'], function () {

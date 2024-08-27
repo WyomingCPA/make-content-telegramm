@@ -2,13 +2,13 @@
     <va-card>
         <va-card-content>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 items-end">
-                <VaInput v-model="nameGroup" placeholder="" label="Name Groups" class="mr-2" />
-                <VaInput v-model="urlGroup" placeholder="" label="Url Groups" class="mr-2" />
-                <VaInput v-model="slugGroup" placeholder="" label="Slug" class="mr-2" />
+                <VaInput v-model="nameSource" placeholder="" label="Name Source" class="mr-2" />
+                <VaInput v-model="urlSource" placeholder="" label="Url Source" class="mr-2" />
+                <VaInput v-model="ownerId" placeholder="" label="Owner ID" class="mr-2" />
             </div>
             <div class="row">
                 <div class="col mt-2 ml-2">
-                    <va-button color="success" @click="createGroups()">Создать</va-button>
+                    <va-button color="success" @click="updateSource()">Обновить</va-button>
                 </div>
             </div>
         </va-card-content>
@@ -26,18 +26,18 @@ export default {
     name: 'TumblrReblogAnime',
     components: {},
     data() {
-        const nameGroup = '';
-        const urlGroup = '';
-        const slugGroup = '';
+        const nameSource = '';
+        const urlSource = '';
+        const ownerId = 0;
         return {
-            nameGroup,
-            urlGroup,
-            slugGroup,
+            nameSource,
+            urlSource,
+            ownerId,
             loading: false,
             serverParams: {
-                name_group: "",
-                url_group: "",
-                slug_group: "",
+                name_source: "",
+                url_source: "",
+                owner_id: "", 
             },
             value: 0,
             items: [
@@ -49,11 +49,26 @@ export default {
         updateParams(newProps) {
             this.serverParams = Object.assign({}, this.serverParams, newProps);
         },
-        createGroups() {
+        getSourceData() {
+            let self = this;
+            axios
+                .get('api/groups/source-edit/' + this.$route.params.id)
+                .then(function (response) {
+                    self.nameSource = response.data.source.name;
+                    self.urlSource = response.data.source.url_source;
+                    self.ownerId = response.data.source.owner_id;
+                })
+                .catch(function (error) {
+                    console.error(error)
+                })
+                
+        },
+        updateSource() {
             this.updateParams({
-                name_group: this.nameGroup,
-                url_group: this.urlGroup,
-                slug_group: this.slugGroup,
+                name_source: this.nameSource,
+                url_source: this.urlSource,
+                owner_id: this.ownerId,
+                id_source: this.$route.params.id,
             });
 
             let self = this;
@@ -61,7 +76,7 @@ export default {
             axios
                 .request({
                     method: "post",
-                    url: "/api/groups/store",
+                    url: "/api/groups/source-update",
                     params: this.serverParams,
                     paramsSerializer: (params) => {
                         return qs.stringify(params);
@@ -69,8 +84,7 @@ export default {
                 })
                 .then((response) => {
                     if (response.status) {
-                        console.log("Вызвали алерт");
-                        this.$vaToast.init({ message: 'Группа создана', color: 'success' })
+                        this.$vaToast.init({ message: 'Источник обновлен', color: 'success' })
                         self.loading = false;
                     } else {
                         console.log("Не работает");
@@ -83,6 +97,9 @@ export default {
                     self.loading = false;
                 });
         },
+    },
+    mounted: function () {
+        this.getSourceData();
     },
 }
 </script>

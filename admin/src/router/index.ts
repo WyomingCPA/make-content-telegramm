@@ -157,6 +157,11 @@ const routes: Array<RouteRecordRaw> = [
             path: 'source-edit/:id',
             component: () => import('../pages/admin/groups/SourceManager.vue'),
           },
+          {
+            name: 'source-edit-edit',
+            path: 'source-edit/edit/:id',
+            component: () => import('../pages/admin/groups/SourceEdit.vue'),
+          },
         ],
       },
       UIRoute,

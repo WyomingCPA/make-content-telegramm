@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('source', function (Blueprint $table) {
             $table->id();
             $table->integer('groups_id')->unsigned();
+            $table->integer('owner_id');
             $table->string('name', 500);
             $table->string('url_source', 500);
             $table->boolean('is_parce')->unsigned()->nullable();

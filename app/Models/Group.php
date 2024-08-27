@@ -12,6 +12,7 @@ class Group extends Model
     use HasFactory;
 
     protected $fillable = ['is_start', 'url_group'];
+    protected $appends = ['count_source'];
 
     public function getUpdatedAtAttribute($value)
     {
@@ -21,5 +22,10 @@ class Group extends Model
     public function source()
     {
         return $this->belongsToMany(Source::class, 'source', 'group_id')->withTimeStamps();
+    }
+    public function getCountSourceAttribute()
+    {
+        $count = Source::where('groups_id', '=', $this->id)->count();
+        return $count;
     }
 }

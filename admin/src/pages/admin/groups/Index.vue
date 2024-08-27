@@ -16,7 +16,7 @@
                 </template>
                 <template #cell(list_source)="{ rowData }">
                     <VaChip :color="success" class="mr-6 mb-2">
-                        0
+                        {{ rowData.count_source }}
                     </VaChip>
                     <va-button :color="primary" @click="goToManageSourcePage(rowData.id)">Добавить</va-button>
                 </template>
@@ -25,6 +25,9 @@
                         @click="updateStatus(rowData.id)">Запущен</va-button>
                     <va-button v-else :color="getStatusColor(rowData.is_start)"
                         @click="updateStatus(rowData.id)">Остановлен</va-button>
+                </template>
+                <template #cell(actions)="{ rowData }">
+                    <va-button color="danger" @click="deleteGroup(rowData.id)">Удалить</va-button>
                 </template>
                 <template #bodyAppend>
                     <tr>
@@ -60,11 +63,14 @@ export default {
             { key: 'id', sortable: true },
             { key: 'group', sortable: true },
             { key: 'status', sortable: true },
+            { key: 'count-source', sortable: true },
             { key: 'list_source', sortable: true },
             { key: 'updated_at', sortable: true },
+            { key: 'actions', width: 50 },
         ]
         return {
             count: { type: Number },
+            countSource: { type: Number },
             loading: false,
             items,
             columns,
@@ -124,8 +130,7 @@ export default {
                         this.loading = false
                     })
             })
-        }
-        ,
+        },
         addNewOption(newOption) {
             const option = {
                 id: String(this.options.length),
@@ -196,6 +201,28 @@ export default {
                     console.log(error);
                     self.loading = false;
                 });
+        },
+        deleteGroup(id)
+        {
+            let self = this;
+            this.loading = true;
+            console.log(self.selectedItemsEmitted);
+            axios.get("/sanctum/csrf-cookie").then((response) => {
+                axios
+                    .post("/api/groups/delete-group", { id_group: id })
+                    .then((response) => {
+                        if (response.status) {
+                            console.log("Вызвали алерт");
+                            this.$vaToast.init({ message: 'Группа удалена', color: 'success' })
+                            this.fetchRows();
+                            self.loading = false;
+                        } else {
+                            console.log("Не работает");
+                            console.log(response.status);
+                            self.loading = false;
+                        }
+                    });
+            });
         },
         resetInfoModal() {
             this.infoModal.title = ''

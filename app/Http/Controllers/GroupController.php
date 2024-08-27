@@ -64,9 +64,11 @@ class GroupController extends Controller
     {
         $name = $request->get('name_group');
         $url_group = $request->get('url_group');
+        $slug_group = $request->get('slug_group');
         $model = new Group();
         $model->group = $name;
         $model->url_group = $url_group;
+        $model->slug = $slug_group;
         $model->save();
 
         return response()->json([
@@ -98,6 +100,14 @@ class GroupController extends Controller
         ], 200);
     }
 
+    public function sourceEdit(Request $request, $id)
+    {
+        return response([
+            'source' => Source::findOrFail($id),
+        ], 200);
+    }
+
+    
     /**
      * Update the specified resource in storage.
      *
@@ -107,9 +117,35 @@ class GroupController extends Controller
      */
     public function update(Request $request, Group $group)
     {
-        //
-    }
+        $id_group = $request->id;
+        $model = Group::find($id_group);
+        $model->group = $request->name_group;
+        $model->url_group = $request->url_group;
+        $model->slug = $request->slug_group;   
+        $model->save();
 
+        return response()->json([
+            'status' => true,
+        ], 200);
+    }
+    
+    public function sourceUpdate(Request $request)
+    {
+        $name = $request->get('name_source');
+        $url_source = $request->get('url_source');
+        $owner_id = $request->get('owner_id');
+        $source_id =  $request->get('id_source');
+
+        $model = Source::find($source_id);
+        $model->owner_id = $owner_id;
+        $model->name = $name;
+        $model->url_source = $url_source; 
+        $model->save();
+
+        return response()->json([
+            'status' => true,
+        ], 200);
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -125,10 +161,13 @@ class GroupController extends Controller
         $id_group = $request->get('id_group');
         $name = $request->get('name_source');
         $url_source = $request->get('url_source');
+        $owner_id = $request->get('owner_id');
+
         $model = new Source();
         $model->groups_id = $id_group;
         $model->name = $name;
         $model->url_source = $url_source;
+        $model->owner_id = $owner_id;
         $model->save();
         return response()->json([
             'status' => true,
@@ -151,6 +190,36 @@ class GroupController extends Controller
 
         $model = Source::find($id_source);  
         $model->delete();
+
+        return response()->json([
+            'status' => true,
+        ], 200);
+    }
+    public function deleteGroup(Request $request)
+    {
+        $id_group = $request->get('id_group');
+
+        $model = Group::find($id_group);  
+        $model->delete();
+
+        return response()->json([
+            'status' => true,
+        ], 200);
+    }
+
+    public function updateParceGroups(Request $request)
+    {
+        $id_source = $request->id_source;
+        $model = Source::find($id_source);
+        if (!isset($model->is_parce) || $model->is_parce == false)
+        {
+            $model->is_parce = true;
+
+        }
+        else {
+            $model->is_parce = false;
+        }
+        $model->save();
 
         return response()->json([
             'status' => true,

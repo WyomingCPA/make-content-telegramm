@@ -190,6 +190,9 @@ export default {
         getData() {
             let self = this;
             this.loading = true;
+            this.updateParams({
+                id_group: this.$route.params.id,
+            });
             axios
                 .request({
                     method: "post",

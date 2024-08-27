@@ -174,9 +174,10 @@ class GroupController extends Controller
         ], 200);
     }
 
-    public function getSource()
+    public function getSource(Request $request)
     {
-        $models = Source::all();
+        $id_group = $request->id_group;
+        $models = Source::where('groups_id', $id_group)->orderBy('updated_at', 'asc')->get();
         $count = $models->count();
         return response()->json([
             'source' => $models->toArray(),

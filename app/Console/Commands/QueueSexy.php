@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Group;
 
 use TelegramBot\Api\BotApi;
 use TelegramBot\Api\Types\InputMedia\InputMediaPhoto;
@@ -38,6 +39,13 @@ class QueueSexy extends Command
      */
     public function handle()
     {
+
+        //Сделать проверку запуска публикаций для телеграмм
+        $isStart = Group::where('slug', '=', 'sexy')->first();
+        if (!$isStart->is_start) {
+            echo "Не публикуем";
+            return Command::SUCCESS;
+        }
         $user = User::select('id')->where('email', 'WyomingCPA@yandex.ru')->first();
         $favorite_ids = $user->queuesPost->pluck('id')->toArray();
         $objects = Post::where('is_publish', false)->where('is_hidden', false)->whereIn('id', $favorite_ids)->orderBy('created_at', 'desc');
@@ -47,9 +55,8 @@ class QueueSexy extends Command
         $objects->whereHas('categories', function ($query) use ($category_ids) {
             $query->whereIn('category_id', array_values($category_ids));
         });
-        
-        if ($objects->count() == 0)
-        {
+
+        if ($objects->count() == 0) {
             $objects =  Post::where('is_publish', true)->where('is_hidden', false)->orderBy('updated_at', 'asc');
             $category_value = ['sexy'];
             $category_ids = Category::whereIn('name', $category_value)->pluck('id')->toArray();
@@ -79,7 +86,7 @@ class QueueSexy extends Command
 
                 $media = new ArrayOfInputMedia();
                 foreach ($list_img as $img) {
-                    foreach ($img as $item_image) {              
+                    foreach ($img as $item_image) {
                         $messageText = "#girl #body #fit \n\n\n<a href='https://t.me/worldofbeautiestg'>World of Beauties</a>";
                         $media->addItem(new InputMediaPhoto($item_image, $messageText, 'HTML'));
                     }
@@ -95,7 +102,7 @@ class QueueSexy extends Command
             $token_key = env('TOKEN_KEY'); // your token
             $token_secret = env('TOKEN_SECRET'); // your token secret
 
-           
+
             $blogName = 'bouncymeatballs';
 
             $client = new Client($consumer_key, $consumer_secret);
@@ -119,7 +126,8 @@ class QueueSexy extends Command
             $postData = array(
                 'caption' => $caption,
                 'tags' => 'sexy, girl, body, fit, beautiful photos',
-                'type' => 'photo', 'data' => $list_img_tumblr
+                'type' => 'photo',
+                'data' => $list_img_tumblr
             );
             $client->createPost($blogName, $postData);
             echo 'Публикация выполена успешно';
@@ -129,7 +137,7 @@ class QueueSexy extends Command
             $post->save();
             echo $e->getMessage();
         }
-        
+
         return Command::SUCCESS;
     }
 }

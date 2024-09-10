@@ -90,6 +90,10 @@ export default {
           name: 'tumblr-reblog-estetic-vibes',
           displayName: 'menu.tumblr-reblog-estetic-vibes',
         },
+        {
+          name: 'tumblr-reblog-sexy',
+          displayName: 'menu.tumblr-reblog-sexy',
+        },
       ],
     },
     {

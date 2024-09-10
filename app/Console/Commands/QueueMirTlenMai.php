@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Group;
 
 use TelegramBot\Api\BotApi;
 use TelegramBot\Api\Types\InputMedia\InputMediaPhoto;
@@ -38,6 +39,12 @@ class QueueMirTlenMai extends Command
      */
     public function handle()
     {
+        //Сделать проверку запуска публикаций для телеграмм
+        $isStart = Group::where('slug', '=', 'sexy')->first();
+        if (!$isStart->is_start) {
+            echo "Не публикуем";
+            return Command::SUCCESS;
+        }
         $user = User::select('id')->where('email', 'WyomingCPA@yandex.ru')->first();
         $favorite_ids = $user->queuesPost->pluck('id')->toArray();
         $objects = Post::where('is_publish', false)->where('is_hidden', false)->whereIn('id', $favorite_ids)->orderBy('created_at', 'desc');

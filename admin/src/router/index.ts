@@ -103,6 +103,11 @@ const routes: Array<RouteRecordRaw> = [
             path: 'tumblr-reblog-estetic-vibes',
             component: () => import('../pages/admin/tumblr/EsteticVibes.vue'),
           },
+          {
+            name: 'tumblr-reblog-sexy',
+            path: 'tumblr-reblog-sexy',
+            component: () => import('../pages/admin/tumblr/SexyReblog.vue'),
+          },
         ],
       },
       {

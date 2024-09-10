@@ -67,7 +67,7 @@ class GetPostFromVk extends Command
 
                 $model = Category::firstOrCreate(['name' => $slug,],);
                 $list_id_category [] = $model->id;
-                $link = "photo" . str($item_source['owner_id']) . "_" . str($id_post);
+                $link = "wall" . str($item_source['owner_id']) . "_" . str($id_post);
                 $model = Post::firstOrCreate(
                     ['link' => $link,],
                     [

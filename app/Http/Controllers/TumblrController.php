@@ -12,6 +12,7 @@ use Tumblr\API\Client;
 
 use TelegramBot\Api\BotApi;
 use TelegramBot\Api\Types\InputMedia\InputMediaPhoto;
+use TelegramBot\Api\Types\InputMedia\InputMediaVideo;
 use \TelegramBot\Api\Types\InputMedia\ArrayOfInputMedia;
 
 class TumblrController extends Controller
@@ -23,14 +24,13 @@ class TumblrController extends Controller
         $messageText = '';
 
         if (!empty($tags_array)) {
-            foreach ($tags_array as $tag)
-            {
+            foreach ($tags_array as $tag) {
                 $tagText = str_replace(' ', '_', $tag);
                 $messageText .= " #$tagText";
             }
         }
-        
- 
+
+
         $messageText .= "\n";
         if (!empty($messageText)) {
             $chatId = '-1001597866737';
@@ -56,12 +56,11 @@ class TumblrController extends Controller
         $tags_array = $request->get('tags');
         $messageText = '';
         if (!empty($tags_array)) {
-            foreach ($tags_array as $tag)
-            {
+            foreach ($tags_array as $tag) {
                 $tagText = str_replace(' ', '_', $tag);
                 $messageText .= " #$tagText";
             }
-        }  
+        }
         $messageText .= "\n";
         if (!empty($messageText)) {
             $chatId = '-1001771871700';
@@ -85,14 +84,14 @@ class TumblrController extends Controller
     {
         $list_img = $request->get('list_img');
         $tags_array = $request->get('tags');
+        $list_video =  $request->get('list_video');
         $messageText = '';
         if (!empty($tags_array)) {
-            foreach ($tags_array as $tag)
-            {
+            foreach ($tags_array as $tag) {
                 $tagText = str_replace(' ', '_', $tag);
                 $messageText .= " #$tagText";
             }
-        }  
+        }
         $messageText .= "\n";
         if (!empty($messageText)) {
             $chatId = '-1001866603682';
@@ -102,8 +101,14 @@ class TumblrController extends Controller
 
             $media = new ArrayOfInputMedia();
             $messageText = "#girl #body #fit \n\n\n<a href='https://t.me/worldofbeautiestg'>World of Beauties</a>";
-            foreach ($list_img as $item_image) {
-                $media->addItem(new InputMediaPhoto($item_image, $messageText, 'HTML'));
+            if (!empty($list_video)) {
+                foreach ($list_video as $item_video) {
+                    $media->addItem(new InputMediaVideo($item_video, $messageText, 'HTML'));
+                }
+            } else {
+                foreach ($list_img as $item_image) {
+                    $media->addItem(new InputMediaPhoto($item_image, $messageText, 'HTML'));
+                }
             }
 
             $bot->sendMediaGroup($chatId, $media);
@@ -112,7 +117,7 @@ class TumblrController extends Controller
             'status' => true,
         ], 200);
     }
-    
+
     public function getDataPostId(Request $request)
     {
         $url = $request->get('url');
@@ -121,10 +126,10 @@ class TumblrController extends Controller
         $nameBlog = $array[1];
         $idPost = $array[2];
 
-        $consumer_key = env('CONSUMER_KEY'); 
-        $consumer_secret = env('CONSUMER_SECRET'); 
-        $token_key = env('TOKEN_KEY'); 
-        $token_secret = env('TOKEN_SECRET'); 
+        $consumer_key = env('CONSUMER_KEY');
+        $consumer_secret = env('CONSUMER_SECRET');
+        $token_key = env('TOKEN_KEY');
+        $token_secret = env('TOKEN_SECRET');
 
         $client = new Client($consumer_key, $consumer_secret);
         $client->setToken($token_key, $token_secret);
@@ -132,21 +137,24 @@ class TumblrController extends Controller
         $post = $client->getRequest("v2/blog/$nameBlog/posts/$idPost", $options, false);
 
         $tags = [];
-        foreach ($post->tags as $item)
-        {
-            $tags [] = $item;
+        foreach ($post->tags as $item) {
+            $tags[] = $item;
         }
         $list_img = [];
-        foreach ($post->content as $item)
-        {
-            if ($item->type === 'image')
-            {
-                $list_img [] = $item->media[0]->url;
+        $list_video = [];
+        foreach ($post->content as $item) {
+            if ($item->type === 'image') {
+                $list_img[] = $item->media[0]->url;
+            }
+            if ($item->type === 'video') {
+                $list_img[] = $item->poster[0]->url;
+                $list_video[] = $item->url;;
             }
         }
         return response()->json([
             'status' => true,
             'list_img' => $list_img,
+            'list_video' => $list_video,
             'tags' => $tags,
         ], 200);
     }

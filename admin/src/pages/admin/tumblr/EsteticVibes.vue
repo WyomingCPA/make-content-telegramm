@@ -39,12 +39,14 @@ export default {
             serverParams: {
                 url: "",
                 list_img: Array,
+                list_video: Array,
                 tags: Array,
             },
             value: 0,
             items: [
 
             ],
+            listVideo: [],
         }
     },
     methods: {
@@ -52,7 +54,7 @@ export default {
             this.serverParams = Object.assign({}, this.serverParams, newProps);
         },
         publishAnimePost() {
-            this.updateParams({ list_img: this.items, tags: this.tags});
+            this.updateParams({ list_img: this.items, list_video: this.listVideo, tags: this.tags});
             console.log(this.items);
             let self = this;
             this.loading = true;
@@ -100,7 +102,7 @@ export default {
                 .then((response) => {
                     self.items = response.data.list_img;
                     self.tags = response.data.tags;
-
+                    self.listVideo = response.data.list_video;
                     self.loading = false;
                     console.log(this.pages);
                 })

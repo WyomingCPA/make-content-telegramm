@@ -21,6 +21,7 @@ class TumblrController extends Controller
     {
         $list_img = $request->get('list_img');
         $tags_array = $request->get('tags');
+        $list_video =  $request->get('list_video');
         $messageText = '';
 
         if (!empty($tags_array)) {
@@ -40,8 +41,14 @@ class TumblrController extends Controller
 
             $media = new ArrayOfInputMedia();
             $messageText .= " #nature #travel \n\n\n<a href='https://t.me/estetic_vibes_tg'>Estetic Vibes</a>";
-            foreach ($list_img as $item_image) {
-                $media->addItem(new InputMediaPhoto($item_image, $messageText, 'HTML'));
+            if (!empty($list_video)) {
+                foreach ($list_video as $item_video) {
+                    $media->addItem(new InputMediaVideo($item_video, $messageText, 'HTML'));
+                }
+            } else {
+                foreach ($list_img as $item_image) {
+                    $media->addItem(new InputMediaPhoto($item_image, $messageText, 'HTML'));
+                }
             }
 
             $bot->sendMediaGroup($chatId, $media);

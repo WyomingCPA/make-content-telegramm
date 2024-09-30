@@ -16,8 +16,8 @@ const app = createApp(App)
 
 axios.defaults.withCredentials = true
 
-//axios.defaults.baseURL = 'http://localhost/make-content-telegramm/public'
-axios.defaults.baseURL = 'http://make-content-telegrammb.simpleitrunner.ru/';
+axios.defaults.baseURL = 'http://localhost/make-content-telegramm/public'
+//axios.defaults.baseURL = 'http://make-content-telegrammb.simpleitrunner.ru/';
 
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 axios.defaults.headers.common['Content-Type'] = 'application/json'

@@ -40,7 +40,7 @@ class QueueMirTlenMai extends Command
     public function handle()
     {
         //Сделать проверку запуска публикаций для телеграмм
-        $isStart = Group::where('slug', '=', 'sexy')->first();
+        $isStart = Group::where('slug', '=', 'mir_tlen_mai')->first();
         if (!$isStart->is_start) {
             echo "Не публикуем";
             return Command::SUCCESS;

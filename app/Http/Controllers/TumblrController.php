@@ -30,8 +30,6 @@ class TumblrController extends Controller
                 $messageText .= " #$tagText";
             }
         }
-
-
         $messageText .= "\n";
         if (!empty($messageText)) {
             $chatId = '-1001597866737';
@@ -61,6 +59,7 @@ class TumblrController extends Controller
     {
         $list_img = $request->get('list_img');
         $tags_array = $request->get('tags');
+        $list_video =  $request->get('list_video');
         $messageText = '';
         if (!empty($tags_array)) {
             foreach ($tags_array as $tag) {
@@ -77,8 +76,14 @@ class TumblrController extends Controller
 
             $media = new ArrayOfInputMedia();
             $messageText .= " #anime #art #tyan \n\n\n<a href='https://t.me/anime_tynka'>Anime_Tyn_TG</a>";
-            foreach ($list_img as $item_image) {
-                $media->addItem(new InputMediaPhoto($item_image, $messageText, 'HTML'));
+            if (!empty($list_video)) {
+                foreach ($list_video as $item_video) {
+                    $media->addItem(new InputMediaVideo($item_video, $messageText, 'HTML'));
+                }
+            } else {
+                foreach ($list_img as $item_image) {
+                    $media->addItem(new InputMediaPhoto($item_image, $messageText, 'HTML'));
+                }
             }
 
             $bot->sendMediaGroup($chatId, $media);
@@ -152,10 +157,13 @@ class TumblrController extends Controller
         foreach ($post->content as $item) {
             if ($item->type === 'image') {
                 $list_img[] = $item->media[0]->url;
+                if (exif_imagetype($item->media[0]->url) == IMAGETYPE_GIF) {
+                    $list_video[] = $item->media[0]->url;
+                }
             }
             if ($item->type === 'video') {
                 $list_img[] = $item->poster[0]->url;
-                $list_video[] = $item->url;;
+                $list_video[] = $item->url;
             }
         }
         return response()->json([

@@ -102,7 +102,6 @@ class QueueSexy extends Command
             $token_key = env('TOKEN_KEY'); // your token
             $token_secret = env('TOKEN_SECRET'); // your token secret
 
-
             $blogName = 'bouncymeatballs';
 
             $client = new Client($consumer_key, $consumer_secret);
@@ -120,7 +119,13 @@ class QueueSexy extends Command
                 }
             }
             $caption = '';
-            if ($count_post == 3) {
+            if ($post->id % 2 === 0)
+            {
+                //echo 'Четное';
+            }
+            else
+            {
+                //echo 'Не четное';
                 $caption = '<a href="https://t.me/worldofbeautiestg">Link Source</a>';
             }
             $postData = array(

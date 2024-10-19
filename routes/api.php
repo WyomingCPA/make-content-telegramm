@@ -8,6 +8,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\QueueController;
 use App\Http\Controllers\TumblrController;
+use App\Http\Controllers\TelegrammController;
 use App\Http\Controllers\GroupController;
 /*
 |--------------------------------------------------------------------------
@@ -78,4 +79,8 @@ Route::group(['prefix' => 'tumblr', 'middleware' => 'auth:sanctum'], function ()
     Route::post('publish-anime-post', [TumblrController::class, 'publishAnimePost']);
     Route::post('estetic-vibes-post', [TumblrController::class, 'publishEsteticVibes']);
     Route::post('sexy-post', [TumblrController::class, 'publishSexy']);
+});
+Route::group(['prefix' => 'telegramm', 'middleware' => 'auth:sanctum'], function () {
+    Route::post('get-post', [TelegrammController::class, 'getDataPostId']);
+
 });

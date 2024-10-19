@@ -358,9 +358,14 @@
     "tumblr-reblog-anime": "Tumblr Реблог Anime",
     "tumblr-reblog-estetic-vibes": "Tumblr estetic-vibes",
     "tumblr-reblog-sexy": "Tumblr Sexy",
+    "telegramm-reblog": "Telegramm Реблог",
+    "telegramm-reblog-anime": "Telegramm Anime",
+    "post-mass-create": "Создать массовые посты",
+    "post-mass-create-anime": "Создать массовые посты",
     "group": "Управление группами",
     "group-index": "Список групп",
     "group-create": "Добавить группу"
+
   },
   "messages": {
     "all": "See all messages",

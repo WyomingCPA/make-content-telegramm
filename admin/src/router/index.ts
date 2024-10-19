@@ -111,6 +111,18 @@ const routes: Array<RouteRecordRaw> = [
         ],
       },
       {
+        name: 'reblogtelegramm',
+        path: 'reblogtelegramm',
+        component: RouteViewComponent,
+        children: [
+          {
+            name: 'telegramm-reblog-anime',
+            path: 'telegramm-reblog-anime',
+            component: () => import('../pages/admin/telegramm/Anime.vue'),
+          },
+        ],
+      },
+      {
         name: 'queue',
         path: 'queue',
         component: RouteViewComponent,

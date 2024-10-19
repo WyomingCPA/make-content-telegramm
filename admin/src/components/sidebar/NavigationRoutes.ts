@@ -97,6 +97,20 @@ export default {
       ],
     },
     {
+      name: 'telegramm-reblog',
+      displayName: 'menu.telegramm-reblog',
+      meta: {
+        icon: 'vuestic-iconset-components',
+      },
+      disabled: true,
+      children: [
+        {
+          name: 'telegramm-reblog-anime',
+          displayName: 'menu.telegramm-reblog-anime',
+        },
+      ],
+    },
+    {
       name: 'queue',
       displayName: 'menu.queue',
       meta: {

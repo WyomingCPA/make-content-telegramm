@@ -41,24 +41,22 @@ class QueueAnime extends Command
     {
         //Сделать проверку запуска публикаций для телеграмм
         $isStart = Group::where('slug', '=', 'anime')->first();
-        if (!$isStart->is_start)
-        {
+        if (!$isStart->is_start) {
             echo "Не публикуем";
             return Command::SUCCESS;
         }
-        
+
         $user = User::select('id')->where('email', 'WyomingCPA@yandex.ru')->first();
         $favorite_ids = $user->queuesPost->pluck('id')->toArray();
         $objects = Post::where('is_publish', false)->where('is_hidden', false)->whereIn('id', $favorite_ids)->orderBy('created_at', 'desc');
-      
+
         $category_value = ['anime'];
         $category_ids = Category::whereIn('name', $category_value)->pluck('id')->toArray();
         $objects->whereHas('categories', function ($query) use ($category_ids) {
             $query->whereIn('category_id', array_values($category_ids));
         });
 
-        if ($objects->count() == 0)
-        {
+        if ($objects->count() == 0) {
             $objects =  Post::where('is_publish', true)->where('is_hidden', false)->orderBy('updated_at', 'asc');
             $category_value = ['anime'];
             $category_ids = Category::whereIn('name', $category_value)->pluck('id')->toArray();
@@ -71,7 +69,7 @@ class QueueAnime extends Command
         $post = $objects->inRandomOrder()->first();
         echo $post->id;
         $post->touch();
-        
+
         try {
             //Telegramm
             $messageText = '';
@@ -111,7 +109,6 @@ class QueueAnime extends Command
 
             $client = new Client($consumer_key, $consumer_secret);
             $client->setToken($token_key, $token_secret);
-            $count_post = 0;
 
             $messageText = '';
 
@@ -124,13 +121,22 @@ class QueueAnime extends Command
                 }
             }
             $caption = '';
-            if ($count_post == 3) {
+
+            if ($post->id % 2 === 0)
+            {
+                //echo 'Четное';
+            }
+            else
+            {
+                //echo 'Не четное';
                 $caption = '<a href="https://t.me/anime_tynka">Link Source</a>';
             }
+                //echo 'Нечетное';
             $postData = array(
                 'caption' => $caption,
                 'tags' => 'anime, art, tyan',
-                'type' => 'photo', 'data' => $list_img_tumblr
+                'type' => 'photo',
+                'data' => $list_img_tumblr
             );
             $client->createPost($blogName, $postData);
             echo 'Публикация выполена успешно';
@@ -140,7 +146,7 @@ class QueueAnime extends Command
             $post->save();
             echo $e->getMessage();
         }
-        
+
         return Command::SUCCESS;
     }
 }

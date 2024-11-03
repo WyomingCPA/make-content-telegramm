@@ -94,19 +94,23 @@ export default {
           name: 'tumblr-reblog-sexy',
           displayName: 'menu.tumblr-reblog-sexy',
         },
+        {
+          name: 'tumblr-reblog-all',
+          displayName: 'menu.tumblr-reblog-all',
+        },
       ],
     },
     {
-      name: 'telegramm-reblog',
-      displayName: 'menu.telegramm-reblog',
+      name: 'post-mass-create',
+      displayName: 'menu.post-mass-create',
       meta: {
         icon: 'vuestic-iconset-components',
       },
       disabled: true,
       children: [
         {
-          name: 'telegramm-reblog-anime',
-          displayName: 'menu.telegramm-reblog-anime',
+          name: 'post-mass-create-anime',
+          displayName: 'menu.post-mass-create-anime',
         },
       ],
     },

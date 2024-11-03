@@ -1,35 +1,36 @@
 <template>
     <va-card>
         <va-card-content>
-            <div class="row">
-                <VaInput v-model="input" placeholder="" label="Url Post" class="mb-6" />
-                <va-button @click="getData(input)">Получить данные</va-button>
-            </div>
+            <VaFileUpload v-model="basic">
+                <div class="custom-upload-file-area">
+                    <p class="mb-2">
+                        This is slot, click or drag'n'drop file to upload
+                    </p>
+                    <img src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png" width="100"
+                        height="100" alt="">
+                </div>
+            </VaFileUpload>
         </va-card-content>
     </va-card>
-    <VaCarousel v-model="value" :items="items" />
-    <div class="flex flex-col sm:flex-row gap-2 items-start">
-        <VaButton v-for="tag in tags">
-            {{ tag }}
-        </VaButton>
-    </div>
+
     <div class="row">
-        <va-button color="warning" @click="publishNaturePost()">Опубликовать</va-button>
+        <va-button color="warning" @click="publishAnimePost()">Опубликовать</va-button>
     </div>
 </template>
 <script>
 
-import { array } from '@amcharts/amcharts5';
+
 import axios from 'axios'
 import debounce from 'lodash/debounce.js'
 import qs from 'qs'
 
 export default {
-    name: 'TumblrReblogAnime',
+    name: 'MassCreatePostAnime',
     components: {},
     data() {
         const input = '';
         return {
+            basic: [],
             input,
             count: { type: Number },
             loading: false,
@@ -46,14 +47,13 @@ export default {
             items: [
 
             ],
-            listVideo: [],
         }
     },
     methods: {
         updateParams(newProps) {
             this.serverParams = Object.assign({}, this.serverParams, newProps);
         },
-        publishNaturePost() {
+        publishAnimePost() {
             this.updateParams({ list_img: this.items, list_video: this.listVideo, tags: this.tags});
             console.log(this.items);
             let self = this;
@@ -61,7 +61,7 @@ export default {
             axios
                 .request({
                     method: "post",
-                    url: "/api/tumblr/estetic-vibes-post",
+                    url: "/api/tumblr/publish-anime-post",
                     params: this.serverParams,
                     paramsSerializer: (params) => {
                         return qs.stringify(params);
@@ -72,6 +72,8 @@ export default {
                             console.log("Вызвали алерт");
                             this.$vaToast.init({ message: 'Запись опубликована', color: 'success' });
                             window.location.reload();
+                            self.list_img = [];
+                            this.tags.splice(0);
                             self.input = '';
                             self.loading = false;
                         } else {
@@ -103,6 +105,7 @@ export default {
                     self.items = response.data.list_img;
                     self.tags = response.data.tags;
                     self.listVideo = response.data.list_video;
+
                     self.loading = false;
                     console.log(this.pages);
                 })

@@ -14,7 +14,7 @@
         </VaButton>
     </div>
     <div class="row">
-        <va-button color="warning" @click="publishAnimePost()">Опубликовать</va-button>
+        <va-button color="warning" @click="publishSexyPost()">Опубликовать</va-button>
     </div>
 </template>
 <script>
@@ -53,7 +53,7 @@ export default {
         updateParams(newProps) {
             this.serverParams = Object.assign({}, this.serverParams, newProps);
         },
-        publishAnimePost() {
+        publishSexyPost() {
             this.updateParams({ list_img: this.items, list_video: this.listVideo, tags: this.tags});
             console.log(this.items);
             let self = this;

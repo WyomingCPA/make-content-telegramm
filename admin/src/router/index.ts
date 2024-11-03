@@ -108,17 +108,22 @@ const routes: Array<RouteRecordRaw> = [
             path: 'tumblr-reblog-sexy',
             component: () => import('../pages/admin/tumblr/SexyReblog.vue'),
           },
+          {
+            name: 'tumblr-reblog-all',
+            path: 'tumblr-reblog-all',
+            component: () => import('../pages/admin/tumblr/AllGroups.vue'),
+          },
         ],
       },
       {
-        name: 'reblogtelegramm',
-        path: 'reblogtelegramm',
+        name: 'post-mass-create',
+        path: 'post-mass-create',
         component: RouteViewComponent,
         children: [
           {
-            name: 'telegramm-reblog-anime',
-            path: 'telegramm-reblog-anime',
-            component: () => import('../pages/admin/telegramm/Anime.vue'),
+            name: 'post-mass-create-anime',
+            path: 'post-mass-create-anime',
+            component: () => import('../pages/admin/mass/Anime.vue'),
           },
         ],
       },

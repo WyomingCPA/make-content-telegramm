@@ -10,6 +10,7 @@ use App\Http\Controllers\QueueController;
 use App\Http\Controllers\TumblrController;
 use App\Http\Controllers\TelegrammController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\MassController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -83,4 +84,7 @@ Route::group(['prefix' => 'tumblr', 'middleware' => 'auth:sanctum'], function ()
 Route::group(['prefix' => 'telegramm', 'middleware' => 'auth:sanctum'], function () {
     Route::post('get-post', [TelegrammController::class, 'getDataPostId']);
 
+});
+Route::group(['prefix' => 'mass', 'middleware' => 'auth:sanctum'], function () {
+    Route::post('publish-sexy-post', [MassController::class, 'publishSexyPost']);
 });

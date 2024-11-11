@@ -90,6 +90,7 @@ class QueueAnime extends Command
                 $media = new ArrayOfInputMedia();
                 foreach ($list_img as $img) {
                     foreach ($img as $item_image) {
+                        $messageText .= " #anime #art #tyan \n\n\n<a href='https://t.me/+ATd62K2jKB43YzIy'>Anime_Tyn_TG</a>";
                         $media->addItem(new InputMediaPhoto($item_image, '#anime #art #tyan'));
                     }
                 }
@@ -129,7 +130,7 @@ class QueueAnime extends Command
             else
             {
                 //echo 'Не четное';
-                $caption = '<a href="https://t.me/anime_tynka">Link Source</a>';
+                $caption = '<a href="https://t.me/+CdvS_PuYdTw2Yzgy">Link Source</a>';
             }
                 //echo 'Нечетное';
             $postData = array(

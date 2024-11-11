@@ -112,6 +112,10 @@ export default {
           name: 'post-mass-create-anime',
           displayName: 'menu.post-mass-create-anime',
         },
+        {
+          name: 'post-mass-create-sexy',
+          displayName: 'menu.post-mass-create-sexy',
+        },
       ],
     },
     {

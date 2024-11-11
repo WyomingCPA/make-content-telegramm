@@ -75,7 +75,7 @@ class TumblrController extends Controller
             //$bot->sendMessage($chatId, $messageText, 'HTML');
 
             $media = new ArrayOfInputMedia();
-            $messageText .= " #anime #art #tyan \n\n\n<a href='https://t.me/anime_tynka'>Anime_Tyn_TG</a>";
+            $messageText .= " #anime #art #tyan \n\n\n<a href='https://t.me/+ATd62K2jKB43YzIy'>Anime_Tyn_TG</a>";
             if (!empty($list_video)) {
                 foreach ($list_video as $item_video) {
                     $media->addItem(new InputMediaVideo($item_video, $messageText, 'HTML'));
@@ -112,7 +112,7 @@ class TumblrController extends Controller
             //$bot->sendMessage($chatId, $messageText, 'HTML');
 
             $media = new ArrayOfInputMedia();
-            $messageText = "#girl #body #fit \n\n\n<a href='https://t.me/worldofbeautiestg'>World of Beauties</a>";
+            $messageText .= "#girl #body #fit \n\n\n<a href='https://t.me/+HARJVgHVnPE5NTky'>World of Beauties</a>";
             if (!empty($list_video)) {
                 foreach ($list_video as $item_video) {
                     $media->addItem(new InputMediaVideo($item_video, $messageText, 'HTML'));

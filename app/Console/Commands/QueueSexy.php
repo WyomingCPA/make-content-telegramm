@@ -87,7 +87,7 @@ class QueueSexy extends Command
                 $media = new ArrayOfInputMedia();
                 foreach ($list_img as $img) {
                     foreach ($img as $item_image) {
-                        $messageText = "#girl #body #fit \n\n\n<a href='https://t.me/worldofbeautiestg'>World of Beauties</a>";
+                        $messageText = "#girl #body #fit \n\n\n<a href='https://t.me/+HARJVgHVnPE5NTky'>World of Beauties</a>";
                         $media->addItem(new InputMediaPhoto($item_image, $messageText, 'HTML'));
                     }
                 }
@@ -126,7 +126,7 @@ class QueueSexy extends Command
             else
             {
                 //echo 'Не четное';
-                $caption = '<a href="https://t.me/worldofbeautiestg">Link Source</a>';
+                $caption = '<a href="https://t.me/+hsLegCU9-vw1MjYy">Link Source</a>';
             }
             $postData = array(
                 'caption' => $caption,

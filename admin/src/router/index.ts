@@ -125,6 +125,11 @@ const routes: Array<RouteRecordRaw> = [
             path: 'post-mass-create-anime',
             component: () => import('../pages/admin/mass/Anime.vue'),
           },
+          {
+            name: 'post-mass-create-sexy',
+            path: 'post-mass-create-sexy',
+            component: () => import('../pages/admin/mass/Sexy.vue'),
+          },
         ],
       },
       {

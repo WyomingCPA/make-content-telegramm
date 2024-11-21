@@ -24,6 +24,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('command:send-new-post')->everyTwoHours();
         $schedule->command('command:delete-old-post')->everyTwoHours();
         $schedule->command('command:publish-anime-queue')->everyTwoHours();
+        $schedule->command('command:publish-anime2-queue')->everyThreeHours();
         $schedule->command('command:publish-sexy-queue')->everyTwoHours();
         $schedule->command('command:publish-esteticvibes-queue')->everyFourHours();
         $schedule->command('command:mirtlenmai-queue')->everyFourHours();

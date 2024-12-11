@@ -39,11 +39,11 @@ class QueueAnime2 extends Command
     public function handle()
     {
         //Сделать проверку запуска публикаций для телеграмм
-        $isStart = Group::where('slug', '=', 'anime')->first();
-        if (!$isStart->is_start) {
-            echo "Не публикуем";
-            return Command::SUCCESS;
-        }
+        //$isStart = Group::where('slug', '=', 'anime')->first();
+        //if (!$isStart->is_start) {
+        //    echo "Не публикуем";
+        //    return Command::SUCCESS;
+        //}
 
         $user = User::select('id')->where('email', 'WyomingCPA@yandex.ru')->first();
         $favorite_ids = $user->queuesPost->pluck('id')->toArray();

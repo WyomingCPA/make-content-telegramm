@@ -31,9 +31,19 @@ class PostController extends Controller
         }
 
         //$categories = Category::pluck('name')->toArray();
-        $categories = ['laravel', 'php', 'typescript', 'javascript', 'vue', 'unix',
-        'программирование', 'python', 'разработка', 'github'];
-        
+        $categories = [
+            'laravel',
+            'php',
+            'typescript',
+            'javascript',
+            'vue',
+            'unix',
+            'программирование',
+            'python',
+            'разработка',
+            'github'
+        ];
+
         $sort = $request->get('sort');
         $direction = $request->get('direction');
         $name = $request->get('title');
@@ -130,12 +140,12 @@ class PostController extends Controller
         $token_key = env('TOKEN_KEY'); // your token
         $token_secret = env('TOKEN_SECRET'); // your token secret
 
-        
+
         $blogName = 'bouncymeatballs';
-        
+
         $client = new Client($consumer_key, $consumer_secret);
         $client->setToken($token_key, $token_secret);
-        $count_post=0;
+        $count_post = 0;
         foreach ($rows as $value) {
             $messageText = '';
             //$select[] = $value['id'];
@@ -149,14 +159,14 @@ class PostController extends Controller
                 }
             }
             $caption = '';
-            if ($count_post == 3)
-            {
+            if ($count_post == 3) {
                 $caption = '<a href="https://t.me/worldofbeautiestg">Link Source</a>';
             }
             $postData = array(
                 'caption' => $caption,
                 'tags' => 'sexy, girl, body, fit, beautiful photos',
-                'type' => 'photo', 'data' => $list_img_tumblr
+                'type' => 'photo',
+                'data' => $list_img_tumblr
             );
             $client->createPost($blogName, $postData);
             $count_post++;
@@ -299,10 +309,10 @@ class PostController extends Controller
 
         $list_name = ['anime-feeder', 'animegirlpin'];
         $blogName = $list_name[array_rand($list_name, 1)];
-        
+
         $client = new Client($consumer_key, $consumer_secret);
         $client->setToken($token_key, $token_secret);
-        $count_post=0;
+        $count_post = 0;
         foreach ($rows as $value) {
             $messageText = '';
             //$select[] = $value['id'];
@@ -316,14 +326,14 @@ class PostController extends Controller
                 }
             }
             $caption = '';
-            if ($count_post == 3)
-            {
+            if ($count_post == 3) {
                 $caption = '<a href="https://t.me/anime_tynka">Link Source</a>';
             }
             $postData = array(
                 'caption' => $caption,
                 'tags' => 'anime, art, tyan',
-                'type' => 'photo', 'data' => $list_img_tumblr
+                'type' => 'photo',
+                'data' => $list_img_tumblr
             );
             $client->createPost($blogName, $postData);
             $count_post++;
@@ -414,7 +424,10 @@ class PostController extends Controller
     public function vkSexyAll(Request $request)
     {
         $favorite_ids = Auth::user()->queuesPost->pluck('id')->toArray();
-        $objects = Post::where('is_publish', false)->where('is_hidden', false)->whereNotIn('id', $favorite_ids)->orderBy('created_at', 'desc');
+        $objects = Post::where('is_publish', false)->where('is_hidden', false)
+            ->whereNotIn('id', $favorite_ids)->whereJsonLength('attachments', '>', 0)
+            ->orderBy('created_at', 'desc');
+        //$test = Post::whereJsonLength('attachments', '>', 0)->get();
         $categories = Category::pluck('name')->toArray();
         $count = $objects->count();
         $sort = $request->get('sort');
@@ -444,6 +457,7 @@ class PostController extends Controller
         //    echo "break";
         //}
         if ($request->isMethod('post')) {
+
             return response()->json([
                 'posts' => $objects->get()->toArray(),
                 'count' => $count,
@@ -454,7 +468,10 @@ class PostController extends Controller
     public function vkAnimeAll(Request $request)
     {
         $favorite_ids = Auth::user()->queuesPost->pluck('id')->toArray();
-        $objects = Post::where('is_publish', false)->where('is_hidden', false)->whereNotIn('id', $favorite_ids)->orderBy('created_at', 'desc');
+        $objects = Post::where('is_publish', false)->where('is_hidden', false)
+                 ->whereJsonLength('attachments', '>', 0) 
+                 ->whereNotIn('id', $favorite_ids)
+                 ->orderBy('created_at', 'desc');
         $categories = Category::pluck('name')->toArray();
         $count = $objects->count();
         $sort = $request->get('sort');
@@ -573,14 +590,13 @@ class PostController extends Controller
         }
     }
 
-    
+
     public function rssHabrPublish(Request $request)
     {
         $rows = $request->post('selRows');
         $select = [];
-        foreach ($rows as $item)
-        {
-            $select [] = $item['id'];
+        foreach ($rows as $item) {
+            $select[] = $item['id'];
         }
         $objects = RssItem::whereIn('id', $select)->orderBy('created_at', 'desc');
         $messageText = "<b>Подборка</b>\n\n";
@@ -598,11 +614,10 @@ class PostController extends Controller
             'curl' => [CURLOPT_SSL_VERIFYPEER => false],
         ];
         $list_img = array();
-        foreach ($raw_links as $item_link)
-        {
+        foreach ($raw_links as $item_link) {
             $client = new \GuzzleHttp\Client($options);
             $response = $client->request('GET', $item_link)->getBody()->getContents();
-    
+
             $crawler = new Crawler($response);
             $image = '';
             try {
@@ -612,9 +627,7 @@ class PostController extends Controller
                     $list_img = array($image);
                     break;
                 }
-            }
-            catch (\Exception $e)
-            {
+            } catch (\Exception $e) {
                 echo 'Error';
             }
         }
@@ -632,8 +645,7 @@ class PostController extends Controller
             $tags = '';
             foreach ($categories as $item_category) {
                 if (strlen($item_category->name) <= 15) {
-                    if ($item_category->name === "anime")
-                    {
+                    if ($item_category->name === "anime") {
                         continue;
                     }
                     $tags .= "#" . str_replace('-', '_', $item_category->name) . " ";

@@ -98,6 +98,10 @@ export default {
           name: 'tumblr-reblog-all',
           displayName: 'menu.tumblr-reblog-all',
         },
+        {
+          name: 'tumblr-sexy-all',
+          displayName: 'menu.tumblr-sexy-all',
+        },
       ],
     },
     {

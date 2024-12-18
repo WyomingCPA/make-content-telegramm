@@ -552,7 +552,10 @@ class PostController extends Controller
     public function vkEsteticVibesAll(Request $request)
     {
         $favorite_ids = Auth::user()->queuesPost->pluck('id')->toArray();
-        $objects = Post::where('is_publish', false)->where('is_hidden', false)->whereNotIn('id', $favorite_ids)->orderBy('created_at', 'desc');
+        $objects = Post::where('is_publish', false)
+                        ->where('is_hidden', false)
+                        ->whereJsonLength('attachments', '>', 0)
+                        ->whereNotIn('id', $favorite_ids)->orderBy('created_at', 'desc');
         $categories = Category::pluck('name')->toArray();
         $count = $objects->count();
         $sort = $request->get('sort');

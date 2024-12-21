@@ -465,6 +465,51 @@ class PostController extends Controller
             ]);
         }
     }
+    
+    public function vkCatsAll(Request $request)
+    {
+        $favorite_ids = Auth::user()->queuesPost->pluck('id')->toArray();
+        $objects = Post::where('is_publish', false)->where('is_hidden', false)
+            ->whereNotIn('id', $favorite_ids)->whereJsonLength('attachments', '>', 0)
+            ->orderBy('created_at', 'desc');
+        //$test = Post::whereJsonLength('attachments', '>', 0)->get();
+        $categories = Category::pluck('name')->toArray();
+        $count = $objects->count();
+        $sort = $request->get('sort');
+        $direction = $request->get('direction');
+        $name = $request->get('title');
+        $category_value = ['cats'];
+        $created_by = $request->get('created_by');
+        $type = $request->get('type');
+        $limit = 50;
+        $page = (int) $request->get('page');
+        $created_at = $request->get('created_at');
+
+        if ($name !== null) {
+            $objects->where('title', 'like', '%' . $name['searchTerm'] . '%');
+        }
+        if ($category_value !== null) {
+            $category_ids = Category::whereIn('name', $category_value)->pluck('id')->toArray();
+
+            $objects->whereHas('categories', function ($query) use ($category_ids, $request) {
+                $query->whereIn('category_id', array_values($category_ids));
+            });
+        }
+        $objects->offset($limit * ($page - 1))->limit($limit);
+        //$test = $objects->first()->attachments;
+        //foreach ($test as $item_test)
+        //{
+        //    echo "break";
+        //}
+        if ($request->isMethod('post')) {
+
+            return response()->json([
+                'posts' => $objects->get()->toArray(),
+                'count' => $count,
+                'categories' => $categories
+            ]);
+        }
+    }
     public function vkAnimeAll(Request $request)
     {
         $favorite_ids = Auth::user()->queuesPost->pluck('id')->toArray();

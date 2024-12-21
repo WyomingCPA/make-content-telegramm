@@ -43,6 +43,10 @@ export default {
           displayName: 'menu.vk-estetic-vibes',
         },
         {
+          name: 'vk-cats',
+          displayName: 'menu.vk-cats',
+        },
+        {
           name: 'vk-mir-tlen-mai',
           displayName: 'menu.vk-mir-tlen-mai',
         },
@@ -141,6 +145,10 @@ export default {
         {
           name: 'queue-estetic',
           displayName: 'menu.queue-estetic',
+        },
+        {
+          name: 'queue-cats',
+          displayName: 'menu.queue-cats',
         },
         {
           name: 'queue-mir-tlen-mai',

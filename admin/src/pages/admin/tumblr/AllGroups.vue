@@ -17,6 +17,7 @@
             <va-button color="danger" @click="publishAnimePost()">Опубликовать Anime</va-button>
             <va-button color="warning" @click="publishSexyPost()">Опубликовать Sexy</va-button>
             <va-button color="primary" @click="publishNaturePost()">Опубликовать Nature</va-button>
+            <va-button color="primary" @click="publishCatsPost()">Опубликовать Cats</va-button>
         </div>
     </va-card>
 
@@ -57,8 +58,40 @@ export default {
         updateParams(newProps) {
             this.serverParams = Object.assign({}, this.serverParams, newProps);
         },
+        publishCatsPost() {
+            this.updateParams({ list_img: this.items, list_video: this.listVideo, tags: this.tags });
+            console.log(this.items);
+            let self = this;
+            this.loading = true;
+            axios
+                .request({
+                    method: "post",
+                    url: "/api/tumblr/estetic-cats-post",
+                    params: this.serverParams,
+                    paramsSerializer: (params) => {
+                        return qs.stringify(params);
+                    },
+                })
+                .then((response) => {
+                    if (response.status) {
+                        console.log("Вызвали алерт");
+                        this.$vaToast.init({ message: 'Запись опубликована', color: 'success' });
+                        window.location.reload();
+                        self.input = '';
+                        self.loading = false;
+                    } else {
+                        console.log("Не работает");
+                        console.log(response.status);
+                        self.loading = false;
+                    }
+                })
+                .catch((error) => {
+                    console.log(error);
+                    self.loading = false;
+                });
+        },
         publishNaturePost() {
-            this.updateParams({ list_img: this.items, list_video: this.listVideo, tags: this.tags});
+            this.updateParams({ list_img: this.items, list_video: this.listVideo, tags: this.tags });
             console.log(this.items);
             let self = this;
             this.loading = true;
@@ -73,16 +106,16 @@ export default {
                 })
                 .then((response) => {
                     if (response.status) {
-                            console.log("Вызвали алерт");
-                            this.$vaToast.init({ message: 'Запись опубликована', color: 'success' });
-                            window.location.reload();
-                            self.input = '';
-                            self.loading = false;
-                        } else {
-                            console.log("Не работает");
-                            console.log(response.status);
-                            self.loading = false;
-                        }
+                        console.log("Вызвали алерт");
+                        this.$vaToast.init({ message: 'Запись опубликована', color: 'success' });
+                        window.location.reload();
+                        self.input = '';
+                        self.loading = false;
+                    } else {
+                        console.log("Не работает");
+                        console.log(response.status);
+                        self.loading = false;
+                    }
                 })
                 .catch((error) => {
                     console.log(error);
@@ -122,7 +155,7 @@ export default {
                 });
         },
         publishAnimePost() {
-            this.updateParams({ list_img: this.items, list_video: this.listVideo, tags: this.tags});
+            this.updateParams({ list_img: this.items, list_video: this.listVideo, tags: this.tags });
             console.log(this.items);
             let self = this;
             this.loading = true;
@@ -137,18 +170,18 @@ export default {
                 })
                 .then((response) => {
                     if (response.status) {
-                            console.log("Вызвали алерт");
-                            this.$vaToast.init({ message: 'Запись опубликована', color: 'success' });
-                            window.location.reload();
-                            self.list_img = [];
-                            this.tags.splice(0);
-                            self.input = '';
-                            self.loading = false;
-                        } else {
-                            console.log("Не работает");
-                            console.log(response.status);
-                            self.loading = false;
-                        }
+                        console.log("Вызвали алерт");
+                        this.$vaToast.init({ message: 'Запись опубликована', color: 'success' });
+                        window.location.reload();
+                        self.list_img = [];
+                        this.tags.splice(0);
+                        self.input = '';
+                        self.loading = false;
+                    } else {
+                        console.log("Не работает");
+                        console.log(response.status);
+                        self.loading = false;
+                    }
                 })
                 .catch((error) => {
                     console.log(error);

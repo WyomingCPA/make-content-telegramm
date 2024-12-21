@@ -129,7 +129,44 @@ class TumblrController extends Controller
             'status' => true,
         ], 200);
     }
+    public function publishCatsPost(Request $request)
+    {
+        $list_img = $request->get('list_img');
+        $tags_array = $request->get('tags');
+        $list_video =  $request->get('list_video');
+        $messageText = '';
+        if (!empty($tags_array)) {
+            foreach ($tags_array as $tag) {
+                $tagText = str_replace(' ', '_', $tag);
+                $messageText .= " #$tagText";
+            }
+        }
+        $messageText .= "\n";
+        if (!empty($messageText)) {
+            $chatId = '-1002315592624';
+            //$chatId = '-414528593';
+            $bot = new BotApi(env('TELEGRAM_TOKEN'));
+            //$bot->sendMessage($chatId, $messageText, 'HTML');
 
+            $media = new ArrayOfInputMedia();
+            $messageText .= "#cats \n\n\n<a href='https://t.me/+7yj6MB0l529lZmRi'>Котики ≽^•⩊•^≼</a>";
+
+            if (!empty($list_video)) {
+                foreach ($list_video as $item_video) {
+                    $media->addItem(new InputMediaVideo($item_video, $messageText, 'HTML'));
+                }
+            } else {
+                foreach ($list_img as $item_image) {
+                    $media->addItem(new InputMediaPhoto($item_image, $messageText, 'HTML'));
+                }
+            }
+
+            $bot->sendMediaGroup($chatId, $media);
+        }
+        return response()->json([
+            'status' => true,
+        ], 200);
+    }
     public function getDataPostId(Request $request)
     {
         $url = $request->get('url');

@@ -55,6 +55,11 @@ const routes: Array<RouteRecordRaw> = [
             component: () => import('../pages/admin/source/VkEsteticVibes.vue'),
           },
           {
+            name: 'vk-cats',
+            path: 'vk-cats',
+            component: () => import('../pages/admin/source/VkCats.vue'),
+          },
+          {
             name: 'vk-mir-tlen-mai',
             path: 'vk-mir-tlen-mai',
             component: () => import('../pages/admin/source/VkMirTlenMai.vue'),
@@ -156,6 +161,11 @@ const routes: Array<RouteRecordRaw> = [
             name: 'queue-estetic',
             path: 'queue-estetic',
             component: () => import('../pages/admin/queue/EsteticVibes.vue'),
+          },
+          {
+            name: 'queue-cats',
+            path: 'queue-cats',
+            component: () => import('../pages/admin/queue/Cats.vue'),
           },
           {
             name: 'queue-mir-tlen-mai',

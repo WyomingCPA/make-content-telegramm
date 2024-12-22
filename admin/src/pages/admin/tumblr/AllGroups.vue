@@ -66,7 +66,7 @@ export default {
             axios
                 .request({
                     method: "post",
-                    url: "/api/tumblr/estetic-cats-post",
+                    url: "/api/tumblr/publish-cats-post",
                     params: this.serverParams,
                     paramsSerializer: (params) => {
                         return qs.stringify(params);

@@ -13,8 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('source', function (Blueprint $table) {
+        Schema::table('posts', function (Blueprint $table) {
             $table->enum('network', ['vk', 'tumblr'])->default('vk');
+            $table->enum('type', ['photo', 'video'])->default('photo');
         });
     }
 
@@ -25,7 +26,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('source', function (Blueprint $table) {
+        Schema::table('posts', function (Blueprint $table) {
             //
         });
     }

@@ -50,6 +50,7 @@ Route::group(['prefix' => 'post', 'middleware' => 'auth:sanctum'], function () {
     Route::post('vk-esteticvibes-release', [PostController::class, 'vkEsteticVibesRelease']);
     Route::post('vk-mirtlenmai-all', [PostController::class, 'vkMirTlenMaiAll']);
     Route::post('vk-mirtlenmai-publish', [PostController::class, 'vkMirTlenMaiPublish']);
+    Route::post('vk-cats-publish', [PostController::class, 'vkCatsPublish']);
     Route::post('vk-cats-all', [PostController::class, 'vkCatsAll']);
 });
 Route::group(['prefix' => 'queue', 'middleware' => 'auth:sanctum'], function () {
@@ -83,6 +84,11 @@ Route::group(['prefix' => 'tumblr', 'middleware' => 'auth:sanctum'], function ()
     Route::post('estetic-vibes-post', [TumblrController::class, 'publishEsteticVibes']);
     Route::post('sexy-post', [TumblrController::class, 'publishSexy']);
     Route::post('publish-cats-post', [TumblrController::class, 'publishCatsPost']);
+    Route::post('cats-video-all', [TumblrController::class, 'catsVideoAll']);
+    Route::post('sexy-video-all', [TumblrController::class, 'sexyVideoAll']);
+    Route::post('cats-video-tumblr-publish', [TumblrController::class, 'catsVideoPublish']);
+    Route::post('sexy-video-tumblr-publish', [TumblrController::class, 'sexyVideoPublish']);
+    
 });
 Route::group(['prefix' => 'telegramm', 'middleware' => 'auth:sanctum'], function () {
     Route::post('get-post', [TelegrammController::class, 'getDataPostId']);

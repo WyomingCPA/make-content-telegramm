@@ -19,6 +19,8 @@ return new class extends Migration
             $table->integer('owner_id');
             $table->string('name', 500);
             $table->string('url_source', 500);
+            $table->enum('type', ['photo', 'video']);
+            $table->enum('network', ['vk', 'tumblr']);
             $table->boolean('is_parce')->unsigned()->nullable();
             $table->timestamps();
         });

@@ -26,6 +26,8 @@ class Post extends Model
         'attachments',
         'is_publish',
         'is_hidden',
+        'network',
+        'type'
     ];
 
     public function getCreatedAtAttribute($value)

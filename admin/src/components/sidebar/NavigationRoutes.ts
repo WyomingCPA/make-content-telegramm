@@ -103,8 +103,12 @@ export default {
           displayName: 'menu.tumblr-reblog-all',
         },
         {
-          name: 'tumblr-sexy-all',
-          displayName: 'menu.tumblr-sexy-all',
+          name: 'tumblr-cats-video',
+          displayName: 'menu.tumblr-cats-video',
+        },
+        {
+          name: 'tumblr-sexy-video',
+          displayName: 'menu.tumblr-sexy-video',
         },
       ],
     },

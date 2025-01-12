@@ -119,9 +119,14 @@ const routes: Array<RouteRecordRaw> = [
             component: () => import('../pages/admin/tumblr/AllGroups.vue'),
           },
           {
-            name: 'tumblr-sexy-all',
-            path: 'tumblr-sexy-all',
-            component: () => import('../pages/admin/tumblr/Sexy.vue'),
+            name: 'tumblr-cats-video',
+            path: 'tumblr-cats-video',
+            component: () => import('../pages/admin/tumblr/TumblrCatsVideo.vue'),
+          },
+          {
+            name: 'tumblr-sexy-video',
+            path: 'tumblr-sexy-video',
+            component: () => import('../pages/admin/tumblr/TumblrSexyVideo.vue'),
           },
         ],
       },

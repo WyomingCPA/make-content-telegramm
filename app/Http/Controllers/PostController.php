@@ -175,6 +175,7 @@ class PostController extends Controller
             'status' => true,
         ], 200);
     }
+    
     public function vkSexyRelease(Request $request)
     {
         $objects = Post::where('is_publish', true)->where('is_hidden', false)->orderBy('updated_at', 'asc');

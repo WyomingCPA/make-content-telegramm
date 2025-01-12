@@ -21,6 +21,7 @@ class DashboardController extends Controller
         $favorite_estetic_post_count = Post::queueCount('estetic_vibes');
         $favorite_sexy_post_count  = Post::queueCount('sexy');
         $favorite_anime_post_count = Post::queueCount('anime');
+        $favorite_cats_post_count = Post::queueCount('cats');
 
         //$date = Carbon::now()->subDays(7);
         //$statistics = Statistics::where('created_at', '>=', $date)->orderBy('created_at', 'desc')->get();
@@ -32,6 +33,7 @@ class DashboardController extends Controller
             'favorite_anime_post_count' => $favorite_anime_post_count, 
             'favorite_sexy_post_count' => $favorite_sexy_post_count,
             'favorite_estetic_post_count' => $favorite_estetic_post_count,
+            'favorite_cats_post_count' => $favorite_cats_post_count,
         ], 200);
     }
 }

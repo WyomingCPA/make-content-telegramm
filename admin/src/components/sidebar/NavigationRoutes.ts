@@ -110,6 +110,10 @@ export default {
           name: 'tumblr-sexy-video',
           displayName: 'menu.tumblr-sexy-video',
         },
+        {
+          name: 'tumblr-sexy-photo',
+          displayName: 'menu.tumblr-sexy-photo',
+        },
       ],
     },
     {

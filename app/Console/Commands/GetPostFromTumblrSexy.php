@@ -50,7 +50,11 @@ class GetPostFromTumblrSexy extends Command
             'idolsgeneration', 
             'baddiesdaily',
             'curious936p3',
-            'laxlygirls'
+            'laxlygirls',
+            'calsevt',
+            'nice-hills',
+            'thepitstops',
+            'danypurple-new',
         ];
         $options = [];
         foreach ($list_blog_name as $item_blog) {

@@ -114,6 +114,10 @@ export default {
           name: 'tumblr-sexy-photo',
           displayName: 'menu.tumblr-sexy-photo',
         },
+        {
+          name: 'tumblr-anime-photo',
+          displayName: 'menu.tumblr-anime-photo',
+        },
       ],
     },
     {

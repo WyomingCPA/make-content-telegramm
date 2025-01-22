@@ -10,15 +10,14 @@ use App\Models\Source;
 use App\Models\Group;
 
 use Tumblr\API\Client;
-
-class GetPostFromTumblrSexy extends Command
+class GetPostFromTumblrAnime extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'command:get-tumblr-post-sexy';
+    protected $signature = 'command:get-tumblr-post-anime';
 
     /**
      * The console command description.
@@ -42,24 +41,9 @@ class GetPostFromTumblrSexy extends Command
         $client->setToken($token_key, $token_secret);
 
         $list_blog_name = [
-            'modelcoutureee',
-            'raydiofriendlyfires',
-            'breelynnxoxoxoxo',
-            'toripensa',
-            'miki-my-love',
-            'idolsgeneration', 
-            'baddiesdaily',
-            'curious936p3',
-            'laxlygirls',
-            'calsevt',
-            'nice-hills',
-            'thepitstops',
-            'danypurple-new',
-            'hedonismgirls',
-            'littlelesbiansoul',
-            'returnoftehfemmies',
-            'hedonismgirls'
-
+            'avakkins-alter',
+            'otakujp030',
+            'rennebright',
         ];
         $options = [];
         foreach ($list_blog_name as $item_blog) {
@@ -121,7 +105,7 @@ class GetPostFromTumblrSexy extends Command
                         ['link' => $link,],
                         [
                             'post_id' => $post_id,
-                            'owner_id' => 213,
+                            'owner_id' => 313,
                             'text' => $text,
                             'attachments' => $attachments,
                             'is_publish' => false,
@@ -153,7 +137,7 @@ class GetPostFromTumblrSexy extends Command
                         ['link' => $link,],
                         [
                             'post_id' => $post_id,
-                            'owner_id' => 213,
+                            'owner_id' => 313,
                             'text' => $text,
                             'attachments' => $attachments,
                             'is_publish' => false,

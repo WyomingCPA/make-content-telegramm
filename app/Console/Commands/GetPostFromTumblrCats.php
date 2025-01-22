@@ -46,7 +46,9 @@ class GetPostFromTumblrCats extends Command
             'caats',
             'cute-catts',
             'superkursunaskr',
-            'catbot2'
+            'catbot2',
+            'catasters',
+            'cuteness--overload'
         ];
         $options = [];
         foreach ($list_blog_name as $item_blog) {

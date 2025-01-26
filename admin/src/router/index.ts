@@ -138,6 +138,11 @@ const routes: Array<RouteRecordRaw> = [
             path: 'tumblr-anime-photo',
             component: () => import('../pages/admin/tumblr/TumblrAnimePhoto.vue'),
           },
+          {
+            name: 'tumblr-anime-video',
+            path: 'tumblr-anime-video',
+            component: () => import('../pages/admin/tumblr/TumblrAnimeVideo.vue'),
+          },
         ],
       },
       {

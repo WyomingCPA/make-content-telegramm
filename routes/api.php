@@ -88,10 +88,12 @@ Route::group(['prefix' => 'tumblr', 'middleware' => 'auth:sanctum'], function ()
     Route::post('sexy-video-all', [TumblrController::class, 'sexyVideoAll']);
     Route::post('sexy-photo-all', [TumblrController::class, 'sexyPhotoAll']);
     Route::post('anime-photo-all', [TumblrController::class, 'animePhotoAll']);
+    Route::post('anime-video-all', [TumblrController::class, 'animeVideoAll']);
     Route::post('cats-video-tumblr-publish', [TumblrController::class, 'catsVideoPublish']);
     Route::post('sexy-video-tumblr-publish', [TumblrController::class, 'sexyVideoPublish']);
     Route::post('sexy-photo-tumblr-publish', [TumblrController::class, 'sexyPhotoPublish']);
     Route::post('anime-photo-tumblr-publish', [TumblrController::class, 'animePhotoPublish']);
+    Route::post('anime-video-tumblr-publish', [TumblrController::class, 'animeVideoPublish']);
 });
 Route::group(['prefix' => 'telegramm', 'middleware' => 'auth:sanctum'], function () {
     Route::post('get-post', [TelegrammController::class, 'getDataPostId']);

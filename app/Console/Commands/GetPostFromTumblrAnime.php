@@ -44,8 +44,15 @@ class GetPostFromTumblrAnime extends Command
             'avakkins-alter',
             'otakujp030',
             'rennebright',
+            'kage-matu-re',
+            'hnty023',
+            'bikinisw',
+            'banadores',
+            'bikinisw',
+            'dummy-dot-exe'
         ];
         $options = [];
+        shuffle($list_blog_name);
         foreach ($list_blog_name as $item_blog) {
             $post_list = $client->getRequest("v2/blog/$item_blog/posts", $options, false);
             foreach ($post_list->posts as $value)

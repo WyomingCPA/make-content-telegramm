@@ -58,10 +58,16 @@ class GetPostFromTumblrSexy extends Command
             'hedonismgirls',
             'littlelesbiansoul',
             'returnoftehfemmies',
-            'hedonismgirls'
-
+            'hedonismgirls',
+            'dieslow',
+            'rqdominique',
+            'coldstonedreamery',
+            'notglockkitty',
+            'imawinnerforever',
+            '3smilelake'
         ];
         $options = [];
+        shuffle($list_blog_name);
         foreach ($list_blog_name as $item_blog) {
             $post_list = $client->getRequest("v2/blog/$item_blog/posts", $options, false);
             foreach ($post_list->posts as $value)

@@ -64,7 +64,13 @@ class GetPostFromTumblrSexy extends Command
             'coldstonedreamery',
             'notglockkitty',
             'imawinnerforever',
-            '3smilelake'
+            '3smilelake',
+            'hot-post45',
+            'lexxylikes25',
+            'neutrinofog',
+            'fanta30',
+            'warriorbrother',
+            'gepetordi2'
         ];
         $options = [];
         shuffle($list_blog_name);

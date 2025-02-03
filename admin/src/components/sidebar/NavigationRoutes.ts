@@ -107,6 +107,10 @@ export default {
           displayName: 'menu.tumblr-cats-video',
         },
         {
+          name: 'tumblr-cats-photo',
+          displayName: 'menu.tumblr-cats-photo',
+        },
+        {
           name: 'tumblr-sexy-video',
           displayName: 'menu.tumblr-sexy-video',
         },

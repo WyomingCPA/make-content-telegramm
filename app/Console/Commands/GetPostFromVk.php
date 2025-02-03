@@ -12,6 +12,7 @@ use App\Models\Post;
 use App\Models\Source;
 use App\Models\Group;
 
+use Illuminate\Support\Str;
 
 class GetPostFromVk extends Command
 {
@@ -73,7 +74,7 @@ class GetPostFromVk extends Command
                     [
                         'post_id' => $id_post,
                         'owner_id' => $item_source['owner_id'],
-                        'text' => $text_post,
+                        'text' => Str::limit($text_post, 50),
                         'attachments' => $img_src,
                         'is_publish' => false,
                         'is_hidden' => false,

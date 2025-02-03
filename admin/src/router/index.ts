@@ -124,6 +124,11 @@ const routes: Array<RouteRecordRaw> = [
             component: () => import('../pages/admin/tumblr/TumblrCatsVideo.vue'),
           },
           {
+            name: 'tumblr-cats-photo',
+            path: 'tumblr-cats-photo',
+            component: () => import('../pages/admin/tumblr/TumblrCatsPhoto.vue'),
+          },
+          {
             name: 'tumblr-sexy-video',
             path: 'tumblr-sexy-video',
             component: () => import('../pages/admin/tumblr/TumblrSexyVideo.vue'),

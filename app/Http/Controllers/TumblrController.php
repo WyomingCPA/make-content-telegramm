@@ -387,7 +387,7 @@ class TumblrController extends Controller
                 //$bot->sendMessage($chatId, $messageText, 'HTML');
 
                 $media = new ArrayOfInputMedia();
-                $messageText .= "#girl #body #fit \n\n\n<a href='https://t.me/+HARJVgHVnPE5NTky'>World of Beauties</a>";
+                $messageText .= " #girl #body #fit \n\n\n<a href='https://t.me/+HARJVgHVnPE5NTky'>World of Beauties</a>";
     
                 $media->addItem(new InputMediaVideo($video[1][0], $messageText, 'HTML'));
     

@@ -32,6 +32,8 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('command:publish-cats-video-tumblr-queue')->everySixHours();
         $schedule->command('command:publish-sexy-video-tumblr-queue')->everySixHours();
+        $schedule->command('command:publish-sexy-photo-tumblr-queue')->everySixHours();
+        $schedule->command('command:publish-anime-photo-tumblr-queue')->everySixHours();
 
         $schedule->command('command:mirtlenmai-queue')->everyFourHours();
         $schedule->command('command:get-statistic')->everyFourHours();

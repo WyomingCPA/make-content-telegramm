@@ -424,7 +424,7 @@ class TumblrController extends Controller
                 //$bot->sendMessage($chatId, $messageText, 'HTML');
 
                 $media = new ArrayOfInputMedia();
-                $messageText .= "#girl #body #fit \n\n\n<a href='https://t.me/+HARJVgHVnPE5NTky'>World of Beauties</a>";
+                $messageText .= " #girl #body #fit \n\n\n<a href='https://t.me/+HARJVgHVnPE5NTky'>World of Beauties</a>";
     
                 foreach ($list_img[1] as $item_image) {
                     $media->addItem(new InputMediaPhoto($item_image, $messageText, 'HTML'));
@@ -462,7 +462,7 @@ class TumblrController extends Controller
                 //$bot->sendMessage($chatId, $messageText, 'HTML');
 
                 $media = new ArrayOfInputMedia();
-                $messageText .= "#anime #art #tyan \n\n\n<a href='https://t.me/+ATd62K2jKB43YzIy'>Anime_Tyn_TG</a>";
+                $messageText .= " #anime #art #tyan \n\n\n<a href='https://t.me/+ATd62K2jKB43YzIy'>Anime_Tyn_TG</a>";
     
                 foreach ($list_img[1] as $item_image) {
                     $media->addItem(new InputMediaPhoto($item_image, $messageText, 'HTML'));

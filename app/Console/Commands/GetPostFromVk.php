@@ -41,11 +41,20 @@ class GetPostFromVk extends Command
         $vk = new VKApiClient();
         //Get All post is status Is_Parce === True
         $array_source = Source::where('is_parce', true)->orderBy('updated_at', 'asc')->get()->toArray();
+        shuffle($array_source);
         foreach ($array_source as $item_source) {
-            $response = $vk->wall()->get($access_token, [
-                'owner_id'  => $item_source['owner_id'],
-                'count'    => 50,
-            ]);
+            echo $item_source['name'] + "\n";
+            try {
+                $response = $vk->wall()->get($access_token, [
+                    'owner_id'  => $item_source['owner_id'],
+                    'count'    => 50,
+                ]);
+            }
+            catch (\Error $e) {
+                echo $e->getMessage();
+                continue;
+            }
+
             $posts_image = [];
             foreach ($response['items'] as $item) {
                 $img_src = [];
@@ -85,7 +94,7 @@ class GetPostFromVk extends Command
                     echo $id_post . "\n";
                 }
                 $model->save();
-                echo 'break';
+                
             }
         }
 

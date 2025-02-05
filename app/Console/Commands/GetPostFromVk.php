@@ -43,7 +43,7 @@ class GetPostFromVk extends Command
         $array_source = Source::where('is_parce', true)->orderBy('updated_at', 'asc')->get()->toArray();
         shuffle($array_source);
         foreach ($array_source as $item_source) {
-            echo $item_source['name'] + "\n";
+            echo $item_source['name'] . "\n";
             try {
                 $response = $vk->wall()->get($access_token, [
                     'owner_id'  => $item_source['owner_id'],

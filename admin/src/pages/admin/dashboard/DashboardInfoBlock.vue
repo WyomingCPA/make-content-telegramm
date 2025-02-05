@@ -105,6 +105,33 @@
                   {{ favorite_cats_post_count }}
                 </VaListItemLabel>
               </VaListItemSection>
+              <VaListItemSection>
+                <VaListItemLabel>
+                  Sexy Tumblr Video
+                </VaListItemLabel>
+
+                <VaListItemLabel caption>
+                  {{ favorite_sexy_tumblr_video_count }}
+                </VaListItemLabel>
+              </VaListItemSection>
+              <VaListItemSection>
+                <VaListItemLabel>
+                  Sexy Tumblr Photo
+                </VaListItemLabel>
+
+                <VaListItemLabel caption>
+                  {{ favorite_sexy_tumblr_photo_count }}
+                </VaListItemLabel>
+              </VaListItemSection>
+              <VaListItemSection>
+                <VaListItemLabel>
+                  Anime Tumblr Photo
+                </VaListItemLabel>
+
+                <VaListItemLabel caption>
+                  {{ favorite_anime_tumblr_photo_count }}
+                </VaListItemLabel>
+              </VaListItemSection>
               <VaListItemSection icon>
                 <VaIcon name="remove_red_eye" color="background-element" />
               </VaListItemSection>
@@ -141,6 +168,9 @@ export default defineComponent({
       favorite_sexy_post_count: { type: Number },
       favorite_estetic_post_count: { type: Number },
       favorite_cats_post_count: { type: Number },
+      favorite_sexy_tumblr_video_count: { type: Number },
+      favorite_sexy_tumblr_photo_count: { type: Number },
+      favorite_anime_tumblr_photo_count: { type: Number },
       items,
     }
   },
@@ -165,6 +195,9 @@ export default defineComponent({
           self.favorite_sexy_post_count = response.data.favorite_sexy_post_count;
           self.favorite_estetic_post_count = response.data.favorite_estetic_post_count;
           self.favorite_cats_post_count = response.data.favorite_cats_post_count;
+          self.favorite_sexy_tumblr_video_count = response.data.favorite_sexy_tumblr_video_count;
+          self.favorite_sexy_tumblr_photo_count = response.data.favorite_sexy_tumblr_photo_count;
+          self.favorite_anime_tumblr_photo_count = response.data.favorite_sexy_tumblr_photo_count;
           console.log(response.data.all_hide_post_count);
         })
         .catch(function (error) {

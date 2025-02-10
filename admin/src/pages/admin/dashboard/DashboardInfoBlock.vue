@@ -60,85 +60,65 @@
     </div>
   </div>
   <div class="row row-equal">
-    <div class="flex xl8 xs12 lg8">
-      <va-card square outlined>
-        <va-card-title>Избранное</va-card-title>
-        <va-card-content>
-          <VaList>
-
-            <VaListItem class="list__item">
-              <VaListItemSection>
-                <VaListItemLabel>
-                  Anime
-                </VaListItemLabel>
-
-                <VaListItemLabel caption>
-                  {{ favorite_anime_post_count }}
-                </VaListItemLabel>
-              </VaListItemSection>
-
-              <VaListItemSection>
-                <VaListItemLabel>
-                  Sexy
-                </VaListItemLabel>
-
-                <VaListItemLabel caption>
-                  {{ favorite_sexy_post_count }}
-                </VaListItemLabel>
-              </VaListItemSection>
-
-              <VaListItemSection>
-                <VaListItemLabel>
-                  Estetic
-                </VaListItemLabel>
-
-                <VaListItemLabel caption>
-                  {{ favorite_estetic_post_count }}
-                </VaListItemLabel>
-              </VaListItemSection>
-              <VaListItemSection>
-                <VaListItemLabel>
-                  Cats
-                </VaListItemLabel>
-
-                <VaListItemLabel caption>
-                  {{ favorite_cats_post_count }}
-                </VaListItemLabel>
-              </VaListItemSection>
-              <VaListItemSection>
-                <VaListItemLabel>
-                  Sexy Tumblr Video
-                </VaListItemLabel>
-
-                <VaListItemLabel caption>
-                  {{ favorite_sexy_tumblr_video_count }}
-                </VaListItemLabel>
-              </VaListItemSection>
-              <VaListItemSection>
-                <VaListItemLabel>
-                  Sexy Tumblr Photo
-                </VaListItemLabel>
-
-                <VaListItemLabel caption>
-                  {{ favorite_sexy_tumblr_photo_count }}
-                </VaListItemLabel>
-              </VaListItemSection>
-              <VaListItemSection>
-                <VaListItemLabel>
-                  Anime Tumblr Photo
-                </VaListItemLabel>
-
-                <VaListItemLabel caption>
-                  {{ favorite_anime_tumblr_photo_count }}
-                </VaListItemLabel>
-              </VaListItemSection>
-              <VaListItemSection icon>
-                <VaIcon name="remove_red_eye" color="background-element" />
-              </VaListItemSection>
-            </VaListItem>
-          </VaList>
-        </va-card-content>
-      </va-card>
+    <div class="flex xl12 xs12 lg12">
+      <div class="row">
+        <div class="flex xs12 sm3 md3">
+          <va-card>
+            <va-card-content>
+              <h2 class="va-h2 ma-0">{{ favorite_anime_post_count }}</h2>
+              <p class="no-wrap">Anime from VK</p>
+            </va-card-content>
+          </va-card>
+        </div>
+        <div class="flex xs12 sm3 md3">
+          <va-card>
+            <va-card-content>
+              <h2 class="va-h2 ma-0">{{ favorite_sexy_post_count }}</h2>
+              <p class="no-wrap">Sexy from VK</p>
+            </va-card-content>
+          </va-card>
+        </div>
+        <div class="flex xs12 sm3 md3">
+          <va-card>
+            <va-card-content>
+              <h2 class="va-h2 ma-0">{{ favorite_estetic_post_count }}</h2>
+              <p class="no-wrap">Estetic from VK</p>
+            </va-card-content>
+          </va-card>
+        </div>
+        <div class="flex xs12 sm3 md3">
+          <va-card>
+            <va-card-content>
+              <h2 class="va-h2 ma-0">{{ favorite_cats_post_count }}</h2>
+              <p class="no-wrap">Cats from VK</p>
+            </va-card-content>
+          </va-card>
+        </div>
+        <div class="flex xs12 sm3 md3">
+          <va-card>
+            <va-card-content>
+              <h2 class="va-h2 ma-0">{{ favorite_sexy_tumblr_video_count }}</h2>
+              <p class="no-wrap">Sexy Tumblr Video</p>
+            </va-card-content>
+          </va-card>
+        </div>
+        <div class="flex xs12 sm3 md3">
+          <va-card>
+            <va-card-content>
+              <h2 class="va-h2 ma-0">{{ favorite_sexy_tumblr_photo_count }}</h2>
+              <p class="no-wrap"> Sexy Tumblr Photo</p>
+            </va-card-content>
+          </va-card>
+        </div>
+        <div class="flex xs12 sm3 md3">
+          <va-card>
+            <va-card-content>
+              <h2 class="va-h2 ma-0">{{ favorite_anime_tumblr_photo_count }}</h2>
+              <p class="no-wrap"> Anime Tumblr Photo</p>
+            </va-card-content>
+          </va-card>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -197,7 +177,7 @@ export default defineComponent({
           self.favorite_cats_post_count = response.data.favorite_cats_post_count;
           self.favorite_sexy_tumblr_video_count = response.data.favorite_sexy_tumblr_video_count;
           self.favorite_sexy_tumblr_photo_count = response.data.favorite_sexy_tumblr_photo_count;
-          self.favorite_anime_tumblr_photo_count = response.data.favorite_sexy_tumblr_photo_count;
+          self.favorite_anime_tumblr_photo_count = response.data.favorite_anime_tumblr_photo_count;
           console.log(response.data.all_hide_post_count);
         })
         .catch(function (error) {

@@ -13,6 +13,7 @@ use App\Models\User;
 use Tumblr\API\Client;
 
 use TelegramBot\Api\BotApi;
+use TelegramBot\Api\Types\Inline\InlineKeyboardMarkup;
 use TelegramBot\Api\Types\InputMedia\InputMediaPhoto;
 use TelegramBot\Api\Types\InputMedia\InputMediaVideo;
 use \TelegramBot\Api\Types\InputMedia\ArrayOfInputMedia;
@@ -392,6 +393,51 @@ class TumblrController extends Controller
                 $media->addItem(new InputMediaVideo($video[1][0], $messageText, 'HTML'));
     
                 $bot->sendMediaGroup($chatId, $media);
+                $post->is_publish = true;
+                $post->save();
+            }
+        }
+        return response()->json([
+            'status' => true,
+        ], 200);
+    }  
+    public function catsAdvertVideoPublish(Request $request)
+    {
+        $rows = $request->post('selRows');
+        $select = [];
+        foreach ($rows as $value) {
+            $messageText = '';
+            //$select[] = $value['id'];
+            $post = Post::findOrFail($value['id']);
+            $categories = $post->categories;
+            $video = $post->attachments;
+            $tags = '';
+            foreach ($categories as $item_category) {
+                $tags .= "#" . $item_category->name . " ";
+            }
+            $messageText .= "\n";
+            $messageText .= $value['text'];
+            if (!empty($messageText)) {
+                $chatId = '-1002315592624';
+                //$chatId = '-414528593';
+                $bot = new BotApi(env('TELEGRAM_TOKEN'));
+                //$bot->sendMessage($chatId, $messageText, 'HTML');
+                $keyboard = new InlineKeyboardMarkup(
+                    [
+                        [
+                            ['text' => '🐱 Cats ≽^•⩊•^≼ 🐱', 'url' => 'https://t.me/+17PJtQS2qttmZjU6']
+                        ]
+                    ]
+                );
+
+                $media = new ArrayOfInputMedia();
+                $messageText .= "#cats \n\n\n<a href='https://t.me/+7yj6MB0l529lZmRi'>Котики ≽^•⩊•^≼</a>";
+    
+                //$media->addItem(new InputMediaVideo($video[1][0], $messageText, 'HTML'));
+    
+                //$bot->sendMediaGroup($chatId, $media);
+                $bot->sendVideo($chatId, $video[1][0], null, false, null, $keyboard);
+                
                 $post->is_publish = true;
                 $post->save();
             }

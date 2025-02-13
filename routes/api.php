@@ -92,6 +92,7 @@ Route::group(['prefix' => 'tumblr', 'middleware' => 'auth:sanctum'], function ()
     Route::post('cats-video-tumblr-publish', [TumblrController::class, 'catsVideoPublish']);
     Route::post('cats-video-tumblr-publish', [TumblrController::class, 'catsVideoPublish']);
     Route::post('cats-advert-video-tumblr-publish', [TumblrController::class, 'catsAdvertVideoPublish']);
+    Route::post('anime-advert-photo-tumblr-publish', [TumblrController::class, 'animeAdvertPhotoPublish']);
     Route::post('sexy-video-tumblr-publish', [TumblrController::class, 'sexyVideoPublish']);
     Route::post('sexy-photo-tumblr-publish', [TumblrController::class, 'sexyPhotoPublish']);
     Route::post('anime-photo-tumblr-publish', [TumblrController::class, 'animePhotoPublish']);

@@ -38,7 +38,7 @@ class QueueAnimePhotoTumblr extends Command
     public function handle()
     {
                 //Сделать проверку запуска публикаций для телеграмм
-                $isStart = Group::where('slug', '=', 'sexy')->first();
+                $isStart = Group::where('slug', '=', 'anime')->first();
                 if (!$isStart->is_start) {
                     echo "Не публикуем";
                     return Command::SUCCESS;

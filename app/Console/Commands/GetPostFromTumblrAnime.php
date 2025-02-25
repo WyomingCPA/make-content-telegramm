@@ -49,7 +49,13 @@ class GetPostFromTumblrAnime extends Command
             'bikinisw',
             'banadores',
             'bikinisw',
-            'dummy-dot-exe'
+            'dummy-dot-exe',
+            'kefirn',
+            'rinlanddess',
+            'rocyskipper',
+            'lordofwaifus',
+            'animepopheart',
+            'lordofwaifus'
         ];
         $options = [];
         shuffle($list_blog_name);

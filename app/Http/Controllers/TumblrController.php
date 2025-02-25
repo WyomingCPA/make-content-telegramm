@@ -301,6 +301,35 @@ class TumblrController extends Controller
         }
     }
 
+    public function naturePhotoAll(Request $request)
+    {
+        $favorite_ids = Auth::user()->queuesPost->pluck('id')->toArray();
+        $objects = Post::where('is_publish', false)->where('is_hidden', false)
+            ->where('network', 'tumblr')
+            ->where('type', 'photo')
+            ->where('owner_id', 413)
+            ->whereNotIn('id', $favorite_ids)
+            ->orderBy('created_at', 'desc');
+        //$test = Post::whereJsonLength('attachments', '>', 0)->get();
+        $categories = Category::pluck('name')->toArray();
+        $count = $objects->count();
+
+        $categories = Category::pluck('name')->toArray();
+        $count = $objects->count();
+
+        $limit = 50;
+        $page = (int) $request->get('page');
+        $objects->offset($limit * ($page - 1))->limit($limit);
+        if ($request->isMethod('post')) {
+
+            return response()->json([
+                'posts' => $objects->get()->toArray(),
+                'count' => $count,
+                'categories' => $categories
+            ]);
+        }
+    }
+
     public function animePhotoAll(Request $request)
     {
         $favorite_ids = Auth::user()->queuesPost->pluck('id')->toArray();

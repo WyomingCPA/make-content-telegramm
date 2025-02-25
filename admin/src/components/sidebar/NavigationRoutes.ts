@@ -126,6 +126,10 @@ export default {
           name: 'tumblr-anime-video',
           displayName: 'menu.tumblr-anime-video',
         },
+        {
+          name: 'tumblr-nature-photo',
+          displayName: 'menu.tumblr-nature-photo',
+        },
       ],
     },
     {

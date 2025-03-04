@@ -198,7 +198,7 @@ export default defineComponent({
       console.log(count);
       if (count <= 10) {
         return "danger";
-      } else if (count >= 10 || count <= 20) {
+      } else if (count >= 10 && count <= 20) {
         return "primary";
       } else if (count >= 20) {
         return "success";

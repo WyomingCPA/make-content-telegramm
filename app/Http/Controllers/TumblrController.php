@@ -521,6 +521,52 @@ class TumblrController extends Controller
             'status' => true,
         ], 200);
     }
+    
+    public function sexyAdvertPhotoPublish(Request $request)
+    {
+        $rows = $request->post('selRows');
+        $select = [];
+        foreach ($rows as $value) {
+            $messageText = '';
+            //$select[] = $value['id'];
+            $post = Post::findOrFail($value['id']);
+            $categories = $post->categories;
+            $list_img = $post->attachments;
+            $tags = '';
+            foreach ($categories as $item_category) {
+                $tags .= "#" . $item_category->name . " ";
+            }
+            $messageText .= "\n";
+            $messageText .= $value['text'];
+            if (!empty($messageText)) {
+                $chatId = '-1001866603682';
+                //$chatId = '-414528593';
+                $bot = new BotApi(env('TELEGRAM_TOKEN'));
+                //$bot->sendMessage($chatId, $messageText, 'HTML');
+                $keyboard = new InlineKeyboardMarkup(
+                    [
+                        [
+                            ['text' => '❤ Sexy View ❤', 'url' => 'https://t.me/+7KljMFpo29ozNGNi'],
+                        ]
+                    ]
+                );
+
+                $media = new ArrayOfInputMedia();
+                $messageText .= " #girl #body #fit \n\n\n<a href='https://t.me/+HARJVgHVnPE5NTky'>World of Beauties</a>";
+    
+                //$media->addItem(new InputMediaVideo($video[1][0], $messageText, 'HTML'));
+    
+                //$bot->sendMediaGroup($chatId, $media);
+                $bot->sendPhoto($chatId, $list_img[1][0], null, false, $keyboard);
+                
+                $post->is_publish = true;
+                $post->save();
+            }
+        }
+        return response()->json([
+            'status' => true,
+        ], 200);
+    }
     public function sexyPhotoPublish(Request $request)
     {
         $rows = $request->post('selRows');

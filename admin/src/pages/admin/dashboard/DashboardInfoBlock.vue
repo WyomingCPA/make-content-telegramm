@@ -196,7 +196,7 @@ export default defineComponent({
     },
     getStatusClass(count) {
       console.log(count);
-      if (status <= 10) {
+      if (count <= 10) {
         return "danger";
       } else if (count >= 10 || count <= 20) {
         return "primary";

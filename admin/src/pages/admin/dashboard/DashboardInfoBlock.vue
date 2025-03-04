@@ -63,7 +63,7 @@
     <div class="flex xl12 xs12 lg12">
       <div class="row">
         <div class="flex xs12 sm3 md3">
-          <va-card>
+          <va-card :color=getStatusClass(favorite_anime_post_count)>
             <va-card-content>
               <h2 class="va-h2 ma-0">{{ favorite_anime_post_count }}</h2>
               <p class="no-wrap">Anime from VK</p>
@@ -71,7 +71,7 @@
           </va-card>
         </div>
         <div class="flex xs12 sm3 md3">
-          <va-card>
+          <va-card :color=getStatusClass(favorite_sexy_post_count)>
             <va-card-content>
               <h2 class="va-h2 ma-0">{{ favorite_sexy_post_count }}</h2>
               <p class="no-wrap">Sexy from VK</p>
@@ -79,7 +79,7 @@
           </va-card>
         </div>
         <div class="flex xs12 sm3 md3">
-          <va-card>
+          <va-card :color=getStatusClass(favorite_estetic_post_count)>
             <va-card-content>
               <h2 class="va-h2 ma-0">{{ favorite_estetic_post_count }}</h2>
               <p class="no-wrap">Estetic from VK</p>
@@ -87,7 +87,7 @@
           </va-card>
         </div>
         <div class="flex xs12 sm3 md3">
-          <va-card>
+          <va-card :color=getStatusClass(favorite_cats_post_count)>
             <va-card-content>
               <h2 class="va-h2 ma-0">{{ favorite_cats_post_count }}</h2>
               <p class="no-wrap">Cats from VK</p>
@@ -95,7 +95,7 @@
           </va-card>
         </div>
         <div class="flex xs12 sm3 md3">
-          <va-card>
+          <va-card :color=getStatusClass(favorite_sexy_tumblr_video_count)>
             <va-card-content>
               <h2 class="va-h2 ma-0">{{ favorite_sexy_tumblr_video_count }}</h2>
               <p class="no-wrap">Sexy Tumblr Video</p>
@@ -103,7 +103,7 @@
           </va-card>
         </div>
         <div class="flex xs12 sm3 md3">
-          <va-card>
+          <va-card :color=getStatusClass(favorite_sexy_tumblr_photo_count)>
             <va-card-content>
               <h2 class="va-h2 ma-0">{{ favorite_sexy_tumblr_photo_count }}</h2>
               <p class="no-wrap"> Sexy Tumblr Photo</p>
@@ -111,10 +111,18 @@
           </va-card>
         </div>
         <div class="flex xs12 sm3 md3">
-          <va-card>
+          <va-card :color=getStatusClass(favorite_anime_tumblr_photo_count)>
             <va-card-content>
               <h2 class="va-h2 ma-0">{{ favorite_anime_tumblr_photo_count }}</h2>
               <p class="no-wrap"> Anime Tumblr Photo</p>
+            </va-card-content>
+          </va-card>
+        </div>
+        <div class="flex xs12 sm3 md3">
+          <va-card :color=getStatusClass(favorite_cats_tumblr_video_count)>
+            <va-card-content>
+              <h2 class="va-h2 ma-0">{{ favorite_cats_tumblr_video_count }}</h2>
+              <p class="no-wrap"> Cats Tumblr Video</p>
             </va-card-content>
           </va-card>
         </div>
@@ -151,6 +159,7 @@ export default defineComponent({
       favorite_sexy_tumblr_video_count: { type: Number },
       favorite_sexy_tumblr_photo_count: { type: Number },
       favorite_anime_tumblr_photo_count: { type: Number },
+      favorite_cats_tumblr_video_count: { type: Number },
       items,
     }
   },
@@ -178,11 +187,25 @@ export default defineComponent({
           self.favorite_sexy_tumblr_video_count = response.data.favorite_sexy_tumblr_video_count;
           self.favorite_sexy_tumblr_photo_count = response.data.favorite_sexy_tumblr_photo_count;
           self.favorite_anime_tumblr_photo_count = response.data.favorite_anime_tumblr_photo_count;
+          self.favorite_cats_tumblr_video_count = response.data.favorite_cats_tumblr_video_count;
           console.log(response.data.all_hide_post_count);
         })
         .catch(function (error) {
           console.error(error);
         });
+    },
+    getStatusClass(count) {
+      console.log(count);
+      if (status <= 10) {
+        return "danger";
+      } else if (count >= 10 || count <= 20) {
+        return "primary";
+      } else if (count >= 20) {
+        return "success";
+      }
+      else {
+        return "";
+      }
     },
   },
   created() {

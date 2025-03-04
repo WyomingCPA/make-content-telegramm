@@ -50,6 +50,14 @@ class DashboardController extends Controller
             ->whereIn('id', $favorite_ids)
             ->orderBy('created_at', 'desc')->count();
 
+        $favorite_cats_tumblr_video_count = Post::where('is_publish', false)
+            ->where('owner_id', 113)
+            ->where('type', 'video')
+            ->where('network', 'tumblr')
+            ->where('is_hidden', false)
+            ->whereIn('id', $favorite_ids)
+            ->orderBy('created_at', 'desc')->count();
+
         //$date = Carbon::now()->subDays(7);
         //$statistics = Statistics::where('created_at', '>=', $date)->orderBy('created_at', 'desc')->get();
         return response([
@@ -64,6 +72,7 @@ class DashboardController extends Controller
             'favorite_sexy_tumblr_video_count' => $favorite_sexy_tumblr_video_count,
             'favorite_sexy_tumblr_photo_count' => $favorite_sexy_tumblr_photo_count,
             'favorite_anime_tumblr_photo_count' => $favorite_anime_tumblr_photo_count,
+            'favorite_cats_tumblr_video_count' => $favorite_cats_tumblr_video_count,
         ], 200);
     }
 }

@@ -96,36 +96,6 @@ class QueueSexyDouble extends Command
                 $post->save();
             }
 
-            //publish Tumblr
-            $consumer_key = env('CONSUMER_KEY'); //  your consumer key
-            $consumer_secret = env('CONSUMER_SECRET'); // your consumer secret
-            $token_key = env('TOKEN_KEY'); // your token
-            $token_secret = env('TOKEN_SECRET'); // your token secret
-
-            $blogName = 'bouncymeatballs';
-
-            $client = new Client($consumer_key, $consumer_secret);
-            $client->setToken($token_key, $token_secret);
-            $count_post = 0;
-
-            $messageText = '';
-
-            $categories = $post->categories;
-            $list_img = $post->attachments;
-            $list_img_tumblr = [];
-            foreach ($list_img as $img) {
-                foreach ($img as $item_image) {
-                    $list_img_tumblr[] = $item_image;
-                }
-            }
-            $caption = '';
-            $postData = array(
-                'caption' => $caption,
-                'tags' => 'sexy, girl, body, fit, beautiful photos',
-                'type' => 'photo',
-                'data' => $list_img_tumblr
-            );
-            $client->createPost($blogName, $postData);
             echo 'Публикация выполена успешно';
         } catch (\Error $e) {
             $user->queuesPost()->detach(array_values([$post->id]));

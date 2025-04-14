@@ -72,13 +72,13 @@ class QueueSexyPhotoTumblr extends Command
                     $messageText .= $post->text;
         
                     if (!empty($messageText)) {
-                        $chatId = '-1001866603682';
+                        $chatId = '-1002366645779';
                         //$chatId = '-414528593';
                         $bot = new BotApi(env('TELEGRAM_TOKEN'));
                         //$bot->sendMessage($chatId, $messageText, 'HTML');
         
                         $media = new ArrayOfInputMedia();
-                        $messageText .= " #girl #body #fit \n\n\n<a href='https://t.me/+HARJVgHVnPE5NTky'>World of Beauties</a>";
+                        $messageText = "#girl #body #fit \n\n\n<a href='https://t.me/+U0H_PQ6A29g0ZmVi'>Bikini Paradise</a>";
             
                         foreach ($list_img[1] as $item_image) {
                             $media->addItem(new InputMediaPhoto($item_image, $messageText, 'HTML'));

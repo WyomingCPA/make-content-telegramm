@@ -411,13 +411,13 @@ class TumblrController extends Controller
             $messageText .= "\n";
             $messageText .= $value['text'];
             if (!empty($messageText)) {
-                $chatId = '-1001866603682';
+                $chatId = '-1002366645779';
                 //$chatId = '-414528593';
                 $bot = new BotApi(env('TELEGRAM_TOKEN'));
                 //$bot->sendMessage($chatId, $messageText, 'HTML');
 
                 $media = new ArrayOfInputMedia();
-                $messageText .= " #girl #body #fit \n\n\n<a href='https://t.me/+HARJVgHVnPE5NTky'>World of Beauties</a>";
+                $messageText .= " #girl #body #fit \n\n\n<a href='https://t.me/+U0H_PQ6A29g0ZmVi'>Bikini Paradise</a>";
     
                 $media->addItem(new InputMediaVideo($video[1][0], $messageText, 'HTML'));
     
@@ -539,20 +539,20 @@ class TumblrController extends Controller
             $messageText .= "\n";
             $messageText .= $value['text'];
             if (!empty($messageText)) {
-                $chatId = '-1001866603682';
+                $chatId = '-1002366645779';
                 //$chatId = '-414528593';
                 $bot = new BotApi(env('TELEGRAM_TOKEN'));
                 //$bot->sendMessage($chatId, $messageText, 'HTML');
                 $keyboard = new InlineKeyboardMarkup(
                     [
                         [
-                            ['text' => '❤ Sexy View ❤', 'url' => 'https://t.me/+7KljMFpo29ozNGNi'],
+                            ['text' => '❤ Sexy View ❤', 'url' => 'https://t.me/+bnRfpjt2rJdmYzgy'],
                         ]
                     ]
                 );
 
                 $media = new ArrayOfInputMedia();
-                $messageText .= " #girl #body #fit \n\n\n<a href='https://t.me/+HARJVgHVnPE5NTky'>World of Beauties</a>";
+                $messageText .= " #girl #body #fit \n\n\n<a href='https://t.me/+U0H_PQ6A29g0ZmVi'>World of Beauties</a>";
     
                 //$media->addItem(new InputMediaVideo($video[1][0], $messageText, 'HTML'));
     
@@ -584,13 +584,13 @@ class TumblrController extends Controller
             $messageText .= "\n";
             $messageText .= $value['text'];
             if (!empty($messageText)) {
-                $chatId = '-1001866603682';
+                $chatId = '-1002366645779';
                 //$chatId = '-414528593';
                 $bot = new BotApi(env('TELEGRAM_TOKEN'));
                 //$bot->sendMessage($chatId, $messageText, 'HTML');
 
                 $media = new ArrayOfInputMedia();
-                $messageText .= " #girl #body #fit \n\n\n<a href='https://t.me/+HARJVgHVnPE5NTky'>World of Beauties</a>";
+                $messageText .= " #girl #body #fit \n\n\n<a href='https://t.me/+U0H_PQ6A29g0ZmVi'>World of Beauties</a>";
     
                 foreach ($list_img[1] as $item_image) {
                     $media->addItem(new InputMediaPhoto($item_image, $messageText, 'HTML'));

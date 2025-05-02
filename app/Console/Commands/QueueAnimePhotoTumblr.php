@@ -8,6 +8,8 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Group;
+use App\Models\Views;
+
 
 use TelegramBot\Api\BotApi;
 use TelegramBot\Api\Types\InputMedia\InputMediaPhoto;
@@ -44,6 +46,12 @@ class QueueAnimePhotoTumblr extends Command
                     return Command::SUCCESS;
                 }
         
+                $count_view = Views::select('last_post_view')->where('groups_id', $isStart->id)->orderBy('id', 'desc')->first();
+                if ($count_view->last_post_view < 50) {
+                    echo "Не публикуем", str($count_view->last_post_view);
+                    return Command::SUCCESS;
+                }
+
                 $user = User::select('id')->where('email', 'WyomingCPA@yandex.ru')->first();
                 $favorite_ids = $user->queuesPost->pluck('id')->toArray();
                 $objects = Post::where('is_publish', false)

@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Group;
+use App\Models\Views;
 
 use TelegramBot\Api\BotApi;
 use TelegramBot\Api\Types\InputMedia\InputMediaPhoto;
@@ -39,10 +40,17 @@ class QueueAnime extends Command
      */
     public function handle()
     {
+ 
         //Сделать проверку запуска публикаций для телеграмм
         $isStart = Group::where('slug', '=', 'anime')->first();
         if (!$isStart->is_start) {
             echo "Не публикуем";
+            return Command::SUCCESS;
+        }
+        
+        $count_view = Views::select('last_post_view')->where('groups_id', $isStart->id)->orderBy('id', 'desc')->first();
+        if ($count_view->last_post_view < 50) {
+            echo "Не публикуем", str($count_view->last_post_view);
             return Command::SUCCESS;
         }
 

@@ -30,10 +30,10 @@ class Kernel extends ConsoleKernel
         $schedule->command('command:publish-esteticvibes-queue')->everySixHours();
         $schedule->command('command:publish-cats-queue')->everySixHours();
 
-        $schedule->command('command:publish-cats-video-tumblr-queue')->everySixHours();
-        $schedule->command('command:publish-sexy-video-tumblr-queue')->everySixHours();
-        $schedule->command('command:publish-sexy-photo-tumblr-queue')->everySixHours();
-        $schedule->command('command:publish-anime-photo-tumblr-queue')->everySixHours();
+        $schedule->command('command:publish-cats-video-tumblr-queue')->everyThreeHours();
+        $schedule->command('command:publish-sexy-video-tumblr-queue')->everyThreeHours();
+        $schedule->command('command:publish-sexy-photo-tumblr-queue')->everyThreeHours();
+        $schedule->command('command:publish-anime-photo-tumblr-queue')->everyThreeHours();
 
         //$schedule->command('command:mirtlenmai-queue')->everyFourHours();
         //$schedule->command('command:get-statistic')->everyFourHours();

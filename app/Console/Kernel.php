@@ -23,7 +23,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('command:get-rss-habr')->hourly();
         $schedule->command('command:send-new-post')->everyTwoHours();
         $schedule->command('command:delete-old-post')->everyTwoHours();
-        $schedule->command('command:publish-anime-queue')->everyTwoHours();
+        $schedule->command('command:publish-anime-queue')->hourly();
         $schedule->command('command:publish-anime2-queue')->everyThreeHours();
         $schedule->command('command:publish-sexy-queue')->everyTwoHours();
         $schedule->command('command:publish-sexy-double-queue')->everyThreeHours();
@@ -41,7 +41,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('command:get-tumblr-post-sexy')->hourly();
         $schedule->command('command:get-tumblr-post-anime')->hourly();
 
-        $schedule->command('command:get-views-my-groups')->everyThirtyMinutes();;
+        $schedule->command('command:get-views-my-groups')->everyFifteenMinutes();
 
     }
 

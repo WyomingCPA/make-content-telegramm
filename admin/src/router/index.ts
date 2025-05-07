@@ -156,6 +156,23 @@ const routes: Array<RouteRecordRaw> = [
         ],
       },
       {
+        name: 'reblogtelegramm',
+        path: 'reblogtelegramm',
+        component: RouteViewComponent,
+        children: [
+          {
+            name: 'telegramm-reblog-anime',
+            path: 'telegramm-reblog-anime',
+            component: () => import('../pages/admin/telegramm/AnimePhoto.vue'),
+          },
+          {
+            name: 'telegramm-reblog-sexy',
+            path: 'telegramm-reblog-sexy',
+            component: () => import('../pages/admin/telegramm/SexyPhoto.vue'),
+          },
+        ],
+      },
+      {
         name: 'post-mass-create',
         path: 'post-mass-create',
         component: RouteViewComponent,

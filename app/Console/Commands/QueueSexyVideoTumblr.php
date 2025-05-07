@@ -47,7 +47,7 @@ class QueueSexyVideoTumblr extends Command
         }
 
         $count_view = Views::select('last_post_view')->where('groups_id', $isStart->id)->orderBy('id', 'desc')->first();
-        if ($count_view->last_post_view < 50) {
+        if ($count_view->last_post_view < 30) {
             echo "Не публикуем", str($count_view->last_post_view);
             return Command::SUCCESS;
         }

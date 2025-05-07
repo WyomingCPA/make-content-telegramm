@@ -49,7 +49,7 @@ class GetDataViewsMyGroup extends Command
             $count_view_last_post = $post_list->last()->filterXPath("//*[@class='tgme_widget_message_views']")->text();
             echo "$count_view_last_post\n";
             
-            $model = Views::firstOrCreate(
+            $model = Views::create(
                 [
                     'groups_id' => $item_group['id'],
                     'last_post_view' => $count_view_last_post,

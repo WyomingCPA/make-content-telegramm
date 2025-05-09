@@ -41,6 +41,9 @@ class Kernel extends ConsoleKernel
         $schedule->command('command:get-tumblr-post-sexy')->hourly();
         $schedule->command('command:get-tumblr-post-anime')->hourly();
 
+        $schedule->command('command:get-telegramm-post-sexy')->hourly();
+        $schedule->command('command:publish-sexy-photo-telegram-queue')->everyTwoHours();
+
         $schedule->command('command:get-views-my-groups')->everyFifteenMinutes();
 
     }

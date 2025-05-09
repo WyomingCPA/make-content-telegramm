@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
@@ -12,17 +13,15 @@ use App\Models\Views;
 use TelegramBot\Api\BotApi;
 use TelegramBot\Api\Types\InputMedia\InputMediaPhoto;
 use \TelegramBot\Api\Types\InputMedia\ArrayOfInputMedia;
-use TelegramBot\Api\Types\InputMedia\InputMediaVideo;
 
-
-class QueueSexyPhotoTumblr extends Command
+class QueueSexyPhotoTelegram extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'command:publish-sexy-photo-tumblr-queue';
+    protected $signature = 'command:publish-sexy-photo-telegram-queue';
 
     /**
      * The console command description.
@@ -50,13 +49,12 @@ class QueueSexyPhotoTumblr extends Command
             echo "Не публикуем", str($count_view->last_post_view);
             return Command::SUCCESS;
         }
-
         $user = User::select('id')->where('email', 'WyomingCPA@yandex.ru')->first();
         $favorite_ids = $user->queuesPost->pluck('id')->toArray();
         $objects = Post::where('is_publish', false)
             ->where('owner_id', 213)
             ->where('type', 'photo')
-            ->where('network', 'tumblr')
+            ->where('network', 'telegramm')
             ->where('is_hidden', false)
             ->whereIn('id', $favorite_ids)
             ->orderBy('created_at', 'desc');
@@ -86,10 +84,11 @@ class QueueSexyPhotoTumblr extends Command
 
                 $media = new ArrayOfInputMedia();
                 $messageText = "#girl #body #fit \n\n\n<a href='https://t.me/+U0H_PQ6A29g0ZmVi'>Bikini Paradise</a>";
-
-                foreach ($list_img[1] as $item_image) {
-                    $media->addItem(new InputMediaPhoto($item_image, $messageText, 'HTML'));
-                }
+                print_r($list_img);
+                //foreach ($list_img[1] as $item_image) {
+                //    $media->addItem(new InputMediaPhoto($item_image, $messageText, 'HTML'));
+                //}
+                $media->addItem(new InputMediaPhoto($list_img[1], $messageText, 'HTML'));
 
                 $bot->sendMediaGroup($chatId, $media);
                 $post->is_publish = true;

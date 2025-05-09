@@ -63,7 +63,6 @@ export default {
             { key: 'id', sortable: true },
             { key: 'group', sortable: true },
             { key: 'status', sortable: true },
-            { key: 'status', sortable: true },
             { key: 'last_view_post_telegramm', sortable: true },
             { key: 'list_source', sortable: true },
             { key: 'updated_at', sortable: true },

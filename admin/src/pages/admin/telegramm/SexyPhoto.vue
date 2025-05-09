@@ -177,7 +177,7 @@ export default {
             axios
                 .request({
                     method: "post",
-                    url: "/api/tumblr/sexy-photo-all",
+                    url: "/api/telegramm/sexy-photo-all",
                     params: this.serverParams,
                     paramsSerializer: (params) => {
                         return qs.stringify(params);

@@ -46,4 +46,40 @@ class TelegrammController extends Controller
             ]);
         }
     }
+    public function sexyPhotoPublish(Request $request)
+    {
+        $rows = $request->post('selRows');
+        $select = [];
+        foreach ($rows as $value) {
+            $messageText = '';
+            //$select[] = $value['id'];
+            $post = Post::findOrFail($value['id']);
+            $categories = $post->categories;
+            $list_img = $post->attachments;
+            $tags = '';
+            foreach ($categories as $item_category) {
+                $tags .= "#" . $item_category->name . " ";
+            }
+            $messageText .= "\n";
+            $messageText .= $value['text'];
+            if (!empty($messageText)) {
+                $chatId = '-1002366645779';
+                //$chatId = '-414528593';
+                $bot = new BotApi(env('TELEGRAM_TOKEN'));
+                //$bot->sendMessage($chatId, $messageText, 'HTML');
+
+                $media = new ArrayOfInputMedia();
+                $messageText .= " #girl #body #fit \n\n\n<a href='https://t.me/+U0H_PQ6A29g0ZmVi'>World of Beauties</a>";
+    
+                $media->addItem(new InputMediaPhoto($list_img[1], $messageText, 'HTML'));
+    
+                $bot->sendMediaGroup($chatId, $media);
+                $post->is_publish = true;
+                $post->save();
+            }
+        }
+        return response()->json([
+            'status' => true,
+        ], 200);
+    }
 }

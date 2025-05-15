@@ -166,7 +166,10 @@ export default {
           name: 'telegramm-reblog-sexy',
           displayName: 'menu.telegramm-reblog-sexy',
         },
-
+        {
+          name: 'telegramm-reblog-sexy-video',
+          displayName: 'menu.telegramm-reblog-sexy-video',
+        },
       ],
     },
     {

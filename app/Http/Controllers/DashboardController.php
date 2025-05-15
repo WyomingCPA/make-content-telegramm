@@ -58,6 +58,22 @@ class DashboardController extends Controller
             ->whereIn('id', $favorite_ids)
             ->orderBy('created_at', 'desc')->count();
 
+        $favorite_sexy_telegramm_photo_count = Post::where('is_publish', false)
+            ->where('owner_id', 213)
+            ->where('type', 'photo')
+            ->where('network', 'telegramm')
+            ->where('is_hidden', false)
+            ->whereIn('id', $favorite_ids)
+            ->orderBy('created_at', 'desc')->count();
+
+        $favorite_sexy_telegramm_video_count = Post::where('is_publish', false)
+            ->where('owner_id', 213)
+            ->where('type', 'video')
+            ->where('network', 'telegramm')
+            ->where('is_hidden', false)
+            ->whereIn('id', $favorite_ids)
+            ->orderBy('created_at', 'desc')->count();
+
         //$date = Carbon::now()->subDays(7);
         //$statistics = Statistics::where('created_at', '>=', $date)->orderBy('created_at', 'desc')->get();
         return response([
@@ -73,6 +89,8 @@ class DashboardController extends Controller
             'favorite_sexy_tumblr_photo_count' => $favorite_sexy_tumblr_photo_count,
             'favorite_anime_tumblr_photo_count' => $favorite_anime_tumblr_photo_count,
             'favorite_cats_tumblr_video_count' => $favorite_cats_tumblr_video_count,
+            'favorite_sexy_telegramm_video_count' => $favorite_sexy_telegramm_video_count,
+            'favorite_sexy_telegramm_photo_count' => $favorite_sexy_telegramm_photo_count,
         ], 200);
     }
 }

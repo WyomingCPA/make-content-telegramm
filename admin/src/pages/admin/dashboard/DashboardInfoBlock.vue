@@ -126,6 +126,22 @@
             </va-card-content>
           </va-card>
         </div>
+        <div class="flex xs12 sm3 md3">
+          <va-card :color=getStatusClass(favorite_sexy_telegramm_video_count)>
+            <va-card-content>
+              <h2 class="va-h2 ma-0">{{ favorite_sexy_telegramm_video_count }}</h2>
+              <p class="no-wrap"> Sexy Telegramm Video</p>
+            </va-card-content>
+          </va-card>
+        </div>
+        <div class="flex xs12 sm3 md3">
+          <va-card :color=getStatusClass(favorite_sexy_telegramm_photo_count)>
+            <va-card-content>
+              <h2 class="va-h2 ma-0">{{ favorite_sexy_telegramm_photo_count }}</h2>
+              <p class="no-wrap"> Sexy Telegramm Photo</p>
+            </va-card-content>
+          </va-card>
+        </div>
       </div>
     </div>
   </div>
@@ -160,6 +176,8 @@ export default defineComponent({
       favorite_sexy_tumblr_photo_count: { type: Number },
       favorite_anime_tumblr_photo_count: { type: Number },
       favorite_cats_tumblr_video_count: { type: Number },
+      favorite_sexy_telegramm_video_count: { type: Number },
+      favorite_sexy_telegramm_photo_count: { type: Number },
       items,
     }
   },
@@ -188,6 +206,8 @@ export default defineComponent({
           self.favorite_sexy_tumblr_photo_count = response.data.favorite_sexy_tumblr_photo_count;
           self.favorite_anime_tumblr_photo_count = response.data.favorite_anime_tumblr_photo_count;
           self.favorite_cats_tumblr_video_count = response.data.favorite_cats_tumblr_video_count;
+          self.favorite_sexy_telegramm_video_count = response.data.favorite_sexy_telegramm_video_count;
+          self.favorite_sexy_telegramm_photo_count = response.data.favorite_sexy_telegramm_photo_count;
           console.log(response.data.all_hide_post_count);
         })
         .catch(function (error) {

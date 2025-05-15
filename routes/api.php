@@ -105,6 +105,8 @@ Route::group(['prefix' => 'telegramm', 'middleware' => 'auth:sanctum'], function
     Route::post('get-post', [TelegrammController::class, 'getDataPostId']);
     Route::post('sexy-photo-all', [TelegrammController::class, 'sexyPhotoAll']);
     Route::post('sexy-photo-telegram-publish', [TelegrammController::class, 'sexyPhotoPublish']);
+    Route::post('sexy-video-all', [TelegrammController::class, 'sexyVideoAll']);
+    Route::post('sexy-video-publish', [TelegrammController::class, 'sexyVideoPublish']);
 });
 Route::group(['prefix' => 'mass', 'middleware' => 'auth:sanctum'], function () {
     Route::post('publish-sexy-post', [MassController::class, 'publishSexyPost']);

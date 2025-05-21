@@ -19,23 +19,13 @@
 
             <div class="row">
                 <div class="col">
-                    <va-button @click="publish">
-                        Опубликовать в Телеграмм
-                    </va-button>
-                </div>
-                <div class="col">
-                    <va-button @click="addQueue">
-                        Добавить в очередь
+                    <va-button @click="deleteQueue">
+                        Удалить из очереди
                     </va-button>
                 </div>
                 <div class="col">
                     <va-button color="danger" @click="hidden">
                         Скрыть
-                    </va-button>
-                </div>
-                <div class="col">
-                    <va-button color="danger" @click="deletePost">
-                        Удалить
                     </va-button>
                 </div>
             </div>
@@ -44,15 +34,14 @@
                 @selectionChange="selectedItemsEmitted = $event.currentSelectedItems">
 
                 <template #cell(attachments)="{ rowData }">
-                    <va-image :src="getOneImage(rowData.attachments)" :sizes="150" />
+                    <va-image :src="getOneImage(rowData.attachments)" :sizes="100" />
                 </template>
                 <template #cell(count_attachments)="{ rowData }">
                     <span>{{ getCountAttachments(rowData.attachments) }}</span>
                 </template>
                 <template #cell(text)="{ rowData }">
-                    <div v-if="rowData.text == ''"><a class="link" target="_blank" :href="rowData.link">Посмотреть</a>
-                    </div>
-                    <div v-else><a class="link" target="_blank" :href="rowData.link">{{
+                    <div v-if="rowData.text == ''"><a class="link" target="_blank" :href="'https://vk.com/' + rowData.link">Посмотреть</a></div>
+                    <div v-else><a class="link" target="_blank" :href="'https://vk.com/' + rowData.link">{{
                         rowData.text }}</a></div>
                 </template>
                 <template #bodyAppend>
@@ -177,7 +166,7 @@ export default {
             axios
                 .request({
                     method: "post",
-                    url: "/api/telegramm/sexy-video-all",
+                    url: "/api/queue/telegramm-photo-sexy",
                     params: this.serverParams,
                     paramsSerializer: (params) => {
                         return qs.stringify(params);
@@ -199,7 +188,7 @@ export default {
             this.infoModal.title = ''
             this.infoModal.content = ''
         },
-        hidden: function (event, rows) {
+        hidden: function(event, rows) {
             let self = this;
             this.loading = true;
             console.log(self.selectedItemsEmitted);
@@ -219,14 +208,14 @@ export default {
                         }
                     });
             });
-        },
+        },            
         publish: function (event, rows) {
             let self = this;
             this.loading = true;
             console.log(self.selectedItemsEmitted);
             axios.get("/sanctum/csrf-cookie").then((response) => {
                 axios
-                    .post("/api/telegramm/sexy-video-tumblr-publish", { selRows: self.selectedItemsEmitted })
+                    .post("/api/post/vk-anime-publish", { selRows: self.selectedItemsEmitted })
                     .then((response) => {
                         if (response.status) {
                             console.log("Вызвали алерт");
@@ -241,38 +230,17 @@ export default {
                     });
             });
         },
-        deletePost: function (event, rows) {
+        deleteQueue: function (event, rows) {
             let self = this;
             this.loading = true;
             console.log(self.selectedItemsEmitted);
             axios.get("/sanctum/csrf-cookie").then((response) => {
                 axios
-                    .post("/api/post/delete", { selRows: self.selectedItemsEmitted })
+                    .post("/api/queue/unset", { selRows: self.selectedItemsEmitted })
                     .then((response) => {
                         if (response.status) {
                             console.log("Вызвали алерт");
-                            this.$vaToast.init({ message: 'Записи удалены', color: 'success' })
-                            this.fetchRows();
-                            self.loading = false;
-                        } else {
-                            console.log("Не работает");
-                            console.log(response.status);
-                            self.loading = false;
-                        }
-                    });
-            });
-        },
-        addQueue: function (event, rows) {
-            let self = this;
-            this.loading = true;
-            console.log(self.selectedItemsEmitted);
-            axios.get("/sanctum/csrf-cookie").then((response) => {
-                axios
-                    .post("/api/queue/set", { selRows: self.selectedItemsEmitted })
-                    .then((response) => {
-                        if (response.status) {
-                            console.log("Вызвали алерт");
-                            this.$vaToast.init({ message: 'Запись добавлена в очередь', color: 'success' })
+                            this.$vaToast.init({ message: 'Записи удалены из очереди', color: 'success' })
                             this.fetchRows();
                             self.loading = false;
                         } else {

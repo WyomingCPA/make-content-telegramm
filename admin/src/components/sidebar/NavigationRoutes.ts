@@ -200,6 +200,14 @@ export default {
           name: 'queue-mir-tlen-mai',
           displayName: 'menu.queue-mir-tlen-mai',
         },
+        {
+          name: 'queue-sexy-photo-telegram',
+          displayName: 'menu.queue-sexy-photo-telegram',
+        },
+        {
+          name: 'queue-sexy-video-telegram',
+          displayName: 'menu.queue-sexy-video-telegram',
+        },
       ],
     },
     {

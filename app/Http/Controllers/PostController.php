@@ -175,7 +175,7 @@ class PostController extends Controller
             'status' => true,
         ], 200);
     }
-    
+
     public function vkSexyRelease(Request $request)
     {
         $objects = Post::where('is_publish', true)->where('is_hidden', false)->orderBy('updated_at', 'asc');
@@ -466,7 +466,7 @@ class PostController extends Controller
             ]);
         }
     }
-    
+
     public function vkCatsAll(Request $request)
     {
         $favorite_ids = Auth::user()->queuesPost->pluck('id')->toArray();
@@ -515,9 +515,9 @@ class PostController extends Controller
     {
         $favorite_ids = Auth::user()->queuesPost->pluck('id')->toArray();
         $objects = Post::where('is_publish', false)->where('is_hidden', false)
-                 ->whereJsonLength('attachments', '>', 0) 
-                 ->whereNotIn('id', $favorite_ids)
-                 ->orderBy('created_at', 'desc');
+            ->whereJsonLength('attachments', '>', 0)
+            ->whereNotIn('id', $favorite_ids)
+            ->orderBy('created_at', 'desc');
         $categories = Category::pluck('name')->toArray();
         $count = $objects->count();
         $sort = $request->get('sort');
@@ -599,9 +599,9 @@ class PostController extends Controller
     {
         $favorite_ids = Auth::user()->queuesPost->pluck('id')->toArray();
         $objects = Post::where('is_publish', false)
-                        ->where('is_hidden', false)
-                        ->whereJsonLength('attachments', '>', 0)
-                        ->whereNotIn('id', $favorite_ids)->orderBy('created_at', 'desc');
+            ->where('is_hidden', false)
+            ->whereJsonLength('attachments', '>', 0)
+            ->whereNotIn('id', $favorite_ids)->orderBy('created_at', 'desc');
         $categories = Category::pluck('name')->toArray();
         $count = $objects->count();
         $sort = $request->get('sort');
@@ -753,6 +753,21 @@ class PostController extends Controller
                 $post->save();
             }
         }
+        return response()->json([
+            'status' => true,
+        ], 200);
+    }
+
+    public function delete(Request $request)
+    {
+        $rows = $request->post('selRows');
+        $select = [];
+        foreach ($rows as $value) {
+            $select[] = $value['id'];
+        }
+
+        Post::destroy($select);
+
         return response()->json([
             'status' => true,
         ], 200);

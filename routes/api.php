@@ -52,6 +52,7 @@ Route::group(['prefix' => 'post', 'middleware' => 'auth:sanctum'], function () {
     Route::post('vk-mirtlenmai-publish', [PostController::class, 'vkMirTlenMaiPublish']);
     Route::post('vk-cats-publish', [PostController::class, 'vkCatsPublish']);
     Route::post('vk-cats-all', [PostController::class, 'vkCatsAll']);
+    Route::post('delete', [PostController::class, 'delete']);
 });
 Route::group(['prefix' => 'queue', 'middleware' => 'auth:sanctum'], function () {
     Route::post('set', [QueueController::class, 'set']);
@@ -61,6 +62,8 @@ Route::group(['prefix' => 'queue', 'middleware' => 'auth:sanctum'], function () 
     Route::post('vk-cats', [QueueController::class, 'vkCats']);
     Route::post('vk-estetic-vibes', [QueueController::class, 'vkEsteticVibes']);
     Route::post('vk-mirtlenmai', [QueueController::class, 'vkMirtlenMai']);
+    Route::post('telegramm-photo-sexy', [QueueController::class, 'telegrammPhotoSexy']);
+    Route::post('telegramm-video-sexy', [QueueController::class, 'telegrammVideoSexy']);  
 });
 
 Route::group(['prefix' => 'groups', 'middleware' => 'auth:sanctum'], function () {

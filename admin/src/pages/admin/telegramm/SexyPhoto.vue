@@ -38,6 +38,11 @@
                         Создать пост с кнопкой
                     </va-button>
                 </div>
+                <div class="col">
+                    <va-button color="danger" @click="deletePost">
+                        Удалить
+                    </va-button>
+                </div>
             </div>
             <va-data-table :items="items" :columns="columns" :filter="filter" :filter-method="customFilteringFn"
                 @filtered="filteredCount = $event.items.length" :loading=loading selectable selected-color="warning"
@@ -50,10 +55,10 @@
                     <span>{{ getCountAttachments(rowData.attachments) }}</span>
                 </template>
                 <template #cell(text)="{ rowData }">
-                    <div v-if="rowData.text == ''"><a class="link" target="_blank"
-                            :href="rowData.link">Посмотреть</a></div>
+                    <div v-if="rowData.text == ''"><a class="link" target="_blank" :href="rowData.link">Посмотреть</a>
+                    </div>
                     <div v-else><a class="link" target="_blank" :href="rowData.link">{{
-                    rowData.text }}</a></div>
+                        rowData.text }}</a></div>
                 </template>
                 <template #bodyAppend>
                     <tr>
@@ -210,6 +215,27 @@ export default {
                         if (response.status) {
                             console.log("Вызвали алерт");
                             this.$vaToast.init({ message: 'Запись скрыта', color: 'danger' })
+                            this.fetchRows();
+                            self.loading = false;
+                        } else {
+                            console.log("Не работает");
+                            console.log(response.status);
+                            self.loading = false;
+                        }
+                    });
+            });
+        },
+        deletePost: function (event, rows) {
+            let self = this;
+            this.loading = true;
+            console.log(self.selectedItemsEmitted);
+            axios.get("/sanctum/csrf-cookie").then((response) => {
+                axios
+                    .post("/api/post/delete", { selRows: self.selectedItemsEmitted })
+                    .then((response) => {
+                        if (response.status) {
+                            console.log("Вызвали алерт");
+                            this.$vaToast.init({ message: 'Записи удалены', color: 'success' })
                             this.fetchRows();
                             self.loading = false;
                         } else {

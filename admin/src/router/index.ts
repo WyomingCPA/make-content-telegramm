@@ -224,6 +224,16 @@ const routes: Array<RouteRecordRaw> = [
             path: 'queue-mir-tlen-mai',
             component: () => import('../pages/admin/queue/VkMirTlenMai.vue'),
           },
+          {
+            name: 'queue-sexy-photo-telegram',
+            path: 'queue-sexy-photo-telegram',
+            component: () => import('../pages/admin/queue/QueueSexyPhotoTelegram.vue'),
+          },
+          {
+            name: 'queue-sexy-video-telegram',
+            path: 'queue-sexy-video-telegram',
+            component: () => import('../pages/admin/queue/QueueSexyVideoTelegram.vue'),
+          },
         ],
       },
       {

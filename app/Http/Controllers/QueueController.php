@@ -79,7 +79,6 @@ class QueueController extends Controller
                 'categories' => $categories
             ]);
         }
-    
     }
     public function vkAnime(Request $request)
     {
@@ -241,5 +240,60 @@ class QueueController extends Controller
             ]);
         }
     }
-     
+    public function telegrammPhotoSexy(Request $request)
+    {
+        $favorite_ids = Auth::user()->queuesPost->pluck('id')->toArray();
+        $objects = Post::where('is_publish', false)
+            ->where('network', 'telegramm')
+            ->where('type', 'photo')
+            ->where('is_hidden', false)
+            ->whereIn('id', $favorite_ids)
+            ->orderBy('created_at', 'desc');
+
+        $count = $objects->count();
+
+        $limit = 20;
+        $page = (int) $request->get('page');
+
+        $objects->offset($limit * ($page - 1))->limit($limit);
+        //$test = $objects->first()->attachments;
+        //foreach ($test as $item_test)
+        //{
+        //    echo "break";
+        //}
+        if ($request->isMethod('post')) {
+            return response()->json([
+                'posts' => $objects->get()->toArray(),
+                'count' => $count,
+            ]);
+        }
+    }
+    public function telegrammVideoSexy(Request $request)
+    {
+        $favorite_ids = Auth::user()->queuesPost->pluck('id')->toArray();
+        $objects = Post::where('is_publish', false)
+            ->where('network', 'telegramm')
+            ->where('type', 'video')
+            ->where('is_hidden', false)
+            ->whereIn('id', $favorite_ids)
+            ->orderBy('created_at', 'desc');
+
+        $count = $objects->count();
+
+        $limit = 20;
+        $page = (int) $request->get('page');
+
+        $objects->offset($limit * ($page - 1))->limit($limit);
+        //$test = $objects->first()->attachments;
+        //foreach ($test as $item_test)
+        //{
+        //    echo "break";
+        //}
+        if ($request->isMethod('post')) {
+            return response()->json([
+                'posts' => $objects->get()->toArray(),
+                'count' => $count,
+            ]);
+        }
+    }
 }

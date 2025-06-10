@@ -84,6 +84,9 @@ class GetPostFromTelegrammSexy extends Command
                             'type' => 'photo'
                         ]
                     );
+                    $model->attachments = $attachments;
+                    $model->save();
+                    
                 } catch (\Exception $e) {
                     echo $e->getMessage() . "\n";
                     continue;

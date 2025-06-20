@@ -41,11 +41,9 @@ class GetPostFromTumblrCats extends Command
             'caats',
             'cute-catts',
             'superkursunaskr',
-            'catbot2',
             'catasters',
             'cuteness--overload',
             'blignick',
-
         ];
         
         $options = [

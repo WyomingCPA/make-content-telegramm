@@ -45,7 +45,8 @@
                     <span>{{ getCountAttachments(rowData.attachments) }}</span>
                 </template>
                 <template #cell(text)="{ rowData }">
-                    <div v-if="rowData.text == ''"><a class="link" target="_blank" :href="'https://vk.com/' + rowData.link">Посмотреть</a></div>
+                    <div v-if="rowData.text == ''"><a class="link" target="_blank"
+                            :href="'https://vk.com/' + rowData.link">Посмотреть</a></div>
                     <div v-else><a class="link" target="_blank" :href="'https://vk.com/' + rowData.link">{{
                         rowData.text }}</a></div>
                 </template>
@@ -110,7 +111,13 @@ export default {
     methods: {
         getOneImage(stringObject) {
             let arr = Array.from(Object.entries(stringObject), ([key, value]) => value);
-            return arr[0];
+            //console.log(arr[0][1]);
+            if (arr[0][1] === undefined) {
+                return arr[0];
+            }
+            else{
+                 return arr[0][1];
+            }
         },
         getCountAttachments(stringObject) {
             let arr = Array.from(Object.entries(stringObject), ([key, value]) => value);
@@ -193,7 +200,7 @@ export default {
             this.infoModal.title = ''
             this.infoModal.content = ''
         },
-        hidden: function(event, rows) {
+        hidden: function (event, rows) {
             let self = this;
             this.loading = true;
             console.log(self.selectedItemsEmitted);
@@ -213,7 +220,7 @@ export default {
                         }
                     });
             });
-        },            
+        },
         publish: function (event, rows) {
             let self = this;
             this.loading = true;

@@ -48,7 +48,7 @@ class QueueAnime2 extends Command
         //}
 
         $count_view = Views::select('last_post_view')->where('groups_id', $isStart->id)->orderBy('id', 'desc')->first();
-        if ($count_view->last_post_view < 50) {
+        if ($count_view->last_post_view < 30) {
             echo "Не публикуем", str($count_view->last_post_view);
             return Command::SUCCESS;
         }
@@ -97,8 +97,18 @@ class QueueAnime2 extends Command
                 $media = new ArrayOfInputMedia();
                 foreach ($list_img as $img) {
                     foreach ($img as $item_image) {
-                        $messageText = " #anime #art #tyan \n\n\n<a href='https://t.me/+ljPw-0C-AhAxY2Ey'>AnimeAddict</a>";
-                        $media->addItem(new InputMediaPhoto($item_image, $messageText, 'HTML'));
+
+
+                        if (count($list_img) != 1) {
+                            foreach ($img as $item_image) {
+                                $messageText = " #anime #art #tyan \n\n\n<a href='https://t.me/+ljPw-0C-AhAxY2Ey'>AnimeAddict</a>";
+                                $media->addItem(new InputMediaPhoto($item_image, $messageText, 'HTML'));
+                            }
+                        } else {
+                            $item_image = end($img);
+                            $messageText = " #anime #art #tyan \n\n\n<a href='https://t.me/+ljPw-0C-AhAxY2Ey'>AnimeAddict</a>";
+                            $media->addItem(new InputMediaPhoto($item_image, $messageText, 'HTML'));
+                        }
                     }
                 }
                 $bot->sendMediaGroup($chatId, $media);

@@ -293,7 +293,13 @@ class PostController extends Controller
 
                 $media = new ArrayOfInputMedia();
                 foreach ($list_img as $img) {
-                    foreach ($img as $item_image) {
+                    if (count($list_img) != 1) {
+                        foreach ($img as $item_image) {
+                            $media->addItem(new InputMediaPhoto($item_image, '#anime #art #tyan'));
+                        }
+                    }
+                    else {
+                        $item_image = end($img);
                         $media->addItem(new InputMediaPhoto($item_image, '#anime #art #tyan'));
                     }
                 }
@@ -302,44 +308,6 @@ class PostController extends Controller
                 $post->save();
             }
         }
-        //publish Tumblr
-        $consumer_key = env('CONSUMER_KEY'); //  your consumer key
-        $consumer_secret = env('CONSUMER_SECRET'); // your consumer secret
-        $token_key = env('TOKEN_KEY'); // your token
-        $token_secret = env('TOKEN_SECRET'); // your token secret
-
-        $list_name = ['anime-feeder', 'animegirlpin'];
-        $blogName = $list_name[array_rand($list_name, 1)];
-
-        $client = new Client($consumer_key, $consumer_secret);
-        $client->setToken($token_key, $token_secret);
-        $count_post = 0;
-        foreach ($rows as $value) {
-            $messageText = '';
-            //$select[] = $value['id'];
-            $post = Post::findOrFail($value['id']);
-            $categories = $post->categories;
-            $list_img = $post->attachments;
-            $list_img_tumblr = [];
-            foreach ($list_img as $img) {
-                foreach ($img as $item_image) {
-                    $list_img_tumblr[] = $item_image;
-                }
-            }
-            $caption = '';
-            if ($count_post == 3) {
-                $caption = '<a href="https://t.me/anime_tynka">Link Source</a>';
-            }
-            $postData = array(
-                'caption' => $caption,
-                'tags' => 'anime, art, tyan',
-                'type' => 'photo',
-                'data' => $list_img_tumblr
-            );
-            $client->createPost($blogName, $postData);
-            $count_post++;
-        }
-
         return response()->json([
             'status' => true,
         ], 200);
@@ -547,6 +515,7 @@ class PostController extends Controller
         //    echo "break";
         //}
         if ($request->isMethod('post')) {
+            $test = $objects->get()->toArray();
             return response()->json([
                 'posts' => $objects->get()->toArray(),
                 'count' => $count,

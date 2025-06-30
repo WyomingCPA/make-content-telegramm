@@ -111,7 +111,13 @@ export default {
     methods: {
         getOneImage(stringObject) {
             let arr = Array.from(Object.entries(stringObject), ([key, value]) => value);
-            return arr[0];
+            //console.log(arr[0][1]);
+            if (arr[0][1] === undefined) {
+                return arr[0];
+            }
+            else{
+                 return arr[0][1];
+            }
         },
         getCountAttachments(stringObject) {
             let arr = Array.from(Object.entries(stringObject), ([key, value]) => value);

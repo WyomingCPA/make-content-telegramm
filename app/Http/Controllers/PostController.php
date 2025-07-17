@@ -118,58 +118,29 @@ class PostController extends Controller
             $messageText .= "\n";
             $messageText .= $tags;
             if (!empty($messageText)) {
-                $chatId = '-1001866603682';
+                $chatId = '-1002366645779';
                 //$chatId = '-414528593';
                 $bot = new BotApi(env('TELEGRAM_TOKEN'));
                 //$bot->sendMessage($chatId, $messageText, 'HTML');
 
                 $media = new ArrayOfInputMedia();
                 foreach ($list_img as $img) {
-                    foreach ($img as $item_image) {
+                    if (count($list_img) != 1) {
+                        foreach ($img as $item_image) {
+                            $messageText = "#girl #body #fit \n\n\n<a href='https://t.me/+U0H_PQ6A29g0ZmVi'>Bikini Paradise</a>";
+                            $media->addItem(new InputMediaPhoto($item_image, $messageText, 'HTML'));
+                        }
+                    } else {
+                        $item_image = end($img);
+                        $messageText = "#girl #body #fit \n\n\n<a href='https://t.me/+U0H_PQ6A29g0ZmVi'>Bikini Paradise</a>";
                         $media->addItem(new InputMediaPhoto($item_image, '#sexy #girl #body #fit'));
                     }
                 }
+
                 $bot->sendMediaGroup($chatId, $media);
                 $post->is_publish = true;
                 $post->save();
             }
-        }
-        //publish Tumblr
-        $consumer_key = env('CONSUMER_KEY'); //  your consumer key
-        $consumer_secret = env('CONSUMER_SECRET'); // your consumer secret
-        $token_key = env('TOKEN_KEY'); // your token
-        $token_secret = env('TOKEN_SECRET'); // your token secret
-
-
-        $blogName = 'bouncymeatballs';
-
-        $client = new Client($consumer_key, $consumer_secret);
-        $client->setToken($token_key, $token_secret);
-        $count_post = 0;
-        foreach ($rows as $value) {
-            $messageText = '';
-            //$select[] = $value['id'];
-            $post = Post::findOrFail($value['id']);
-            $categories = $post->categories;
-            $list_img = $post->attachments;
-            $list_img_tumblr = [];
-            foreach ($list_img as $img) {
-                foreach ($img as $item_image) {
-                    $list_img_tumblr[] = $item_image;
-                }
-            }
-            $caption = '';
-            if ($count_post == 3) {
-                $caption = '<a href="https://t.me/worldofbeautiestg">Link Source</a>';
-            }
-            $postData = array(
-                'caption' => $caption,
-                'tags' => 'sexy, girl, body, fit, beautiful photos',
-                'type' => 'photo',
-                'data' => $list_img_tumblr
-            );
-            $client->createPost($blogName, $postData);
-            $count_post++;
         }
         return response()->json([
             'status' => true,
@@ -295,12 +266,14 @@ class PostController extends Controller
                 foreach ($list_img as $img) {
                     if (count($list_img) != 1) {
                         foreach ($img as $item_image) {
-                            $media->addItem(new InputMediaPhoto($item_image, '#anime #art #tyan'));
+                            $messageText = " #anime #art #tyan \n\n\n<a href='https://t.me/+ATd62K2jKB43YzIy'>Anime_Tyn_TG</a>";
+                            $media->addItem(new InputMediaPhoto($item_image, $messageText, 'HTML'));
                         }
-                    }
-                    else {
+                    } else {
                         $item_image = end($img);
-                        $media->addItem(new InputMediaPhoto($item_image, '#anime #art #tyan'));
+
+                        $messageText = " #anime #art #tyan \n\n\n<a href='https://t.me/+ATd62K2jKB43YzIy'>Anime_Tyn_TG</a>";
+                        $media->addItem(new InputMediaPhoto($item_image, $messageText, 'HTML'));
                     }
                 }
                 $bot->sendMediaGroup($chatId, $media);

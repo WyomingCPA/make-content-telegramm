@@ -43,8 +43,8 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('command:get-telegramm-post-sexy')->hourly();
         $schedule->command('command:get-telegram-photo-anime')->hourly();
-        
-        $schedule->command('command:command:get-telegramm-post-sexy-video')->everyThirtyMinutes();
+        $schedule->command('command:get-telegramm-post-sexy-video')->hourly();
+
         $schedule->command('command:publish-sexy-photo-telegram-queue')->everyTwoHours();
         $schedule->command('command:publish-anime-photo-telegram-queue')->everyTwoHours();
         $schedule->command('command:publish-sexy-video-telegramm-queue')->everyThreeHours();

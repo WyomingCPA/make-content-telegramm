@@ -348,7 +348,7 @@
     "publish": "Опубликованные",
     "it-publish": "IT блог",
     "vk-sexy-publish": "vk-sexy",
-    "vk-esteticvibes-publish": "Vk EsteticVibes Publish", 
+    "vk-esteticvibes-publish": "Vk EsteticVibes Publish",
     "Logs": "Логи",
     "queue": "Очередь",
     "queue-anime": "Очередь Anime",
@@ -380,7 +380,6 @@
     "group": "Управление группами",
     "group-index": "Список групп",
     "group-create": "Добавить группу"
-
   },
   "messages": {
     "all": "See all messages",

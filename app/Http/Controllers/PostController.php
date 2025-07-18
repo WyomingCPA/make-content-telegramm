@@ -126,14 +126,13 @@ class PostController extends Controller
                 $media = new ArrayOfInputMedia();
                 foreach ($list_img as $img) {
                     if (count($list_img) != 1) {
-                        foreach ($img as $item_image) {
-                            $messageText = "#girl #body #fit \n\n\n<a href='https://t.me/+U0H_PQ6A29g0ZmVi'>Bikini Paradise</a>";
-                            $media->addItem(new InputMediaPhoto($item_image, $messageText, 'HTML'));
-                        }
+                        $image = end($img);
+                        $messageText = "#girl #body #fit \n\n\n<a href='https://t.me/+U0H_PQ6A29g0ZmVi'>Bikini Paradise</a>";
+                        $media->addItem(new InputMediaPhoto($image, $messageText, 'HTML'));
                     } else {
                         $item_image = end($img);
                         $messageText = "#girl #body #fit \n\n\n<a href='https://t.me/+U0H_PQ6A29g0ZmVi'>Bikini Paradise</a>";
-                        $media->addItem(new InputMediaPhoto($item_image, '#sexy #girl #body #fit'));
+                        $media->addItem(new InputMediaPhoto($item_image, $messageText, 'HTML'));
                     }
                 }
 
@@ -265,14 +264,57 @@ class PostController extends Controller
                 $media = new ArrayOfInputMedia();
                 foreach ($list_img as $img) {
                     if (count($list_img) != 1) {
-                        foreach ($img as $item_image) {
-                            $messageText = " #anime #art #tyan \n\n\n<a href='https://t.me/+ATd62K2jKB43YzIy'>Anime_Tyn_TG</a>";
-                            $media->addItem(new InputMediaPhoto($item_image, $messageText, 'HTML'));
-                        }
+                        $image = end($img);
+                        $messageText = " #anime #art #tyan \n\n\n<a href='https://t.me/+ATd62K2jKB43YzIy'>Anime_Tyn_TG</a>";
+                        $media->addItem(new InputMediaPhoto($image, $messageText, 'HTML'));
                     } else {
                         $item_image = end($img);
 
                         $messageText = " #anime #art #tyan \n\n\n<a href='https://t.me/+ATd62K2jKB43YzIy'>Anime_Tyn_TG</a>";
+                        $media->addItem(new InputMediaPhoto($item_image, $messageText, 'HTML'));
+                    }
+                }
+                $bot->sendMediaGroup($chatId, $media);
+                $post->is_publish = true;
+                $post->save();
+            }
+        }
+        return response()->json([
+            'status' => true,
+        ], 200);
+    }
+
+    public function vkCatsPublish(Request $request)
+    {
+        $rows = $request->post('selRows');
+        $select = [];
+        foreach ($rows as $value) {
+            $messageText = '';
+            //$select[] = $value['id'];
+            $post = Post::findOrFail($value['id']);
+            $categories = $post->categories;
+            $list_img = $post->attachments;
+            $tags = '#art #tyan ';
+            foreach ($categories as $item_category) {
+                $tags .= "#" . $item_category->name . " ";
+            }
+            $messageText .= "\n";
+            $messageText .= $tags;
+            if (!empty($messageText)) {
+                $chatId = '-1002315592624';
+                //$chatId = '-414528593';
+                $bot = new BotApi(env('TELEGRAM_TOKEN'));
+                //$bot->sendMessage($chatId, $messageText, 'HTML');
+
+                $media = new ArrayOfInputMedia();
+                foreach ($list_img as $img) {
+                    if (count($list_img) != 1) {
+                        $image = end($img);
+                        $messageText = "🐾 #cats \n\n\n<a href='https://t.me/+7yj6MB0l529lZmRi'>Cats ≽^•⩊•^≼</a>";
+                        $media->addItem(new InputMediaPhoto($image, $messageText, 'HTML'));
+                    } else {
+                        $item_image = end($img);
+                        $messageText = "🐾 #cats \n\n\n<a href='https://t.me/+7yj6MB0l529lZmRi'>Cats ≽^•⩊•^≼</a>";
                         $media->addItem(new InputMediaPhoto($item_image, $messageText, 'HTML'));
                     }
                 }

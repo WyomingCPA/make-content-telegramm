@@ -26,7 +26,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('command:publish-anime-queue')->hourly();
         $schedule->command('command:publish-anime2-queue')->everyThreeHours();
         $schedule->command('command:publish-sexy-queue')->everyTwoHours();
-        $schedule->command('command:publish-sexy-double-queue')->everyThreeHours();
+        //$schedule->command('command:publish-sexy-double-queue')->everyThreeHours();
         $schedule->command('command:publish-esteticvibes-queue')->everySixHours();
         $schedule->command('command:publish-cats-queue')->everySixHours();
 

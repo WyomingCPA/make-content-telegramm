@@ -124,7 +124,7 @@ class TelegrammController extends Controller
                 //$bot->sendMessage($chatId, $messageText, 'HTML');
 
                 $media = new ArrayOfInputMedia();
-                $messageText .= " #girl #body #fit \n\n\n<a href='https://t.me/+U0H_PQ6A29g0ZmVi'>World of Beauties</a>";
+                $messageText .= " #girl #body #fit \n\n\n<a href='https://t.me/+U0H_PQ6A29g0ZmVi'>Bikini Paradise</a>";
 
                 $media->addItem(new InputMediaPhoto($list_img[1], $messageText, 'HTML'));
 
@@ -163,9 +163,10 @@ class TelegrammController extends Controller
                 $media = new ArrayOfInputMedia();
                 $messageText .= " #girl #body #fit \n\n\n<a href='https://t.me/+U0H_PQ6A29g0ZmVi'>Bikini Paradise</a>";
 
-                $media->addItem(new InputMediaVideo($video[1][0], $messageText, 'HTML'));
+                $media->addItem(new InputMediaVideo($video[1], $messageText, 'HTML'));
 
                 $bot->sendMediaGroup($chatId, $media);
+
                 $post->is_publish = true;
                 $post->save();
             }

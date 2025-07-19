@@ -237,7 +237,7 @@
         console.log(self.selectedItemsEmitted)
         axios.get('/sanctum/csrf-cookie').then((response) => {
           axios
-            .post('/api/telegramm/sexy-video-publish', { selRows: self.selectedItemsEmitted })
+            .post('/api/telegramm/sexy-video-tumblr-publish', { selRows: self.selectedItemsEmitted })
             .then((response) => {
               if (response.status) {
                 console.log('Вызвали алерт')

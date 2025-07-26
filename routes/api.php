@@ -11,6 +11,7 @@ use App\Http\Controllers\TumblrController;
 use App\Http\Controllers\TelegrammController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\MassController;
+use App\Http\Controllers\telegramm\BotController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -115,4 +116,9 @@ Route::group(['prefix' => 'telegramm', 'middleware' => 'auth:sanctum'], function
 });
 Route::group(['prefix' => 'mass', 'middleware' => 'auth:sanctum'], function () {
     Route::post('publish-sexy-post', [MassController::class, 'publishSexyPost']);
+});
+
+Route::group(['prefix' => 'telegramm-bot',], function () {
+    Route::post('update-status-group', [BotController::class, 'updateStatusGroup']);
+    Route::post('get-statistic', [BotController::class, 'getStatistic']);
 });

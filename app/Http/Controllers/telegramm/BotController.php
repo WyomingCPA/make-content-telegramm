@@ -15,8 +15,10 @@ class BotController extends Controller
     public function getStatistic(Request $request)
     {
         $list_chat_id = [
-            '-1002366645779' => 'sexy', '-1001597866737' => 'estetic_vibes',
-            '-1001771871700' => 'anime', '-1002082778220' => 'Котики'
+            '-1002366645779' => 'sexy',
+            '-1001597866737' => 'estetic_vibes',
+            '-1001771871700' => 'anime',
+            '-1002315592624' => 'Котики'
         ];
 
         $bot = new BotApi(env('TELEGRAM_TOKEN'));
@@ -28,7 +30,8 @@ class BotController extends Controller
             $queues_count = Post::queueCount($value);
             $stat[] = array(
                 'count_member' => $count_channel,
-                'channel' => $value, 'id_channel' => $key,
+                'channel' => $value,
+                'id_channel' => $key,
                 'count_queues' => $queues_count,
             );
             $messageText .= "$value = $count_channel Очередь = $queues_count\n";
@@ -39,18 +42,22 @@ class BotController extends Controller
             'status' => true,
         ], 200);
     }
-    public function updateStatus(Request $request)
+    public function updateStatusGroup(Request $request)
     {
-        $id_group = $request->id_group;
+        $message = '';
+        $id_group = $request->id;
         $model = Group::find($id_group);
         if (!isset($model->is_start) || $model->is_start == false) {
             $model->is_start = true;
+            $message = 'Группа включена';
         } else {
             $model->is_start = false;
+            $message = 'Группа выключена';
         }
         $model->save();
 
         return response()->json([
+            'message' => $message,
             'status' => true,
         ], 200);
     }

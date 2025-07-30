@@ -37,6 +37,7 @@ class GetPostFromTelegrammSexy extends Command
     {
         $list_blog_name = [
             'https://t.me/s/Tenderness_my',
+            'https://t.me/s/boucy_meatballs'
         ];
 
         $options = [
@@ -52,6 +53,54 @@ class GetPostFromTelegrammSexy extends Command
             $client = new Client($options);
             $response = $client->request('GET', $item_blog)->getBody()->getContents();
             $crawler = new Crawler($response);
+
+            //Получаем несколько фотографий
+            $several_post_list = $crawler->filterXPath("//*[@class='tgme_widget_message_grouped_layer js-message_grouped_layer']");
+            $group_count = 0;
+            $link_group = '';
+            foreach ($several_post_list as $item) {
+                try {
+                    //Обработканесколько фотографий
+                    $outerImageHTML = $item->ownerDocument->saveHTML($item);
+                    $crawler_image_block = new Crawler($outerImageHTML);
+                    $list_img_dom = $crawler_image_block->filterXPath("//*[@class='tgme_widget_message_photo_wrap grouped_media_wrap blured js-message_photo']");
+                    $img_src = [];
+                    foreach ($list_img_dom as $iamge) {
+                        $raw_string_image = $iamge->attributes->getNamedItem('style')->nodeValue;
+                        $regex = "/.*\(([^)]*)\)/";
+                        preg_match($regex, $raw_string_image, $matches);
+                        $img = trim($matches[1], "'");
+                        $img_src[] = $img;
+                        $link_group = $iamge->attributes->getNamedItem('href')->nodeValue;
+                        echo "Несколько фотографий в посте";
+                    }
+                } catch (\Exception $e) {
+                    echo $e->getMessage() . "\n";
+                    continue;
+                }
+                $list_img_group[] = $img_src;
+
+                $is_publish = false;
+                $is_hidden = false;
+                $attachments = [];
+                $attachments = [$img_src[0], $img_src];
+                echo $img_src[0] . "\n";
+                $model = Post::firstOrCreate(
+                    ['link' => $link_group,],
+                    [
+                        'post_id' => 0,
+                        'owner_id' => 213,
+                        'text' => "",
+                        'attachments' => $attachments,
+                        'is_publish' => false,
+                        'is_hidden' => false,
+                        'network' => 'telegramm',
+                        'type' => 'photo'
+                    ]
+                );
+
+                $group_count++;                
+            }
 
             //$list_img = [];
             $post_list = $crawler->filterXPath("//*[@class='tgme_widget_message_wrap js-widget_message_wrap']");

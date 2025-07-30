@@ -126,7 +126,13 @@ class TelegrammController extends Controller
                 $media = new ArrayOfInputMedia();
                 $messageText .= " #girl #body #fit \n\n\n<a href='https://t.me/+U0H_PQ6A29g0ZmVi'>Bikini Paradise</a>";
 
-                $media->addItem(new InputMediaPhoto($list_img[1], $messageText, 'HTML'));
+                if (is_array($list_img[1])) {
+                    foreach ($list_img[1] as $item_image) {
+                        $media->addItem(new InputMediaPhoto($item_image, $messageText, 'HTML'));
+                    }
+                } else {
+                    $media->addItem(new InputMediaPhoto($list_img[1], $messageText, 'HTML'));
+                }
 
                 $bot->sendMediaGroup($chatId, $media);
                 $post->is_publish = true;
@@ -202,7 +208,13 @@ class TelegrammController extends Controller
                 $media = new ArrayOfInputMedia();
                 $messageText = " #anime #art #tyan \n\n\n<a href='https://t.me/+ATd62K2jKB43YzIy'>Anime_Tyn_TG</a>";
 
-                $media->addItem(new InputMediaPhoto($list_img[1], $messageText, 'HTML'));
+                if (is_array($list_img[1])) {
+                    foreach ($list_img[1] as $item_image) {
+                        $media->addItem(new InputMediaPhoto($item_image, $messageText, 'HTML'));
+                    }
+                } else {
+                    $media->addItem(new InputMediaPhoto($list_img[1], $messageText, 'HTML'));
+                }
 
                 $bot->sendMediaGroup($chatId, $media);
                 $post->is_publish = true;

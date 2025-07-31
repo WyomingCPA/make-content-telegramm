@@ -133,11 +133,13 @@
         return arr[0]
       },
       getCountAttachments(stringObject) {
-        let arr = Array.from(Object.entries(stringObject), ([key, value]) => value)
-        var count = arr.filter(function () {
-          return true
-        }).length
-        return count
+        //let arr = Array.from(Object.entries(stringObject), ([key, value]) => value)
+        let arr = Object.values(stringObject).flat().length;
+        //console.log(stringObject);
+        //var count = arr.filter(function () {
+        //  return true
+        //}).length
+        return arr - 1;
       },
       addNewOption(newOption) {
         const option = {

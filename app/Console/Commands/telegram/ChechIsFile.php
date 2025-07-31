@@ -34,17 +34,22 @@ class ChechIsFile extends Command
         $user = User::select('id')->where('email', 'WyomingCPA@yandex.ru')->first();
         $favorite_ids = $user->queuesPost->pluck('id')->toArray();
         $objects = Post::where('is_publish', false)
-            ->where('owner_id', 313)
+            ->whereIn('owner_id', [313, 213])
             ->where('type', 'photo')
             ->where('network', 'telegramm')
             ->where('is_hidden', false)
-            ->whereIn('id', $favorite_ids)
+            //->whereIn('id', $favorite_ids)
             ->orderBy('created_at', 'desc');
 
-
-        foreach ($objects as $item)
-        {
-            echo $item->attachments . "\n";
+        //echo $objects->count();
+        foreach ($objects->get() as $item) {
+            //echo $item->attachments[0] . "\n";
+            if ($this->urlIsOk($item->attachments[0])) {
+                echo "Файл найден\n";
+            } else {
+                Post::destroy($item->id);
+                echo "Файл не найден удаляем пост\n";
+            }
         }
 
         return Command::SUCCESS;

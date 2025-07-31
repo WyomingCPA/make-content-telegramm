@@ -50,6 +50,9 @@ class Kernel extends ConsoleKernel
         $schedule->command('command:publish-sexy-video-telegramm-queue')->everyThreeHours();
         $schedule->command('command:get-views-my-groups')->everyFifteenMinutes();
 
+        //support
+        $schedule->command('command:check-is-file')->daily();
+        
     }
 
     /**

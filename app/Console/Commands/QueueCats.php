@@ -9,6 +9,8 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Group;
+use App\Models\Views;
+
 
 use TelegramBot\Api\BotApi;
 use TelegramBot\Api\Types\InputMedia\InputMediaPhoto;
@@ -44,6 +46,12 @@ class QueueCats extends Command
         $isStart = Group::where('slug', '=', 'cats')->first();
         if (!$isStart->is_start) {
             echo "Не публикуем";
+            return Command::SUCCESS;
+        }
+
+        $count_view = Views::select('last_post_view')->where('groups_id', $isStart->id)->orderBy('id', 'desc')->first();
+        if ($count_view->last_post_view < 60) {
+            echo "Не публикуем", str($count_view->last_post_view);
             return Command::SUCCESS;
         }
 
@@ -91,16 +99,16 @@ class QueueCats extends Command
                 $media = new ArrayOfInputMedia();
                 foreach ($list_img as $img) {
                     if (count($list_img) != 1) {
-                            $image = end($img);
-                            $messageText = "🐾 #cats \n\n\n<a href='https://t.me/+7yj6MB0l529lZmRi'>Cats ≽^•⩊•^≼</a>";
-                            $media->addItem(new InputMediaPhoto($image, $messageText, 'HTML'));
+                        $image = end($img);
+                        $messageText = "🐾 #cats \n\n\n<a href='https://t.me/+7yj6MB0l529lZmRi'>Cats ≽^•⩊•^≼</a>";
+                        $media->addItem(new InputMediaPhoto($image, $messageText, 'HTML'));
                     } else {
                         $item_image = end($img);
                         $messageText = "🐾 #cats \n\n\n<a href='https://t.me/+7yj6MB0l529lZmRi'>Cats ≽^•⩊•^≼</a>";
                         $media->addItem(new InputMediaPhoto($item_image, $messageText, 'HTML'));
                     }
                 }
-                
+
                 $bot->sendMediaGroup($chatId, $media);
                 $post->is_publish = true;
                 $post->save();

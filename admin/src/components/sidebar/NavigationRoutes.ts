@@ -170,6 +170,14 @@ export default {
           name: 'telegramm-reblog-sexy-video',
           displayName: 'menu.telegramm-reblog-sexy-video',
         },
+        {
+          name: 'telegramm-reblog-cats',
+          displayName: 'menu.telegramm-reblog-cats',
+        },
+        {
+          name: 'telegramm-reblog-cats-video',
+          displayName: 'menu.telegramm-reblog-cats-video',
+        },
       ],
     },
     {

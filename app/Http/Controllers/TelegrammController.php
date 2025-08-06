@@ -44,6 +44,34 @@ class TelegrammController extends Controller
             ]);
         }
     }
+    public function catsPhotoAll(Request $request)
+    {
+        $favorite_ids = Auth::user()->queuesPost->pluck('id')->toArray();
+        $objects = Post::where('is_publish', false)->where('is_hidden', false)
+            ->where('network', 'telegramm')
+            ->where('type', 'photo')
+            ->where('owner_id', 113)
+            ->whereNotIn('id', $favorite_ids)
+            ->orderBy('created_at', 'desc');
+        //$test = Post::whereJsonLength('attachments', '>', 0)->get();
+        $categories = Category::pluck('name')->toArray();
+        $count = $objects->count();
+
+        $categories = Category::pluck('name')->toArray();
+        $count = $objects->count();
+
+        $limit = 50;
+        $page = (int) $request->get('page');
+        $objects->offset($limit * ($page - 1))->limit($limit);
+        if ($request->isMethod('post')) {
+
+            return response()->json([
+                'posts' => $objects->get()->toArray(),
+                'count' => $count,
+                'categories' => $categories
+            ]);
+        }
+    }
 
     public function animePhotoAll(Request $request)
     {
@@ -74,6 +102,33 @@ class TelegrammController extends Controller
         }
     }
 
+    public function catsVideoAll(Request $request)
+    {
+        $favorite_ids = Auth::user()->queuesPost->pluck('id')->toArray();
+        $objects = Post::where('is_publish', false)->where('is_hidden', false)
+            ->where('network', 'telegramm')
+            ->where('type', 'video')
+            ->where('owner_id', 113)
+            ->whereNotIn('id', $favorite_ids)
+            ->orderBy('created_at', 'desc');
+        //$test = Post::whereJsonLength('attachments', '>', 0)->get();
+        $categories = Category::pluck('name')->toArray();
+        $count = $objects->count();
+
+        $categories = Category::pluck('name')->toArray();
+        $count = $objects->count();
+
+        $limit = 50;
+        $page = (int) $request->get('page');
+        $objects->offset($limit * ($page - 1))->limit($limit);
+        if ($request->isMethod('post')) {
+
+            return response()->json([
+                'posts' => $objects->get()->toArray(),
+                'count' => $count,
+            ]);
+        }
+    }
     public function sexyVideoAll(Request $request)
     {
         $favorite_ids = Auth::user()->queuesPost->pluck('id')->toArray();
@@ -182,6 +237,46 @@ class TelegrammController extends Controller
             'status' => true,
         ], 200);
     }
+
+    public function catsVideoPublish(Request $request)
+    {
+        $rows = $request->post('selRows');
+        $select = [];
+        foreach ($rows as $value) {
+            $messageText = '';
+            //$select[] = $value['id'];
+            $post = Post::findOrFail($value['id']);
+            $categories = $post->categories;
+            $video = $post->attachments;
+            $tags = '';
+            foreach ($categories as $item_category) {
+                $tags .= "#" . $item_category->name . " ";
+            }
+            $messageText .= "\n";
+            $messageText .= $value['text'];
+            if (!empty($messageText)) {
+                $chatId = '-1002315592624';
+                //$chatId = '-414528593';
+                $bot = new BotApi(env('TELEGRAM_TOKEN'));
+                //$bot->sendMessage($chatId, $messageText, 'HTML');
+
+                $media = new ArrayOfInputMedia();
+                $messageText .= "🐾 #cats \n\n\n<a href='https://t.me/+7yj6MB0l529lZmRi'>Cats ≽^•⩊•^≼</a>";
+
+                $media->addItem(new InputMediaVideo($video[1], $messageText, 'HTML'));
+
+                $bot->sendMediaGroup($chatId, $media);
+
+                $post->is_publish = true;
+                $post->save();
+            }
+        }
+
+        return response()->json([
+            'status' => true,
+        ], 200);
+    }
+
 
     public function animePhotoPublish(Request $request)
     {

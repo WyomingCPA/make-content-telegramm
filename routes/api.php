@@ -111,8 +111,11 @@ Route::group(['prefix' => 'telegramm', 'middleware' => 'auth:sanctum'], function
     Route::post('sexy-photo-telegram-publish', [TelegrammController::class, 'sexyPhotoPublish']);
     Route::post('sexy-video-all', [TelegrammController::class, 'sexyVideoAll']);
     Route::post('sexy-video-publish', [TelegrammController::class, 'sexyVideoPublish']);
+    Route::post('cats-video-publish', [TelegrammController::class, 'catsVideoPublish']);  
     Route::post('anime-photo-all', [TelegrammController::class, 'animePhotoAll']);
     Route::post('anime-photo-telegram-publish', [TelegrammController::class, 'animePhotoPublish']);
+    Route::post('cats-photo-all', [TelegrammController::class, 'catsPhotoAll']);
+    Route::post('cats-video-all', [TelegrammController::class, 'catsVideoAll']);
 });
 Route::group(['prefix' => 'mass', 'middleware' => 'auth:sanctum'], function () {
     Route::post('publish-sexy-post', [MassController::class, 'publishSexyPost']);

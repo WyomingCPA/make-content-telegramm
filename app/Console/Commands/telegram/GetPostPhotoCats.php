@@ -12,14 +12,14 @@ use App\Models\Group;
 use GuzzleHttp\Client;
 use Symfony\Component\DomCrawler\Crawler;
 
-class GetPostPhotoAnime extends Command
+class GetPostPhotoCats extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'command:get-telegram-photo-anime';
+    protected $signature = 'command:get-telegram-photo-cats';
 
     /**
      * The console command description.
@@ -36,8 +36,8 @@ class GetPostPhotoAnime extends Command
     public function handle()
     {
         $list_blog_name = [
-            'https://t.me/s/mysavedpicturesdontenterpls',
-            'https://t.me/s/anime_art_Ai'
+            'https://t.me/s/prikotik',
+            'https://t.me/s/kotism'
         ];
 
         $options = [
@@ -89,7 +89,7 @@ class GetPostPhotoAnime extends Command
                     ['link' => $link_group,],
                     [
                         'post_id' => 0,
-                        'owner_id' => 313,
+                        'owner_id' => 113,
                         'text' => "",
                         'attachments' => $attachments,
                         'is_publish' => false,
@@ -126,7 +126,7 @@ class GetPostPhotoAnime extends Command
                         ['link' => $link,],
                         [
                             'post_id' => 0,
-                            'owner_id' => 313,
+                            'owner_id' => 113,
                             'text' => "",
                             'attachments' => $attachments,
                             'is_publish' => false,

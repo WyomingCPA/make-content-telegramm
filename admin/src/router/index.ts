@@ -175,6 +175,16 @@ const routes: Array<RouteRecordRaw> = [
             path: 'telegramm-reblog-sexy-video',
             component: () => import('../pages/admin/telegramm/SexyVideo.vue'),
           },
+          {
+            name: 'telegramm-reblog-cats',
+            path: 'telegramm-reblog-cats',
+            component: () => import('../pages/admin/telegramm/CatsPhoto.vue'),
+          },
+          {
+            name: 'telegramm-reblog-cats-video',
+            path: 'telegramm-reblog-cats-video',
+            component: () => import('../pages/admin/telegramm/CatsVideo.vue'),
+          },
         ],
       },
       {

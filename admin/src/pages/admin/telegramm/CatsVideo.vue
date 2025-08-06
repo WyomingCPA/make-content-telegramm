@@ -1,35 +1,6 @@
 <template>
   <va-card>
     <va-card-content>
-      <div class="grid md:grid-cols-2 gap-6 mb-6">
-        <va-input v-model="input" placeholder="Filter..." class="w-full" />
-      </div>
-
-      <div class="grid md:grid-cols-2 gap-6 mb-6">
-        <va-select
-          v-model="value"
-          label="Removable chips"
-          :options="options"
-          @create-new="addNewOption"
-          :track-by="(option) => option"
-          allow-create="unique"
-          multiple
-        >
-          <template #content="{ value }">
-            <va-chip
-              v-for="chip in value"
-              :key="chip"
-              size="small"
-              class="mr-1 my-1"
-              closeable
-              @update:modelValue="deleteChip(chip)"
-            >
-              {{ chip }}
-            </va-chip>
-          </template>
-        </va-select>
-      </div>
-
       <div class="row">
         <div class="col">
           <va-button @click="publish"> Опубликовать в Телеграмм </va-button>
@@ -190,7 +161,7 @@
         axios
           .request({
             method: 'post',
-            url: '/api/telegramm/sexy-video-all',
+            url: '/api/telegramm/cats-video-all',
             params: this.serverParams,
             paramsSerializer: (params) => {
               return qs.stringify(params)
@@ -237,7 +208,7 @@
         console.log(self.selectedItemsEmitted)
         axios.get('/sanctum/csrf-cookie').then((response) => {
           axios
-            .post('/api/telegramm/sexy-video-tumblr-publish', { selRows: self.selectedItemsEmitted })
+            .post('/api/telegramm/cats-video-publish', { selRows: self.selectedItemsEmitted })
             .then((response) => {
               if (response.status) {
                 console.log('Вызвали алерт')

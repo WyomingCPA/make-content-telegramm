@@ -198,7 +198,7 @@ class TelegrammController extends Controller
                     $telegram->sendPhotos($chatId, $imgUrls, $messageText, 'HTML');
                     $post->is_publish = true;
                     $post->save();
-                    
+
                 } else {
 
                     $telegram = new TelegramHelper();
@@ -215,6 +215,8 @@ class TelegrammController extends Controller
 
     public function sexyVideoPublish(Request $request)
     {
+        $telegram = new TelegramHelper();
+
         $rows = $request->post('selRows');
         $select = [];
         foreach ($rows as $value) {
@@ -238,10 +240,11 @@ class TelegrammController extends Controller
                 $media = new ArrayOfInputMedia();
                 $messageText .= " #girl #body #fit \n\n\n<a href='https://t.me/+U0H_PQ6A29g0ZmVi'>Bikini Paradise</a>";
 
-                $media->addItem(new InputMediaVideo($video[1], $messageText, 'HTML'));
+                //$media->addItem(new InputMediaVideo($video[1], $messageText, 'HTML'));
 
-                $bot->sendMediaGroup($chatId, $media);
-
+                //$bot->sendMediaGroup($chatId, $media);
+                
+                $telegram->sendVideos($chatId, $video[1], $messageText, 'HTML');
                 $post->is_publish = true;
                 $post->save();
             }
@@ -254,6 +257,8 @@ class TelegrammController extends Controller
 
     public function catsVideoPublish(Request $request)
     {
+        $telegram = new TelegramHelper();
+
         $rows = $request->post('selRows');
         $select = [];
         foreach ($rows as $value) {
@@ -277,10 +282,7 @@ class TelegrammController extends Controller
                 $media = new ArrayOfInputMedia();
                 $messageText .= "🐾 #cats \n\n\n<a href='https://t.me/+7yj6MB0l529lZmRi'>Cats ≽^•⩊•^≼</a>";
 
-                $media->addItem(new InputMediaVideo($video[1], $messageText, 'HTML'));
-
-                $bot->sendMediaGroup($chatId, $media);
-
+                $telegram->sendVideos($chatId, $video[1], $messageText, 'HTML');
                 $post->is_publish = true;
                 $post->save();
             }

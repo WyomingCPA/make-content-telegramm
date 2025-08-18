@@ -33,6 +33,17 @@ class TelegramHelper
         }
     }
 
+    public function sendVideos(string|array $chatId, string|array $urls, ?string $caption = null, string $parseMode = 'Markdown'): void
+{
+    if (is_string($urls)) {
+        $this->sendSingleVideo($chatId, $urls, $caption, $parseMode);
+    } elseif (is_array($urls)) {
+        //$this->sendMultipleVideos($chatId, $urls, $caption, $parseMode);
+    } else {
+        throw new \InvalidArgumentException("urls должен быть строкой или массивом");
+    }
+}
+
     protected function sendSinglePhoto(string|array $chatId, string $url, ?string $caption, string $parseMode): void
     {
         $tmpFile = sys_get_temp_dir() . "/tg_" . uniqid() . ".jpg";
@@ -90,5 +101,23 @@ class TelegramHelper
                 @unlink($file->getFilename());
             }
         }
+    }
+    protected function sendSingleVideo(string|array $chatId, string $url, ?string $caption = null, string $parseMode = 'Markdown'): void
+    {
+        $tmpFile = sys_get_temp_dir() . "/tg_" . uniqid() . ".mp4";
+        file_put_contents($tmpFile, file_get_contents($url));
+
+        $this->bot->sendVideo(
+            $chatId,
+            new CURLFile($tmpFile),
+            null,       // duration
+            null,       // width
+            null,       // height
+            null,       // thumb
+            $caption ?? '',
+            $parseMode
+        );
+
+        unlink($tmpFile);
     }
 }

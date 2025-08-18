@@ -34,8 +34,9 @@ class ChechIsFile extends Command
         $user = User::select('id')->where('email', 'WyomingCPA@yandex.ru')->first();
         $favorite_ids = $user->queuesPost->pluck('id')->toArray();
         $objects = Post::where('is_publish', false)
-            ->whereIn('owner_id', [313, 213])
+            ->whereIn('owner_id', [313, 213, 113])
             ->where('type', 'photo')
+            ->where('type', 'video')
             ->where('network', 'telegramm')
             ->where('is_hidden', false)
             //->whereIn('id', $favorite_ids)

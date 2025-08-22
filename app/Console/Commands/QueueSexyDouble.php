@@ -48,11 +48,11 @@ class QueueSexyDouble extends Command
             return Command::SUCCESS;
         }
 
-        $count_view = Views::select('last_post_view')->where('groups_id', $isStart->id)->orderBy('id', 'desc')->first();
-        if ($count_view->last_post_view < 30) {
-            echo "Не публикуем", str($count_view->last_post_view);
-            return Command::SUCCESS;
-        }
+        //$count_view = Views::select('last_post_view')->where('groups_id', $isStart->id)->orderBy('id', 'desc')->first();
+        //if ($count_view->last_post_view < 30) {
+        //    echo "Не публикуем", str($count_view->last_post_view);
+        //    return Command::SUCCESS;
+        //}
         
         $user = User::select('id')->where('email', 'WyomingCPA@yandex.ru')->first();
         $favorite_ids = $user->queuesPost->pluck('id')->toArray();

@@ -42,6 +42,7 @@ class GetDataViewsMyGroup extends Command
         $array_groups = Group::where('is_start', true)->orderBy('updated_at', 'asc')->get()->toArray();
         foreach ($array_groups as $item_group) {
             $url = $item_group['url_group'];
+            echo "$url\n";
             $client = new Client($options);
             $response = $client->request('GET', $url)->getBody()->getContents();
             $crawler = new Crawler($response);

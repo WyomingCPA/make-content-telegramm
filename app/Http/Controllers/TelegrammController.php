@@ -339,9 +339,6 @@ class TelegrammController extends Controller
                     $post->is_publish = true;
                     $post->save();
                 }
-
-                //$bot->sendMediaGroup($chatId, $media);
-
             }
         }
         return response()->json([

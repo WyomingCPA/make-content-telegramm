@@ -57,6 +57,10 @@ class Kernel extends ConsoleKernel
 
         //support
         $schedule->command('command:check-is-file')->daily();
+
+        //advert
+        $schedule->command('command:create-sexy-ads')->daily();
+        $schedule->command('command:delete-ads')->daily();
         
     }
 

@@ -31,7 +31,7 @@ class CreateSexy extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Комманда созадет рекламму на мою группу Sexy, c ссылкой на Anime';
 
     /**
      * Execute the console command.
@@ -73,7 +73,7 @@ class CreateSexy extends Command
         $bot = new BotApi(env('TELEGRAM_TOKEN'));
         // ID группы или канала, куда отправляем
         $chatId = -1001771871700;
-        $ttl = 48; //Время жизни сообщения в секундах
+        $ttlHours = 20; //Время жизни сообщения в часах
         $text = "Check Other Channels 📌";
 
         // Создаём inline-клавиатуру с 3 кнопками
@@ -94,7 +94,7 @@ class CreateSexy extends Command
         AdsMessage::create([
             'chat_id' => $chatId,
             'message_id' => $messageId,
-            'delete_after' => Carbon::now()->addHours($ttl),
+            'delete_after' => Carbon::now()->addHours($ttlHours),
         ]);
         return Command::SUCCESS;
     }

@@ -46,8 +46,7 @@ class Delete extends Command
                 $this->error("Ошибка при удалении {$ad->message_id}: " . $e->getMessage());
             }
         }
-
-        
+      
         return Command::SUCCESS;
     }
 }

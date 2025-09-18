@@ -60,6 +60,7 @@ class Kernel extends ConsoleKernel
 
         //advert
         $schedule->command('command:create-sexy-ads')->daily();
+        $schedule->command('command:create-anime-ads')->daily();
         $schedule->command('command:delete-ads')->daily();
         
     }

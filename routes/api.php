@@ -124,4 +124,5 @@ Route::group(['prefix' => 'mass', 'middleware' => 'auth:sanctum'], function () {
 Route::group(['prefix' => 'telegramm-bot',], function () {
     Route::post('update-status-group', [BotController::class, 'updateStatusGroup']);
     Route::post('get-statistic', [BotController::class, 'getStatistic']);
+    Route::get('get-status-group', [BotController::class, 'getStatusGroups']);
 });

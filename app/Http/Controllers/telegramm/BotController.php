@@ -61,4 +61,23 @@ class BotController extends Controller
             'status' => true,
         ], 200);
     }
+
+    public function getStatusGroups(Request $request)
+    {
+        $models = Group::all();
+
+        return response()->json([
+            'groups' => $models->toArray(),
+            'status' => true,
+        ], 200);
+    }
+
+    //Удалить все рекламмные посты во всех группах без условий
+    public function deleteAllAdvertPost(Request $request)
+    {
+
+        return response()->json([
+            'status' => true,
+        ], 200);
+    }
 }

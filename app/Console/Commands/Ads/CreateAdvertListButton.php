@@ -43,7 +43,7 @@ class CreateAdvertListButton extends Command
         $bot = new BotApi(env('TELEGRAM_TOKEN'));
         // ID группы или канала, куда отправляем
         //$chatId = -414528593;
-        $ttlHours = 3; //Время жизни сообщения в часах
+        $ttlHours = 7; //Время жизни сообщения в часах
         $text = "🔥🔥🔥🔥🔥🔥🔥";
 
         $chatIds = [
@@ -54,24 +54,24 @@ class CreateAdvertListButton extends Command
         // Создаём inline-клавиатуру
         $keyboard = new InlineKeyboardMarkup([
             [
-                ['text' => '🗝️❤ Тайник Кати', 'url' => 'https://t.me/Kktaybot?start=_tgr_9GEHI7wxYzJi'],
-                ['text' => '🤖✨Flirr AI', 'url' => 'https://t.me/flirrbot?start=_tgr_bI4qgcg0Mjdi'],
-                ['text' => '💡📱 Simple GPT', 'url' => 'https://t.me/SimpleGPT_robot?start=_tgr_tvz47YZiMjFi'],
+                ['text' => '🗝️❤ Тайник Кати', 'url' => 'https://simpleitrunner.ru/c0xi'],
+                ['text' => '🤖✨Flirr AI', 'url' => 'https://simpleitrunner.ru/ja4d'],
+                ['text' => '💡📱 Simple GPT', 'url' => 'https://simpleitrunner.ru/mww0'],
             ],
             [
-                ['text' => 'Премиум храм', 'url' => 'https://t.me/Vipkhrambot?start=_tgr_lq47oLxiMTVi'],
-                ['text' => '🔒Prison', 'url' => 'https://t.me/tonprison_bot?start=_tgr_sm1N5pE1ZDYy'],
-                ['text' => 'Blocus AI', 'url' => 'https://t.me/blocusai_bot?start=_tgr_hqPTJbo0YmUy'],
+                ['text' => 'Премиум храм', 'url' => 'https://simpleitrunner.ru/b7vv'],
+                ['text' => '🔒Prison', 'url' => 'https://simpleitrunner.ru/l69e'],
+                ['text' => 'Blocus AI', 'url' => 'https://simpleitrunner.ru/t5ii'],
             ],
             [
-                ['text' => '🔥Trusty Talk (18+)', 'url' => 'https://t.me/TrustyTalkBot?start=_tgr_fPuzn3kyYjAy'],
-                ['text' => '🌸💭Waifu Dream', 'url' => 'https://t.me/Waifu_Dream_bot?start=_tgr_C85ksgg3YzFi'],
-                ['text' => '🌙✨Ira moon', 'url' => 'https://t.me/Iramoonrobot?start=_tgr_5e3XPDQwNzEy'],
+                ['text' => '🔥Trusty Talk (18+)', 'url' => 'https://simpleitrunner.ru/83co'],
+                ['text' => '🌸💭Waifu Dream', 'url' => 'https://simpleitrunner.ru/4wnz'],
+                ['text' => '🌙✨Ira moon', 'url' => 'https://simpleitrunner.ru/2xpv'],
             ],
             [
-                ['text' => '🔥💋Hot Chat AI (18+)', 'url' => 'https://t.me/HotChatAI_bot?start=_tgr_bmXscewzN2Ji'],
-                ['text' => '💘Date Me', 'url' => 'https://t.me/datemeai_bot?start=_tgr_lkZsR0M5OTQ6'],
-                ['text' => '🎁✨Случайный подарок', 'url' => 'https://t.me/randgift_bot?start=_tgr_WpyvtYc2MDdi'],
+                ['text' => '🔥💋Hot Chat AI (18+)', 'url' => 'https://simpleitrunner.ru/5pla'],
+                ['text' => '💘Date Me', 'url' => 'https://simpleitrunner.ru/mcl6'],
+                ['text' => '🎁✨Случайный подарок', 'url' => 'https://simpleitrunner.ru/oxox'],
             ],
         ]);
         foreach ($chatIds as $chatId) {

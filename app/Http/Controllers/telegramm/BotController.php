@@ -52,13 +52,13 @@ class BotController extends Controller
 
     public function createAnimeAdvert(Request $request)
     {
-        $message = '';
+        $messageResponse = '-';
         $isStart = Group::where('slug', '=', 'sexy')->first();
         if (!$isStart->is_start) {
-            $message = "Не публикуем";
+            $messageResponse = "Не публикуем";
 
             return response()->json([
-                'message' => $message,
+                'message' => $messageResponse,
                 'status' => true,
             ], 200);
         }
@@ -113,20 +113,20 @@ class BotController extends Controller
         ]);
 
         return response()->json([
-            'message' => $message,
+            'message' => $messageResponse,
             'status' => true,
         ], 200);
     }
 
     public function createSexyAdvert(Request $request)
     {
-        $message = '';
+        $messageResponse = '-';
         $isStart = Group::where('slug', '=', 'anime')->first();
         if (!$isStart->is_start) {
-            $message = "Не публикуем";
+            $messageResponse = "Не публикуем";
 
             return response()->json([
-                'message' => $message,
+                'message' => $messageResponse,
                 'status' => true,
             ], 200);
         }
@@ -181,7 +181,7 @@ class BotController extends Controller
         ]);
 
         return response()->json([
-            'message' => $message,
+            'message' => $messageResponse,
             'status' => true,
         ], 200);
     }

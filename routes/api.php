@@ -124,6 +124,7 @@ Route::group(['prefix' => 'mass', 'middleware' => 'auth:sanctum'], function () {
 Route::group(['prefix' => 'telegramm-bot',], function () {
     Route::post('create-anime-advert', [BotController::class, 'createAnimeAdvert']);
     Route::post('create-sexy-advert', [BotController::class, 'createSexyAdvert']);
+    Route::post('create-list-button-advert', [BotController::class, 'createListButtonAdvert']);
 
     Route::post('update-status-group', [BotController::class, 'updateStatusGroup']);
     Route::post('get-statistic', [BotController::class, 'getStatistic']);

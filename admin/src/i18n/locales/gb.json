@@ -381,7 +381,11 @@
     "post-mass-create-sexy": "Создать массовые посты Sexy",
     "group": "Управление группами",
     "group-index": "Список групп",
-    "group-create": "Добавить группу"
+    "group-create": "Добавить группу",
+    "advert": "РРеклама",
+    "advert-link": "Рекламные ссылки",
+    "advert-post": "Рекламные посты",
+    "advert-create": "Создать"
   },
   "messages": {
     "all": "See all messages",

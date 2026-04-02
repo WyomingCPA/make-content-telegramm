@@ -18,6 +18,20 @@ export default {
         icon: 'vuestic-iconset-dashboard',
       },
     },
+        {
+      name: 'advert',
+      displayName: 'menu.advert',
+      meta: {
+        icon: 'vuestic-iconset-components',
+      },
+      disabled: true,
+      children: [
+        {
+          name: 'advert-link',
+          displayName: 'menu.advert-link',
+        },
+      ],
+    },
     {
       name: 'source',
       displayName: 'menu.source',

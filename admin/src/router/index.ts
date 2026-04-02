@@ -30,6 +30,43 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('../pages/admin/dashboard/Dashboard.vue'),
       },
       {
+        name: 'advert',
+        path: 'advert',
+        component: RouteViewComponent,
+        children: [
+          {
+            name: 'index',
+            path: 'index',
+            component: () => import('../pages/admin/advert/Index.vue'),
+          },
+          {
+            name: 'advert-store',
+            path: 'advert-store',
+            component: () => import('../pages/admin/advert/Store.vue'),
+          },
+          {
+            name: 'advert-link',
+            path: 'advert-link',
+            component: () => import('../pages/admin/source/VkSexy.vue'),
+          },
+          {
+            name: 'vk-estetic-vibes',
+            path: 'vk-estetic-vibes',
+            component: () => import('../pages/admin/source/VkEsteticVibes.vue'),
+          },
+          {
+            name: 'vk-cats',
+            path: 'vk-cats',
+            component: () => import('../pages/admin/source/VkCats.vue'),
+          },
+          {
+            name: 'vk-mir-tlen-mai',
+            path: 'vk-mir-tlen-mai',
+            component: () => import('../pages/admin/source/VkMirTlenMai.vue'),
+          },
+        ],
+      },
+      {
         name: 'source',
         path: 'source',
         component: RouteViewComponent,
